@@ -5,8 +5,8 @@
 }
 
 .main {
-  margin-top: 100px;
-  margin-bottom: 80px;
+  margin-top: var(--header-height);
+  margin-bottom: var(--footer-height);
   width: 100%;
   display: flex;
   flex-direction: column;

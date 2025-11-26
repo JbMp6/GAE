@@ -3,8 +3,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/Header.module.css';
+import useSmoothScroll from '@/hooks/useSmoothScroll';
+import React from 'react';
 
 export default function Header() {
+  const scrollToId = useSmoothScroll();
+  const handleNav = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    scrollToId(id);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.logoContainer}>
@@ -22,22 +30,22 @@ export default function Header() {
       <nav className={styles.nav}>
         <ul className={styles.navList}>
           <li>
-            <Link href="#" className={styles.navLink}>
+            <Link href="#accueil" onClick={handleNav('accueil')} className={styles.navLink}>
               Accueil
             </Link>
           </li>
           <li>
-            <Link href="#" className={styles.navLink}>
+            <Link href="#services" onClick={handleNav('services')} className={styles.navLink}>
               Services
             </Link>
           </li>
           <li>
-            <Link href="#" className={styles.navLink}>
+            <Link href="#apropos" onClick={handleNav('apropos')} className={styles.navLink}>
               À propos
             </Link>
           </li>
           <li>
-            <Link href="#" className={styles.navLink}>
+            <Link href="#contact" onClick={handleNav('contact')} className={styles.navLink}>
               Contact
             </Link>
           </li>
