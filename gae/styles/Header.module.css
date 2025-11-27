@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: var(--header-height);
-  background-color: #535A5C;
+  background-color: var(--primary);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 50;
   display: flex;
@@ -52,5 +52,5 @@
 }
 
 .navLink:hover {
-  color: #CFD81E;
+  color: var(--secondary);
 }

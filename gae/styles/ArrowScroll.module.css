@@ -15,7 +15,7 @@
 }
 
 .arrowScroll:hover {
-    color: #cdda01 !important;
+    color: var(--secondary) !important;
 }
 
 .arrowScroll svg {

@@ -35,13 +35,18 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="#services" onClick={handleNav('services')} className={styles.navLink}>
-              Services
+            <Link href="#qui-sommes-nous" onClick={handleNav('qui-sommes-nous')} className={styles.navLink}>
+              Qui sommes-nous ?
             </Link>
           </li>
           <li>
-            <Link href="#apropos" onClick={handleNav('apropos')} className={styles.navLink}>
-              À propos
+            <Link href="#actualites" onClick={handleNav('actualites')} className={styles.navLink}>
+              Actualités
+            </Link>
+          </li>
+          <li>
+            <Link href="#nous-rejoindre" onClick={handleNav('nous-rejoindre')} className={styles.navLink}>
+              Nous rejoindre
             </Link>
           </li>
           <li>

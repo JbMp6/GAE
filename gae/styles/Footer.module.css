@@ -1,10 +1,10 @@
 .footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
   height: var(--footer-height);
-  background-color: #535A5C;
+  background-color: var(--primary);
   z-index: 50;
   display: flex;
   align-items: center;

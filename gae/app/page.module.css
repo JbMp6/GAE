@@ -12,3 +12,26 @@
   flex-direction: column;
   flex: 1;
 }
+
+.heroHomeTitle {
+  color: white;
+  font-size: 6rem;
+  font-family: "Syntha", sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-transform: lowercase;
+}
+
+.heroHomeArrowScroll {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quiSommesNous {
+  height: 500px;
+  background: #ffffff;
+}
