@@ -40,15 +40,13 @@ export default function Home() {
 
             <CompanyCard 
             id="1_card" 
-            logo="/img/logo29.png" 
-            description="Allanic 29, dans le Finistère, réalise construction et rénovation de bâtiments résidentiels et commerciaux avec une équipe experte et des services personnalisés." 
+            logo="/img/logo29.png"  
             btnLink="/29" 
             />
 
             <CompanyCard 
             id="2_card" 
             logo="/img/logo56.png" 
-            description="Allanic 56, dans le Morbihan, réalise construction et rénovation de bâtiments résidentiels et commerciaux avec une équipe experte et des services personnalisés." 
             btnLink="/56" 
             />
 

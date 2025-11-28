@@ -7,11 +7,11 @@ import Image from 'next/image';
 interface CompanyCardProps {
   id: string;
   logo: string;
-  description: string;
+  description?: string;
   btnLink: string;
 }
 
-export default function CompanyCard({ id, logo, description, btnLink }: CompanyCardProps) {
+export default function CompanyCard({ id, logo, description="", btnLink }: CompanyCardProps) {
     const router = useRouter();
 
     return (
