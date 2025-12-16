@@ -22,29 +22,30 @@ export default function Header() {
   return (
     <header className="w-full h-header bg-secondary text-white fixed top-0 z-50">
       {/* Header Desktop - Caché sur mobile */}
-      <div className="hidden xl:flex justify-between items-center h-full px-20">
+      <div className="hidden 2xl:flex justify-between items-center h-full px-20">
         {/* Logo section */}
         <div className="flex items-center gap-4">
-          <Link href="/">
+          <Link href="/"
+            className="absolute left-20 top-1.5">
             <Image 
               src="/ilstr/gae_logo_02.svg" 
               alt="G.a.e Logo" 
               width={252} 
               height={90}
-              className="absolute left-20 top-1.5 cursor-pointer"
+              className="cursor-pointer"
               priority
-            />
-          </Link>
-          <Image 
-            src="/ilstr/eclair_01.svg" 
-            alt="Éclair" 
-            width={30} 
-            height={30}
-            className="absolute left-110"
           />
-        </div>
+        </Link>
+        <Image 
+          src="/ilstr/eclair_01.svg" 
+          alt="Éclair" 
+          width={30} 
+          height={30}
+          className="absolute left-110 hidden min-[1740px]:block" 
+        />
 
-        {/* Navigation Desktop */}
+      {/* Navigation Desktop */}
+      </div>        
         <nav className="flex items-center h-full gap-11 font-futura text-[24px] font-normal">
           {navLinks.map((link) => (
             <Link
@@ -63,7 +64,7 @@ export default function Header() {
       </div>
 
       {/* Header Mobile - Caché sur desktop */}
-      <div className="xl:hidden flex justify-center items-center h-full relative">
+      <div className="2xl:hidden flex justify-center items-center h-full relative">
         {/* Logo Mobile - Éclair uniquement */}
         <Link href="/"
           className="absolute left-10"
