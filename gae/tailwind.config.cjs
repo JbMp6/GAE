@@ -23,6 +23,7 @@ module.exports = {
       },
       paddingTop: {
         'header': '100px',
+        'footer': '80px',
       },
       
     },

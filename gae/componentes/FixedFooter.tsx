@@ -1,0 +1,54 @@
+'use client';
+
+import Image from 'next/image';
+
+export default function FixedFooter() {
+    const currentYear = new Date().getFullYear();
+    
+    return (
+        <footer className="w-full xl:h-footer h-header bg-primary text-black fixed bottom-0 z-1 flex flex-col xl:flex-row justify-center items-center px-10">
+
+            <div className="flex flex-row justify-center items-center gap-6">
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <Image 
+                        src="/ilstr/facebook_logo.svg" 
+                        alt="Facebook" 
+                        width={50} 
+                        height={50}
+                        className="hover:opacity-80 transition-opacity cursor-pointer"
+                    />
+                </a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <Image 
+                        src="/ilstr/instagram_logo.svg" 
+                        alt="Instagram" 
+                        width={50} 
+                        height={50}
+                        className="hover:opacity-80 transition-opacity cursor-pointer"
+                    />
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <Image 
+                        src="/ilstr/linkedin_logo.svg" 
+                        alt="LinkedIn" 
+                        width={50} 
+                        height={50}
+                        className="hover:opacity-80 transition-opacity cursor-pointer"
+                    />
+                </a>
+                <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                    <Image 
+                        src="/ilstr/x_logo.svg" 
+                        alt="X (Twitter)" 
+                        width={50} 
+                        height={50}
+                        className="hover:opacity-80 transition-opacity cursor-pointer"
+                    />
+                </a>
+            </div>
+
+            <p className="block xl:absolute xl:pt-0 pt-2.5 left-15 font-futura text-[12px] font-normal">© {currentYear} GROUPE ALLANIC ENERGIE • Tous droits réservés</p>
+
+        </footer>
+    );
+}

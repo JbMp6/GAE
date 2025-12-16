@@ -1,7 +1,14 @@
+'use client';
+
+import FixedFooter from '@/componentes/FixedFooter';
+
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center bg-white pt-header">
+    <div>
+      <main className="flex flex-col items-center justify-center bg-white pt-header">
 
-    </main>
+      </main>
+      <FixedFooter />
+    </div>
   );
 }
