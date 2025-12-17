@@ -6,15 +6,15 @@ export default function FixedFooter() {
     const currentYear = new Date().getFullYear();
     
     return (
-        <footer className="w-full xl:h-footer h-header bg-primary text-black fixed bottom-0 z-1 flex flex-col xl:flex-row justify-center items-center px-10">
+        <footer className="w-full xl:h-footer h-header bg-primary text-black fixed bottom-0 z-50 flex flex-col xl:flex-row justify-center items-center px-10">
 
             <div className="flex flex-row justify-center items-center gap-6">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <Image 
                         src="/ilstr/facebook_logo.svg" 
                         alt="Facebook" 
-                        width={50} 
-                        height={50}
+                        width={40} 
+                        height={40}
                         className="hover:opacity-80 transition-opacity cursor-pointer"
                     />
                 </a>
@@ -22,8 +22,8 @@ export default function FixedFooter() {
                     <Image 
                         src="/ilstr/instagram_logo.svg" 
                         alt="Instagram" 
-                        width={50} 
-                        height={50}
+                        width={40} 
+                        height={40}
                         className="hover:opacity-80 transition-opacity cursor-pointer"
                     />
                 </a>
@@ -31,8 +31,8 @@ export default function FixedFooter() {
                     <Image 
                         src="/ilstr/linkedin_logo.svg" 
                         alt="LinkedIn" 
-                        width={50} 
-                        height={50}
+                        width={40} 
+                        height={40}
                         className="hover:opacity-80 transition-opacity cursor-pointer"
                     />
                 </a>
@@ -40,8 +40,8 @@ export default function FixedFooter() {
                     <Image 
                         src="/ilstr/x_logo.svg" 
                         alt="X (Twitter)" 
-                        width={50} 
-                        height={50}
+                        width={40} 
+                        height={40}
                         className="hover:opacity-80 transition-opacity cursor-pointer"
                     />
                 </a>
