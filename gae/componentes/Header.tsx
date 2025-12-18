@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const navLinks = [
   { href: '/actualites', label: 'ACTUALITÉS' },
@@ -15,12 +15,45 @@ const navLinks = [
   { href: '/contact', label: 'CONTACT' },
 ];
 
-export default function Header() {
+interface HeaderProps {
+  onHeaderBottomChange?: (absoluteBottomY: number) => void;
+}
+
+export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const logHeaderBottom = () => {
+      if (headerRef.current) {
+        const rect = headerRef.current.getBoundingClientRect();
+        const bottomY = rect.bottom;
+        const scrollY = window.scrollY || window.pageYOffset;
+        const absoluteBottomY = bottomY + scrollY;
+        
+        if (onHeaderBottomChange) {
+          onHeaderBottomChange(absoluteBottomY);
+        }
+      }
+    };
+
+    // Log initial position
+    logHeaderBottom();
+
+    // Log on scroll
+    window.addEventListener('scroll', logHeaderBottom);
+    // Log on resize
+    window.addEventListener('resize', logHeaderBottom);
+
+    return () => {
+      window.removeEventListener('scroll', logHeaderBottom);
+      window.removeEventListener('resize', logHeaderBottom);
+    };
+  }, [onHeaderBottomChange]);
 
   return (
-    <header className="w-full h-header bg-secondary text-white fixed top-0 z-50">
+    <header ref={headerRef} className="w-full h-header bg-secondary text-white fixed top-0 z-50">
       {/* Header Desktop - Caché sur mobile */}
       <div className="hidden 2xl:flex justify-between items-center h-full px-20">
         {/* Logo section */}

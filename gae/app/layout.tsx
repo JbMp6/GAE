@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/componentes/Header";
+import LayoutClient from "@/componentes/LayoutClient";
 
 const futura = localFont({
   src: [
@@ -53,8 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr">
       <body className={`${futura.variable} ${futuraCondensed.variable} ${syntha.variable} font-sans`}>
-        <Header />
-        {children}
+        <LayoutClient>{children}</LayoutClient>
       </body>
     </html>
   );
