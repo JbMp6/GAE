@@ -126,7 +126,7 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
 
         {/* Navigation Mobile - Menu slide-in */}
         <nav className={`
-          fixed top-header left-0 w-full h-[calc(100vh-200px)]
+          fixed top-header left-0 w-full h-[calc(100vh-var(--spacing-header)-var(--spacing-footer))]
           bg-secondary
           flex flex-col items-center justify-center gap-10
           font-futura text-xl font-normal
