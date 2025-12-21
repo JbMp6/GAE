@@ -4,7 +4,7 @@ import React from 'react';
 interface BoxedProps {
     children: React.ReactNode;
     w_size: '100%' | '70%' | '50%';
-    color: string;
+    color: 'primary' | 'secondary' | 'white' | 'extra';
 }
 
 export default function Boxed({ children, color, w_size }: BoxedProps) {
@@ -14,8 +14,15 @@ export default function Boxed({ children, color, w_size }: BoxedProps) {
         '50%': 'w-full 2xl:w-1/2'
     };
 
+    const colorClasses = {
+        'primary': 'bg-primary',
+        'secondary': 'bg-secondary',
+        'white': 'bg-white',
+        'extra': 'bg-extra'
+    };
+
     return (
-        <div className={`flex flex-col items-center justify-center h-auto ${widthClasses[w_size]} bg-${color}`}>
+        <div className={`flex flex-col items-center justify-center h-auto ${widthClasses[w_size]} ${colorClasses[color]}`}>
             {children}
         </div>
     );

@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Groupe Allanic Energie",
+  description: "Groupe Allanic Energie - Expertise en solutions énergétiques",
+};
 
 const futura = localFont({
   src: [
@@ -51,7 +57,7 @@ const syntha = localFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
-      <body className={`${futura.variable} ${futuraCondensed.variable} ${syntha.variable} font-sans`}>
+      <body className={`${futura.variable} ${futuraCondensed.variable} ${syntha.variable} font-futura`}>
         {children}
       </body>
     </html>

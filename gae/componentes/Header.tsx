@@ -132,7 +132,7 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
           font-futura text-xl font-normal
           transition-all duration-300 ease-in-out
           ${isMenuOpen ? 'opacity-100 translate-x-0 visible' : 'opacity-0 -translate-x-full invisible'}
-          z-25
+          z-20
         `}>
           {navLinks.map((link) => (
             <Link

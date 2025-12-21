@@ -1,12 +1,49 @@
 @import "tailwindcss";
 
+/* ============================================
+   TAILWIND V4 - CONFIGURATION DU THEME
+   Variables CSS personnalisées pour le projet
+   ============================================ */
+
 @theme {
+  /* Palette de couleurs */
   --color-primary: #cbda00;
   --color-secondary: #4c5859;
   --color-extra: #4c5859;
+  
+  /* Espacements custom */
+  --spacing-11: 2.75rem;      /* 44px */
+  --spacing-15: 3.75rem;      /* 60px */
+  --spacing-110: 27.5rem;     /* 440px */
   --spacing-header: 100px;
   --spacing-footer: 80px;
+  
+  /* Polices personnalisées - Tailwind v4 */
+  --font-family-futura: var(--font-futura), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-futura-condensed: var(--font-futura-condensed), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-syntha: var(--font-syntha), 'Courier New', Consolas, Monaco, monospace;
+  
+  /* Alias pour font-* classes */
+  --font-futura: var(--font-family-futura);
+  --font-futura-condensed: var(--font-family-futura-condensed);
+  --font-syntha: var(--font-family-syntha);
 }
+
+@layer utilities {
+  .font-futura {
+    font-family: var(--font-futura);
+  }
+  
+  .font-futura-condensed {
+    font-family: var(--font-futura-condensed);
+  }
+  
+  .font-syntha {
+    font-family: var(--font-syntha);
+  }
+}
+
+
 
 /* ============================================
    STYLES GLOBAUX
@@ -22,7 +59,6 @@ html, body, #__next {
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-futura), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   background: #ffffff;
   color: #000000;
 }
