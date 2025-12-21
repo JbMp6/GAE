@@ -15,6 +15,11 @@ const navLinks = [
   { href: '/contact', label: 'CONTACT' },
 ];
 
+const baseNavLink =
+  "relative inline-flex items-center h-full transition-colors duration-300 ease-in-out after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[6px] after:bg-[#cbda00] after:origin-center after:transition-transform after:duration-300 after:ease-in-out";
+const activeNavLink = `${baseNavLink} text-[#cbda00] after:scale-x-100`;
+const inactiveNavLink = `${baseNavLink} text-white after:scale-x-0 hover:text-[#cbda00] hover:after:scale-x-100`;
+
 interface HeaderProps {
   onHeaderBottomChange?: (absoluteBottomY: number) => void;
 }
@@ -79,16 +84,12 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
 
       {/* Navigation Desktop */}
       </div>        
-        <nav className="flex items-center h-full gap-11 font-futura text-[24px] font-normal">
+        <nav className="flex items-center h-full gap-13 font-futura text-[20px] font-normal">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`h-full flex items-center ${
-                pathname === link.href
-                  ? 'nav-link-active'
-                  : 'nav-link'
-              }`}
+              className={pathname === link.href ? activeNavLink : inactiveNavLink}
             >
               {link.label}
             </Link>

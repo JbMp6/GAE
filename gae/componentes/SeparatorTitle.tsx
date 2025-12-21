@@ -37,11 +37,15 @@ export default function SeparatorTitle({ title, headerBottom = 0, onPositionChan
     // Vérifier si headerBottom est entre topY et bottomY
     const isHeaderInside = headerBottom >= topY && headerBottom <= bottomY;
 
-    return (
-        <div ref={separatorRef} className="w-full h-37.5 bg-secondary flex justify-center items-center">
-          <h2 className={`text-4xl font-bold font-syntha transition-colors duration-300 ease-in-out ${isHeaderInside ? 'text-white' : 'text-primary'}`}>
-            {title}
-          </h2>
-        </div>
-    );
+        return (
+            <div
+                ref={separatorRef}
+                className={`relative w-full h-[150px] flex justify-center items-center transition-colors duration-400 ease-in-out ${isHeaderInside ? 'bg-[#6b7173]' : 'bg-secondary'}`}
+            >
+                <h2 className={`text-4xl font-syntha text-primary absolute bottom-10`}>
+                    {title}
+                </h2>
+                <div className='h-[6px] bg-primary absolute bottom-0 w-75'></div>
+            </div>
+        );
 }
