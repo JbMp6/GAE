@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
+import useSmoothScroll from '@/hooks/useSmoothScroll';
 
 const navLinks = [
-  { href: '/actualites', label: 'ACTUALITÉS' },
-  { href: '/groupe', label: 'GROUPE' },
-  { href: '/services', label: 'SERVICES' },
+  { href: '/actualites', label: 'ACTUALITÉS', id: 'actualites' },
+  { href: '/groupe', label: 'GROUPE', id: 'groupe' },
+  { href: '/services', label: 'SERVICES', id: 'services' },
   { href: '/societes', label: 'SOCIÉTÉS' },
   { href: '/realisations', label: 'RÉALISATIONS' },
   { href: '/recrutement', label: 'RECRUTEMENT' },
@@ -26,8 +27,21 @@ interface HeaderProps {
 
 export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const smoothScrollTo = useSmoothScroll();
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: typeof navLinks[0]) => {
+    if (link.id) {
+      e.preventDefault();
+      if (pathname === '/') {
+        smoothScrollTo(link.id);
+      } else {
+        router.push(`/#${link.id}`);
+      }
+    }
+  };
 
   useEffect(() => {
     const logHeaderBottom = () => {
@@ -89,6 +103,7 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
             <Link
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link)}
               className={pathname === link.href ? activeNavLink : inactiveNavLink}
             >
               {link.label}

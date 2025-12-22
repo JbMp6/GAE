@@ -36,19 +36,87 @@ const rightCards = [
 
 export default function GroupePresentation() {
   return (
-    <div className="bg-extra w-full flex flex-col items-center justify-center gap-4 py-8">
+    <div className="bg-extra w-full flex flex-col items-center justify-center gap-20 py-16">
         <Boxed w_size="70%" color="extra" className="flex-row">
-            <div className="flex justify-start items-start w-[30%] h-full">
-                <h3>Presentation</h3>
+            <div className="flex justify-start items-start w-[34%] h-full">
+                <h3 className="font-syntha text-secondary text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">Presentation</h3>
             </div>
 
-            <div className="flex justify-start items-start w-[70%] h-full">
-                <p className="text-left">
-                    Le Groupe ALLANIC, c’est avant tout une histoire de famille et de passion pour le métier d’électricien. 
-                    Fondée en 1983 par M. Allanic, l’entreprise a su évoluer au fil des années pour devenir un acteur majeur dans le domaine de l’électricité et des services associés.
+            <div className="flex justify-start items-start w-[66%] h-full">
+                <p className="text-left text-secondary text-3xl font-futura">
+                    Acipis elicidunt aut et quuntemquiaXimincimusam alibus modiae
+                    platem volupid qui omnihillam, qui quat omnim nos et hiciae cusae
+                    vendandit rendam ne sus aliquis ex eat. Accabo. Udaest volupta.
                 </p>
             </div>
 
+        </Boxed>
+        <Boxed w_size="70%" color="extra" className="flex-row">
+          <p className="text-left text-secondary text-2xl font-futura columns-3 gap-x-8">
+            Acipis elicidunt aut et quuntemquiaXimincimusam alibus modiae platem volupid qui omnihillam, qui quat omnim nos et hiciae cusae vendandit rendam ne sus aliquis ex eat. Accabo. Udaest, tempore scimus inctempor sitatae peris nimus et velignit quid mo ipiendel ium volupta voluptatium ligendi rerum.Ullaborehenis dolupta tibusciam et et, etum aut landis aliatur? et di cullaiq uaspero tem as senthictatem expedis.
+          </p>
+        </Boxed>
+        <Boxed w_size="70%" color="extra" className="flex-col gap-12">
+            <div className="flex justify-start items-start w-full">
+                <h3 className="font-syntha text-secondary text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">IMPLANTATION</h3>
+            </div>
+
+            <div className="flex flex-row justify-between items-start w-full gap-4">
+                <div className="flex flex-col gap-4 w-1/4">
+                    {leftCards.map((card) => (
+                        <div key={card.id} className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                            <h4 className="font-bold text-lg text-secondary">
+                                {card.title} <span className="font-normal text-gray-500 text-sm">{card.subtitle}</span>
+                            </h4>
+                            <div className="mt-2 text-gray-600 text-sm">
+                                {card.address.map((line, index) => (
+                                    <p key={index}>{line}</p>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="flex justify-center items-center w-1/2">
+                     <Image 
+                        src="/ilstr/carte_bretagne.svg" 
+                        alt="Carte Implantation" 
+                        width={600} 
+                        height={400}
+                        className="w-full h-auto object-contain"
+                     />
+                </div>
+
+                <div className="flex flex-col gap-4 w-1/4">
+                    {rightCards.map((card) => (
+                        <div key={card.id} className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                            <h4 className="font-bold text-lg text-secondary">
+                                {card.title} {card.subtitle && <span className="font-normal text-gray-500 text-sm">{card.subtitle}</span>}
+                            </h4>
+                            <div className="mt-2 text-gray-600 text-sm">
+                                {card.address.map((line, index) => (
+                                    <p key={index}>{line}</p>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </Boxed>
+        <Boxed w_size="70%" color="extra" className="flex-col gap-8">
+            <div className="flex justify-start items-start w-full">
+                <h3 className="font-syntha text-secondary text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">VALEURS DU GROUPE</h3>
+            </div>
+            
+            <p className="text-left text-secondary text-2xl font-futura">
+                Acipis elicidunt aut et quuntemquiaXimincimusam alibus modiae platem volupid qui omnihillam, qui quat omnim nos et hiciae cusae vendandit rendam ne sus aliquis ex eat. Accabo. Udaest, tempore scimus inctempor sitatae peris nimus et velignit quid mo ipiendel ium volupta voluptatium ligendi rerum.Ullaborehenis dolupta tibusciam et et, ut quodit recus adipsant autet ut oditate mporit aut facim auta quamenisque etum aut landis aliatur?
+            </p>
+
+            <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full mt-4">
+                 <div></div>
+                 <Button title="+" />
+                 <span className="text-gray-500 text-xl font-futura font-light ml-8">En savoir plus ...</span>
+            </div>
         </Boxed>
     </div>
   );

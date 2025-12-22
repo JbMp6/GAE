@@ -6,9 +6,10 @@ interface SeparatorTitleProps {
     title: string;
     headerBottom?: number;
     onPositionChange?: (yTop: number, yBottom: number) => void;
+    id?: string;
 }
 
-export default function SeparatorTitle({ title, headerBottom = 0, onPositionChange }: SeparatorTitleProps) {
+export default function SeparatorTitle({ title, headerBottom = 0, onPositionChange, id }: SeparatorTitleProps) {
     const separatorRef = useRef<HTMLDivElement>(null);
     const [topY, setTopY] = useState<number>(0);
     const [bottomY, setBottomY] = useState<number>(0);
@@ -39,6 +40,7 @@ export default function SeparatorTitle({ title, headerBottom = 0, onPositionChan
 
         return (
             <div
+                id={id}
                 ref={separatorRef}
                 className={`relative w-full h-[150px] flex justify-center items-center transition-colors duration-400 ease-in-out ${isHeaderInside ? 'bg-[#6b7173]' : 'bg-secondary'}`}
             >

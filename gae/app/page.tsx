@@ -59,13 +59,15 @@ export default function Home() {
       <main className="flex flex-col items-center justify-start bg-white pt-header min-h-screen h-[25555555px] pb-footer">
         <ImgBanner img_src="/img/home_banner.jpg"/>
 
-        <SeparatorTitle title='actualites' headerBottom={headerBottom} />
+        <SeparatorTitle id="actualites" title='actualites' headerBottom={headerBottom} />
 
         <ActuSlider items={actuItems} />
 
-        <SeparatorTitle title='groupe  allanic' headerBottom={headerBottom} />
+        <SeparatorTitle id="groupe" title='groupe allanic' headerBottom={headerBottom} />
 
         <GroupePresentation />
+
+        <SeparatorTitle id="services" title='services' headerBottom={headerBottom} />
 
       </main>
       <FixedFooter />
