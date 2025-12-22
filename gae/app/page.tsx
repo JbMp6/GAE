@@ -6,6 +6,7 @@ import Boxed from '@/staticComponentes/Boxed';
 import FixedFooter from '@/staticComponentes/FixedFooter';
 import ImgBanner from '@/staticComponentes/ImgBanner';
 import SeparatorTitle from '@/componentes/SeparatorTitle';
+import Button from '@/componentes/Button';
 
 export default function Home() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);
@@ -18,9 +19,10 @@ export default function Home() {
 
         <SeparatorTitle title='actualites' headerBottom={headerBottom} />
 
-        <div className='h-[250px]'></div>
+        <Boxed>
 
-        <SeparatorTitle title='Test' headerBottom={headerBottom} />
+        </Boxed>
+
 
       </main>
       <FixedFooter />
