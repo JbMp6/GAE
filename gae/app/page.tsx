@@ -9,6 +9,7 @@ import SeparatorTitle from '@/componentes/SeparatorTitle';
 import Button from '@/componentes/Button';
 import ActuCard from '@/componentes/ActuCard';
 import ActuSlider from '@/componentes/ActuSlider';
+import GroupePresentation from '@/staticComponentes/GroupePresentation';
 
 export default function Home() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);
@@ -64,8 +65,10 @@ export default function Home() {
 
         <SeparatorTitle title='groupe  allanic' headerBottom={headerBottom} />
 
+        <GroupePresentation />
+
       </main>
       <FixedFooter />
     </>
   );
-}
+} 
