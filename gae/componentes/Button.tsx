@@ -9,7 +9,7 @@ interface ButtonProps {
 }
 
 export default function Button({ title, href, onClick }: ButtonProps) {
-  const buttonClasses = 'px-16 py-4 bg-primary text-secondary font-futura font-bold text-xl hover:scale-110 hover:shadow-lg active:scale-100 transition-all duration-300 ease-in-out cursor-pointer rounded';
+  const buttonClasses = 'px-16 py-1 bg-primary text-secondary font-futura font-bold text-4xl hover:scale-110 hover:shadow-lg active:scale-100 transition-all duration-300 ease-in-out cursor-pointer rounded';
 
   if (href) {
     return (
