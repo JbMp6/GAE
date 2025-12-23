@@ -10,7 +10,7 @@ const navLinks = [
   { href: '/actualites', label: 'ACTUALITÉS', id: 'actualites' },
   { href: '/groupe', label: 'GROUPE', id: 'groupe' },
   { href: '/services', label: 'SERVICES', id: 'services' },
-  { href: '/societes', label: 'SOCIÉTÉS' },
+  { href: '/societes', label: 'SOCIÉTÉS', id: 'societes' },
   { href: '/realisations', label: 'RÉALISATIONS' },
   { href: '/recrutement', label: 'RECRUTEMENT' },
   { href: '/contact', label: 'CONTACT' },

@@ -4,7 +4,7 @@ import React from 'react';
 interface BoxedProps {
     children: React.ReactNode;
     w_size: '100%' | '70%' | '50%';
-    color: 'primary' | 'secondary' | 'white' | 'extra';
+    color: 'primary' | 'secondary' | 'white' | 'extra' | 'transparent';
     className?: string;
 }
 
@@ -19,7 +19,8 @@ export default function Boxed({ children, color, w_size, className }: BoxedProps
         'primary': 'bg-primary',
         'secondary': 'bg-secondary',
         'white': 'bg-white',
-        'extra': 'bg-extra'
+        'extra': 'bg-extra',
+        'transparent': 'bg-transparent'
     };
 
     return (
