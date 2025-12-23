@@ -49,16 +49,9 @@ export default function SocietesPresentation() {
               className={`flex flex-col md:flex-row items-center justify-between w-full gap-8 ${company.reverse ? 'md:flex-row-reverse' : ''}`}
             >
               {/* Logo & Icon Section */}
-              <div className="flex items-center justify-center gap-6 w-full md:w-5/12">
-                <div className={`relative w-96 h-48 ${company.reverse ? 'order-2' : 'order-1'}`}>
-                  <Image 
-                    src={company.logo} 
-                    alt="Logo société" 
-                    fill 
-                    className="object-contain"
-                  />
-                </div>
-                <div className={`relative w-24 h-24 ${company.reverse ? 'order-1' : 'order-2'}`}>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 w-full md:w-5/12">
+                {/* Icon */}
+                <div className={`relative w-16 h-16 md:w-24 md:h-24 order-1 ${company.reverse ? 'md:order-1' : 'md:order-2'}`}>
                   <Image 
                     src={company.icon} 
                     alt="Icone métier" 
@@ -66,10 +59,20 @@ export default function SocietesPresentation() {
                     className="object-contain"
                   />
                 </div>
+
+                {/* Logo */}
+                <div className={`relative w-64 h-32 md:w-96 md:h-48 order-2 ${company.reverse ? 'md:order-2' : 'md:order-1'}`}>
+                  <Image 
+                    src={company.logo} 
+                    alt="Logo société" 
+                    fill 
+                    className="object-contain"
+                  />
+                </div>
               </div>
 
               {/* Text Section */}
-              <div className="w-full md:w-5/12 text-[var(--color-secondary)] font-futura text-base leading-relaxed whitespace-pre-line text-justify">
+              <div className="hidden md:block w-full md:w-5/12 text-[var(--color-secondary)] font-futura text-base leading-relaxed whitespace-pre-line text-justify">
                 {company.text}
               </div>
             </div>

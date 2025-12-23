@@ -36,14 +36,14 @@ const rightCards = [
 
 export default function GroupePresentation() {
   return (
-    <div className="bg-extra w-full flex flex-col items-center justify-center gap-20 py-16">
-        <Boxed w_size="70%" color="extra" className="flex-row">
-            <div className="flex justify-start items-start w-[34%] h-full">
-                <h3 className="font-syntha text-secondary text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">Presentation</h3>
+    <div className="bg-extra w-full flex flex-col items-center justify-center gap-10 md:gap-20 py-16 px-4 md:px-0">
+        <Boxed w_size="70%" color="extra" className="flex-col md:flex-row gap-8 md:gap-0">
+            <div className="flex justify-start items-start w-full md:w-[34%] h-full">
+                <h3 className="font-syntha text-secondary text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2 uppercase">Presentation</h3>
             </div>
 
-            <div className="flex justify-start items-start w-[66%] h-full">
-                <p className="text-left text-secondary text-3xl font-futura">
+            <div className="flex justify-start items-start w-full md:w-[66%] h-full">
+                <p className="text-left text-secondary text-xl md:text-3xl font-futura font-bold">
                     Acipis elicidunt aut et quuntemquiaXimincimusam alibus modiae
                     platem volupid qui omnihillam, qui quat omnim nos et hiciae cusae
                     vendandit rendam ne sus aliquis ex eat. Accabo. Udaest volupta.
@@ -52,11 +52,11 @@ export default function GroupePresentation() {
 
         </Boxed>
         <Boxed w_size="70%" color="extra" className="flex-row">
-          <p className="text-left text-secondary text-2xl font-futura columns-3 gap-x-8">
+          <p className="text-left text-secondary text-lg md:text-2xl font-futura columns-1 md:columns-3 gap-x-8">
             Acipis elicidunt aut et quuntemquiaXimincimusam alibus modiae platem volupid qui omnihillam, qui quat omnim nos et hiciae cusae vendandit rendam ne sus aliquis ex eat. Accabo. Udaest, tempore scimus inctempor sitatae peris nimus et velignit quid mo ipiendel ium volupta voluptatium ligendi rerum.Ullaborehenis dolupta tibusciam et et, etum aut landis aliatur? et di cullaiq uaspero tem as senthictatem expedis.
           </p>
         </Boxed>
-        <Boxed w_size="70%" color="extra" className="flex-col gap-12">
+        <Boxed w_size="70%" color="extra" className="hidden md:flex flex-col gap-12">
             <div className="flex justify-start items-start w-full">
                 <h3 className="font-syntha text-secondary text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">IMPLANTATION</h3>
             </div>
@@ -105,17 +105,17 @@ export default function GroupePresentation() {
         </Boxed>
         <Boxed w_size="70%" color="extra" className="flex-col gap-8">
             <div className="flex justify-start items-start w-full">
-                <h3 className="font-syntha text-secondary text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">VALEURS DU GROUPE</h3>
+                <h3 className="font-syntha text-secondary text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2 uppercase">VALEURS DU GROUPE</h3>
             </div>
             
-            <p className="text-left text-secondary text-2xl font-futura">
+            <p className="text-left text-secondary text-lg md:text-2xl font-futura">
                 Acipis elicidunt aut et quuntemquiaXimincimusam alibus modiae platem volupid qui omnihillam, qui quat omnim nos et hiciae cusae vendandit rendam ne sus aliquis ex eat. Accabo. Udaest, tempore scimus inctempor sitatae peris nimus et velignit quid mo ipiendel ium volupta voluptatium ligendi rerum.Ullaborehenis dolupta tibusciam et et, ut quodit recus adipsant autet ut oditate mporit aut facim auta quamenisque etum aut landis aliatur?
             </p>
 
-            <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full mt-4">
-                 <div></div>
+            <div className="flex justify-center items-center gap-4 md:grid md:grid-cols-[1fr_auto_1fr] w-full mt-4">
+                 <div className="hidden md:block"></div>
                  <Button title="+" />
-                 <span className="text-gray-500 text-xl font-futura font-light ml-8">En savoir plus ...</span>
+                 <span className="text-gray-500 text-lg md:text-xl font-futura font-light md:ml-8">En savoir plus ...</span>
             </div>
         </Boxed>
     </div>

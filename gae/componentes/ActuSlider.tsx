@@ -46,61 +46,81 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
     items[(currentIndex + 1) % items.length],
   ];
 
+  const lastThreeItems = items.slice(-3);
+
   return (
-    <div className="flex items-center justify-center gap-0 w-full py-16">
-      {/* Left Arrow - 15% */}
-      <div className="w-[15%] flex justify-center">
-        <button
-          onClick={handlePrevious}
-          className="hover:scale-125 transition-transform duration-300 cursor-pointer w-16 h-16 relative"
-        >
-          <Image
-            src="/ilstr/bouton_fleche.svg"
-            alt="Flèche précédente"
-            fill
-            className="object-contain"
-          />
-        </button>
+    <div className="w-full py-16">
+      {/* Desktop Slider */}
+      <div className="hidden md:flex items-center justify-center gap-0 w-full">
+        {/* Left Arrow - 15% */}
+        <div className="w-[15%] flex justify-center">
+          <button
+            onClick={handlePrevious}
+            className="hover:scale-125 transition-transform duration-300 cursor-pointer w-16 h-16 relative"
+          >
+            <Image
+              src="/ilstr/bouton_fleche.svg"
+              alt="Flèche précédente"
+              fill
+              className="object-contain"
+            />
+          </button>
+        </div>
+
+        {/* Cards in Boxed - 70% */}
+        <Boxed color="white" w_size="70%">
+          <div className="relative w-full py-4">
+            <div 
+              className={`flex gap-20 justify-center transition-all duration-300 ease-out
+                ${slideDirection === 'right' ? '-translate-x-20 opacity-0' : ''}
+                ${slideDirection === 'left' ? 'translate-x-20 opacity-0' : ''}
+                ${!slideDirection ? 'translate-x-0 opacity-100' : ''}
+              `}
+            >
+              {visibleItems.map((item, index) => (
+                <ActuCard
+                  key={`${item.id}-${currentIndex}-${index}`}
+                  image={item.image}
+                  imageAlt={item.imageAlt}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  description={item.description}
+                  href={item.href}
+                />
+              ))}
+            </div>
+          </div>
+        </Boxed>
+
+        {/* Right Arrow - 15% */}
+        <div className="w-[15%] flex justify-center">
+          <button
+            onClick={handleNext}
+            className="hover:scale-125 transition-transform duration-300 cursor-pointer w-16 h-16 relative"
+          >
+            <Image
+              src="/ilstr/bouton_fleche.svg"
+              alt="Flèche suivante"
+              fill
+              className="object-contain rotate-180"
+            />
+          </button>
+        </div>
       </div>
 
-      {/* Cards in Boxed - 70% */}
-      <Boxed color="white" w_size="70%">
-        <div className="relative w-full py-4">
-          <div 
-            className={`flex gap-20 justify-center transition-all duration-300 ease-out
-              ${slideDirection === 'right' ? '-translate-x-20 opacity-0' : ''}
-              ${slideDirection === 'left' ? 'translate-x-20 opacity-0' : ''}
-              ${!slideDirection ? 'translate-x-0 opacity-100' : ''}
-            `}
-          >
-            {visibleItems.map((item, index) => (
-              <ActuCard
-                key={`${item.id}-${currentIndex}-${index}`}
-                image={item.image}
-                imageAlt={item.imageAlt}
-                title={item.title}
-                subtitle={item.subtitle}
-                description={item.description}
-                href={item.href}
-              />
-            ))}
-          </div>
-        </div>
-      </Boxed>
-
-      {/* Right Arrow - 15% */}
-      <div className="w-[15%] flex justify-center">
-        <button
-          onClick={handleNext}
-          className="hover:scale-125 transition-transform duration-300 cursor-pointer w-16 h-16 relative"
-        >
-          <Image
-            src="/ilstr/bouton_fleche.svg"
-            alt="Flèche suivante"
-            fill
-            className="object-contain rotate-180"
+      {/* Mobile List */}
+      <div className="flex md:hidden flex-col items-center gap-8 w-full px-4">
+        {lastThreeItems.map((item, index) => (
+          <ActuCard
+            key={`mobile-${item.id}-${index}`}
+            image={item.image}
+            imageAlt={item.imageAlt}
+            title={item.title}
+            subtitle={item.subtitle}
+            description={item.description}
+            href={item.href}
           />
-        </button>
+        ))}
       </div>
     </div>
   );

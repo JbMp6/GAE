@@ -6,7 +6,7 @@ export default function FixedFooter() {
     const currentYear = new Date().getFullYear();
     
     return (
-        <footer className="w-full xl:h-footer h-header bg-primary text-black sticky bottom-0 z-50 flex flex-col xl:flex-row justify-center items-center px-10">
+        <footer className="w-full xl:h-footer h-header bg-primary text-black sticky bottom-0 z-25 flex flex-col xl:flex-row justify-center items-center px-10">
 
             <div className="flex flex-row justify-center items-center gap-6">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
