@@ -111,15 +111,16 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
       {/* Mobile List */}
       <div className="flex md:hidden flex-col items-center gap-8 w-full px-4">
         {lastThreeItems.map((item, index) => (
-          <ActuCard
-            key={`mobile-${item.id}-${index}`}
-            image={item.image}
-            imageAlt={item.imageAlt}
-            title={item.title}
-            subtitle={item.subtitle}
-            description={item.description}
-            href={item.href}
-          />
+          <div key={`mobile-${item.id}-${index}`} className="w-[85%]">
+            <ActuCard
+              image={item.image}
+              imageAlt={item.imageAlt}
+              title={item.title}
+              subtitle={item.subtitle}
+              description={item.description}
+              href={item.href}
+            />
+          </div>
         ))}
       </div>
     </div>
