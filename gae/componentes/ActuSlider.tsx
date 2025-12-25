@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import Boxed from '@/staticComponentes/Boxed';
 import ActuCard from '@/componentes/ActuCard';
 
@@ -21,30 +23,67 @@ interface ActuSliderProps {
 }
 
 export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
+  const directionRef = useRef<'left' | 'right' | null>(null);
 
-  const handlePrevious = () => {
-    setSlideDirection('left');
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
-      setSlideDirection(null);
-    }, 300);
+  const { contextSafe } = useGSAP({ scope: containerRef });
+
+  const getSlideAmount = () => {
+    if (!containerRef.current) return 0;
+    const firstCard = containerRef.current.children[0] as HTMLElement;
+    if (!firstCard) return 0;
+    
+    // Calculate width including gap
+    const style = window.getComputedStyle(containerRef.current);
+    const gap = parseFloat(style.gap) || 0;
+    return firstCard.offsetWidth + gap;
   };
 
-  const handleNext = () => {
-    setSlideDirection('right');
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
-      setSlideDirection(null);
-    }, 300);
-  };
+  const handlePrevious = contextSafe(() => {
+    if (directionRef.current) return;
+    directionRef.current = 'left';
+    
+    const slideAmount = getSlideAmount();
+    
+    gsap.to(containerRef.current, {
+      x: slideAmount,
+      duration: 0.5,
+      ease: "power2.inOut",
+      onComplete: () => {
+        setCurrentIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
+      },
+    });
+  });
 
-  const visibleItems = [
-    items[(currentIndex - 1 + items.length) % items.length],
-    items[currentIndex],
-    items[(currentIndex + 1) % items.length],
-  ];
+  const handleNext = contextSafe(() => {
+    if (directionRef.current) return;
+    directionRef.current = 'right';
+
+    const slideAmount = getSlideAmount();
+
+    gsap.to(containerRef.current, {
+      x: -slideAmount,
+      duration: 0.5,
+      ease: "power2.inOut",
+      onComplete: () => {
+        setCurrentIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
+      },
+    });
+  });
+
+  useGSAP(() => {
+    if (directionRef.current) {
+      gsap.set(containerRef.current, { x: 0 });
+      directionRef.current = null;
+    }
+  }, [currentIndex]);
+
+  const visibleItems = [];
+  for (let i = -2; i <= 2; i++) {
+    const index = (currentIndex + i + items.length) % items.length;
+    visibleItems.push(items[index]);
+  }
 
   const lastThreeItems = items.slice(-3);
 
@@ -69,24 +108,26 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
 
         {/* Cards in Boxed - 70% */}
         <Boxed color="white" w_size="70%">
-          <div className="relative w-full py-4">
+          <div className="relative w-full py-4 overflow-hidden">
             <div 
-              className={`flex gap-20 justify-center transition-all duration-300 ease-out
-                ${slideDirection === 'right' ? '-translate-x-20 opacity-0' : ''}
-                ${slideDirection === 'left' ? 'translate-x-20 opacity-0' : ''}
-                ${!slideDirection ? 'translate-x-0 opacity-100' : ''}
-              `}
+              ref={containerRef}
+              className="flex gap-20 justify-center"
             >
               {visibleItems.map((item, index) => (
-                <ActuCard
-                  key={`${item.id}-${currentIndex}-${index}`}
-                  image={item.image}
-                  imageAlt={item.imageAlt}
-                  title={item.title}
-                  subtitle={item.subtitle}
-                  description={item.description}
-                  href={item.href}
-                />
+                <div 
+                  key={`${item.id}-${currentIndex}-${index}`} 
+                  className="shrink-0 flex justify-center"
+                  style={{ width: 'calc((100% - 10rem) / 3)' }}
+                >
+                  <ActuCard
+                    image={item.image}
+                    imageAlt={item.imageAlt}
+                    title={item.title}
+                    subtitle={item.subtitle}
+                    description={item.description}
+                    href={item.href}
+                  />
+                </div>
               ))}
             </div>
           </div>
