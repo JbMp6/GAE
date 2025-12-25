@@ -99,7 +99,11 @@ code, pre {
   font-family: var(--font-syntha), 'Courier New', monospace;
 }
 
-/* Force light mode on mobile */
+/* Force light mode on mobile and auto-dark browsers */
+:root {
+  color-scheme: light;
+}
+
 @media (max-width: 768px) {
   :root {
     color-scheme: light;
