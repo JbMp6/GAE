@@ -115,19 +115,29 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
       {/* Header Mobile - Caché sur desktop */}
       <div className="2xl:hidden flex justify-center items-center h-full relative">
         {/* Logo Mobile - Éclair uniquement */}
-        <Link href="/"
-          className="absolute left-10"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-          <Image 
-            src="/ilstr/eclair_01.svg" 
-            alt="Éclair" 
-            width={35} 
-            height={35}
-            className="cursor-pointer"
-            priority
-          />
-        </Link>
+            <Link
+              href="/"
+              className="absolute left-10"
+              onClick={(e) => {
+                if (isMenuOpen) {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  setTimeout(() => {
+                    router.push('/');
+                  }, 300); // match transition duration
+                }
+                // If menu is closed, let Link handle navigation
+              }}
+            >
+              <Image 
+                src="/ilstr/eclair_01.svg" 
+                alt="Éclair" 
+                width={35} 
+                height={35}
+                className="cursor-pointer"
+                priority
+              />
+            </Link>
 
         {/* Hamburger button */}
         <button 
