@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef } from 'react';
@@ -7,6 +8,7 @@ import gsap from 'gsap';
 import Boxed from '@/staticComponentes/Boxed';
 import ActuCard from '@/componentes/ActuCard';
 
+// TypeScript interface for a news item (card)
 interface ActuItem {
   id: string;
   image: string;
@@ -17,61 +19,68 @@ interface ActuItem {
   href?: string;
 }
 
+// Props for the slider
 interface ActuSliderProps {
   items: ActuItem[];
   w_size?: '100%' | '70%' | '50%';
 }
 
+// Main slider component
 export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
+  // Ref for the sliding container
   const containerRef = useRef<HTMLDivElement>(null);
+  // Current index of the centered card
   const [currentIndex, setCurrentIndex] = useState(0);
+  // Ref to keep track of animation direction
   const directionRef = useRef<'left' | 'right' | null>(null);
 
+  // GSAP context for animation
   const { contextSafe } = useGSAP({ scope: containerRef });
 
+  // Helper: get the slide distance (card width + gap)
   const getSlideAmount = () => {
     if (!containerRef.current) return 0;
     const firstCard = containerRef.current.children[0] as HTMLElement;
     if (!firstCard) return 0;
-    
-    // Calculate width including gap
+    // Get the gap between cards
     const style = window.getComputedStyle(containerRef.current);
     const gap = parseFloat(style.gap) || 0;
     return firstCard.offsetWidth + gap;
   };
 
+  // Handle left arrow click (slide right)
   const handlePrevious = contextSafe(() => {
     if (directionRef.current) return;
     directionRef.current = 'left';
-    
     const slideAmount = getSlideAmount();
-    
+    // Animate the container to the right
     gsap.to(containerRef.current, {
       x: slideAmount,
       duration: 0.5,
-      ease: "power2.inOut",
+      ease: 'power2.inOut',
       onComplete: () => {
         setCurrentIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
       },
     });
   });
 
+  // Handle right arrow click (slide left)
   const handleNext = contextSafe(() => {
     if (directionRef.current) return;
     directionRef.current = 'right';
-
     const slideAmount = getSlideAmount();
-
+    // Animate the container to the left
     gsap.to(containerRef.current, {
       x: -slideAmount,
       duration: 0.5,
-      ease: "power2.inOut",
+      ease: 'power2.inOut',
       onComplete: () => {
         setCurrentIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
       },
     });
   });
 
+  // After index update, reset the container position instantly
   useGSAP(() => {
     if (directionRef.current) {
       gsap.set(containerRef.current, { x: 0 });
@@ -79,24 +88,28 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
     }
   }, [currentIndex]);
 
+  // Compute the 5 visible items (2 before, center, 2 after)
   const visibleItems = [];
   for (let i = -2; i <= 2; i++) {
     const index = (currentIndex + i + items.length) % items.length;
     visibleItems.push(items[index]);
   }
 
+  // For mobile: last 3 items only
   const lastThreeItems = items.slice(-3);
 
   return (
     <div className="w-full py-16">
-      {/* Desktop Slider */}
+      {/* --- Desktop Slider --- */}
       <div className="hidden md:flex items-center justify-center gap-0 w-full">
-        {/* Left Arrow - 15% */}
+        {/* --- Left Arrow --- */}
         <div className="w-[15%] flex justify-center">
           <button
             onClick={handlePrevious}
+            aria-label="Précédent"
             className="hover:scale-125 transition-transform duration-300 cursor-pointer w-16 h-16 relative"
           >
+            {/* SVG or Image for left arrow */}
             <Image
               src="/ilstr/bouton_fleche.svg"
               alt="Flèche précédente"
@@ -106,39 +119,46 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
           </button>
         </div>
 
-        {/* Cards in Boxed - 70% */}
+        {/* --- Cards in Boxed --- */}
         <Boxed color="white" w_size="70%">
-          <div className="relative w-full py-4 overflow-hidden">
-            <div 
+          {/* Overflow hidden to keep cards inside the box, even on hover. min-h-[540px] ensures shadow is always visible. */}
+          <div className="relative w-full py-4 overflow-hidden min-h-[540px]">
+            <div
               ref={containerRef}
               className="flex gap-20 justify-center"
+              style={{ transition: 'none' }}
             >
               {visibleItems.map((item, index) => (
-                <div 
-                  key={`${item.id}-${currentIndex}-${index}`} 
+                <div
+                  key={`${item.id}-${currentIndex}-${index}`}
                   className="shrink-0 flex justify-center"
-                  style={{ width: 'calc((100% - 10rem) / 3)' }}
+                  style={{ width: 'calc((100% - 10rem) / 3)', maxWidth: 400 }}
                 >
-                  <ActuCard
-                    image={item.image}
-                    imageAlt={item.imageAlt}
-                    title={item.title}
-                    subtitle={item.subtitle}
-                    description={item.description}
-                    href={item.href}
-                  />
+                  {/* Card with hover effect, but overflow is managed by parent */}
+                  <div className="w-full h-full flex items-center justify-center">
+                    <ActuCard
+                      image={item.image}
+                      imageAlt={item.imageAlt}
+                      title={item.title}
+                      subtitle={item.subtitle}
+                      description={item.description + " ..."}
+                      href={item.href}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </Boxed>
 
-        {/* Right Arrow - 15% */}
+        {/* --- Right Arrow --- */}
         <div className="w-[15%] flex justify-center">
           <button
             onClick={handleNext}
+            aria-label="Suivant"
             className="hover:scale-125 transition-transform duration-300 cursor-pointer w-16 h-16 relative"
           >
+            {/* SVG or Image for right arrow (rotated) */}
             <Image
               src="/ilstr/bouton_fleche.svg"
               alt="Flèche suivante"
@@ -149,7 +169,7 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
         </div>
       </div>
 
-      {/* Mobile List */}
+      {/* --- Mobile List --- */}
       <div className="flex md:hidden flex-col items-center gap-8 w-full px-4">
         {lastThreeItems.map((item, index) => (
           <div key={`mobile-${item.id}-${index}`} className="w-[85%]">
