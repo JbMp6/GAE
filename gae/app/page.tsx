@@ -73,7 +73,6 @@ export default function Home() {
 
         <Parallax 
           image="/img/elec.jpg" 
-          text="I AM THE WINNER" 
           height="500px" 
         />
 
@@ -87,7 +86,6 @@ export default function Home() {
 
         <Parallax 
           image="/img/salon.jpg" 
-          text="Votre Titre" 
           height="500px" 
         />
 

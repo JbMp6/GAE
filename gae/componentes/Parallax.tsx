@@ -11,7 +11,7 @@ if (typeof window !== "undefined") {
 
 interface ParallaxProps {
   image: string;
-  text: string;
+  text?: string;
   height?: string;
   className?: string;
 }
@@ -26,7 +26,7 @@ export const Parallax = ({
   className = "",
 }: ParallaxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -65,11 +65,11 @@ export const Parallax = ({
   );
 
   return (
-    <main
+    <div
       className={`w-full m-0 bg-[#6a8faa] font-['Euclid_Circular_A','Poppins'] ${className}`}
       ref={containerRef}
     >
-      <section
+      <div
         ref={sectionRef}
         className="relative w-full flex items-center justify-center overflow-hidden"
         style={{ height }}
@@ -78,10 +78,12 @@ export const Parallax = ({
           className="bg absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat brightness-[0.68]"
           style={{ backgroundImage: `url(${image})` }}
         />
-        <h1 className="text-white z-10 text-[3em] font-normal [text-shadow:_1px_1px_3px_black]">
-          {text}
-        </h1>
-      </section>
-    </main>
+        {text && (
+          <h1 className="text-white z-10 text-[3em] font-normal [text-shadow:_1px_1px_3px_black]">
+            {text}
+          </h1>
+        )}
+      </div>
+    </div>
   );
 };
