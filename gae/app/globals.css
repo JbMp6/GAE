@@ -104,6 +104,22 @@ code, pre {
   color-scheme: light;
 }
 
+html {
+  color-scheme: light;
+  background-color: #ffffff !important;
+}
+
+body {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  forced-color-adjust: none;
+}
+
+/* Ensure main content is always white */
+main {
+  background-color: #ffffff !important;
+}
+
 @media (max-width: 768px) {
   :root {
     color-scheme: light;
