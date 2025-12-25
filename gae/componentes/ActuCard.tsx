@@ -45,7 +45,11 @@ export default function ActuCard({image,imageAlt,title,subtitle,description,href
 
         {/* Button */}
         <div className="flex justify-center">
-          <span className="text-secondary font-futura font-bold text-lg cursor-pointer">Lire la suite...</span>
+          <Button
+            title="+"
+            onClick={onClick}
+            href={href}
+          />
         </div>
       </div>
     </div>

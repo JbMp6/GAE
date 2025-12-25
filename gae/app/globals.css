@@ -41,37 +41,6 @@
   .font-syntha {
     font-family: var(--font-syntha);
   }
-
-  /* Animations de slide pour le slider */
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(100px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-100px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .animate-slideInRight {
-    animation: slideInRight 0.5s ease-out;
-  }
-
-  .animate-slideInLeft {
-    animation: slideInLeft 0.5s ease-out;
-  }
 }
 
 
@@ -97,32 +66,5 @@ body {
 /* Styles pour les éléments de code */
 code, pre {
   font-family: var(--font-syntha), 'Courier New', monospace;
-}
-
-/* Force light mode on mobile and auto-dark browsers */
-:root {
-  color-scheme: light;
-}
-
-html {
-  color-scheme: light;
-  background-color: #ffffff !important;
-}
-
-body {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  forced-color-adjust: none;
-}
-
-/* Ensure main content is always white */
-main {
-  background-color: #ffffff !important;
-}
-
-@media (max-width: 768px) {
-  :root {
-    color-scheme: light;
-  }
 }
 
