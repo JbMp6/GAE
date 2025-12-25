@@ -10,7 +10,7 @@ export default function Footer() {
           
           {/* Colonne 1 : Groupe */}
           <div className="flex flex-col items-start">
-            <h3 className="font-syntha text-lg md:text-2xl mb-6 uppercase">GROUPE ALLANIC ENERGIE</h3>
+            <h3 className="font-syntha text-lg md:text-2xl mb-6">groupe allanic energie</h3>
             <div className="font-futura text-sm space-y-2">
               <p>Siège social : PLOUGOURVEST (29400)</p>
               <p>Président : Sylvain Baron</p>
@@ -20,7 +20,7 @@ export default function Footer() {
           {/* Colonne 2 : Contact */}
           <div className="flex flex-col items-start md:items-center">
             <div className="flex flex-col items-start">
-                <h3 className="font-syntha text-lg md:text-2xl mb-6 uppercase">CONTACT</h3>
+                <h3 className="font-syntha text-lg md:text-2xl mb-6">contact</h3>
                 <div className="font-futura text-sm space-y-4">
                 <div className="flex items-center gap-3">
                     <div className="relative w-6 h-6 flex items-center justify-center">
@@ -53,7 +53,7 @@ export default function Footer() {
           {/* Colonne 3 : Liens Utiles */}
           <div className="flex flex-col items-start md:items-end">
             <div className="flex flex-col items-start md:items-end">
-                <h3 className="font-syntha text-lg md:text-2xl mb-6 uppercase">LIENS UTILES</h3>
+                <h3 className="font-syntha text-lg md:text-2xl mb-6 ">liens utiles</h3>
                 <div className="font-futura text-sm space-y-2 flex flex-col items-start md:items-end">
                 <Link href="/mentions-legales" className="hover:text-[var(--color-primary)] transition-colors">
                     Mentions légales

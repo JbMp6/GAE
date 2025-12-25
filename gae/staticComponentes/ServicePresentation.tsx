@@ -36,7 +36,7 @@ export default function ServicePresentation() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
         {services.map((service, index) => (
           <div key={index} className="flex flex-col items-center">
-            <div className={`${service.bg} w-3/4 md:w-full aspect-square rounded-[30px] flex flex-col items-center justify-center p-6 relative group transition-transform hover:scale-105 duration-300`}>
+            <div className={`${service.bg} w-3/4 md:w-full aspect-square rounded-[30px] flex flex-col items-center justify-center p-6 relative group transition-all hover:scale-105 hover:shadow-2xl duration-300`}>
               <div className="relative w-40 h-40 mb-6">
                  <Image 
                    src={service.icon} 

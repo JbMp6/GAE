@@ -1,8 +1,16 @@
 'use client';
 
+import { useRef } from 'react';
 import Image from 'next/image';
 import Boxed from './Boxed';
 import Button from '@/componentes/Button';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+import { useGSAP } from '@gsap/react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const companies = [
   {
@@ -40,8 +48,36 @@ const companies = [
 ];
 
 export default function SocietesPresentation() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const texts = gsap.utils.toArray<HTMLElement>('.company-text');
+    
+    texts.forEach((text) => {
+      const isReverse = text.getAttribute('data-reverse') === 'true';
+      
+      gsap.fromTo(text, 
+        { 
+          opacity: 0, 
+          x: isReverse ? -300 : 300
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 2.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: text,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+    });
+  }, { scope: containerRef });
+
   return (
-    <div className="w-full flex flex-col items-center">
+    <div ref={containerRef} className="w-full flex flex-col items-center overflow-hidden">
       {companies.map((company) => (
         <div key={company.id} className={`w-full flex justify-center ${company.bgColor}`}>
           <Boxed w_size="70%" color="transparent" className="py-8 md:py-12">
@@ -72,7 +108,10 @@ export default function SocietesPresentation() {
               </div>
 
               {/* Text Section */}
-              <div className="hidden md:block w-full md:w-5/12 text-[var(--color-secondary)] font-futura text-base leading-relaxed whitespace-pre-line text-justify">
+              <div 
+                className="company-text hidden md:block w-full md:w-5/12 text-[var(--color-secondary)] font-futura text-base leading-relaxed whitespace-pre-line text-justify"
+                data-reverse={company.reverse}
+              >
                 {company.text}
               </div>
             </div>
