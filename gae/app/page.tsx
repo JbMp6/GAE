@@ -13,6 +13,7 @@ import GroupePresentation from '@/staticComponentes/GroupePresentation';
 import ServicePresentation from '@/staticComponentes/ServicePresentation';
 import SocietesPresentation from '@/staticComponentes/SocietesPresentation';
 import Footer from '@/staticComponentes/Footer';
+import { Parallax } from '@/componentes/Parallax';
 
 export default function Home() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);
@@ -70,6 +71,12 @@ export default function Home() {
 
         <GroupePresentation />
 
+        <Parallax 
+          image="/img/elec.jpg" 
+          text="I AM THE WINNER" 
+          height="500px" 
+        />
+
         <SeparatorTitle id="services" title='services' headerBottom={headerBottom} />
 
         <ServicePresentation />
@@ -77,6 +84,12 @@ export default function Home() {
         <SeparatorTitle id="societes" title='societes' headerBottom={headerBottom} />
 
         <SocietesPresentation />
+
+        <Parallax 
+          image="/img/salon.jpg" 
+          text="Votre Titre" 
+          height="500px" 
+        />
 
         <FixedFooter />
 
