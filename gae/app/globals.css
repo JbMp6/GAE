@@ -99,3 +99,10 @@ code, pre {
   font-family: var(--font-syntha), 'Courier New', monospace;
 }
 
+/* Force light mode on mobile */
+@media (max-width: 768px) {
+  :root {
+    color-scheme: light;
+  }
+}
+
