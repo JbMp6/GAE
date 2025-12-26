@@ -68,7 +68,7 @@ const rightCards = [
     },
 ];
 
-
+export default function GroupePresentation() {
     const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
     const [hoveredMapLabel, setHoveredMapLabel] = useState<string | null>(null);
 
