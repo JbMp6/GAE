@@ -80,14 +80,14 @@ export default function SocietesPresentation() {
     <div ref={containerRef} className="w-full flex flex-col items-center overflow-hidden">
       {companies.map((company) => (
         <div key={company.id} className={`w-full flex justify-center ${company.bgColor}`}>
-          <Boxed w_size="70%" color="transparent" className="py-8 md:py-12">
+          <Boxed w_size="70%" color="transparent" className="py-8 2xl:py-12">
             <div 
-              className={`flex flex-col md:flex-row items-center justify-between w-full gap-8 ${company.reverse ? 'md:flex-row-reverse' : ''}`}
+              className={`flex flex-col 2xl:flex-row items-center justify-between w-full gap-8 ${company.reverse ? '2xl:flex-row-reverse' : ''}`}
             >
               {/* Logo & Icon Section */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 w-full md:w-5/12">
+              <div className="flex flex-col 2xl:flex-row items-center justify-center gap-2 2xl:gap-6 w-full 2xl:w-5/12">
                 {/* Icon */}
-                <div className={`relative w-16 h-16 md:w-24 md:h-24 order-1 ${company.reverse ? 'md:order-1' : 'md:order-2'}`}>
+                <div className={`relative w-16 h-16 2xl:w-24 2xl:h-24 order-1 ${company.reverse ? '2xl:order-1' : '2xl:order-2'}`}>
                   <Image 
                     src={company.icon} 
                     alt="Icone métier" 
@@ -97,7 +97,7 @@ export default function SocietesPresentation() {
                 </div>
 
                 {/* Logo */}
-                <div className={`relative w-64 h-32 md:w-96 md:h-48 order-2 ${company.reverse ? 'md:order-2' : 'md:order-1'}`}>
+                <div className={`relative w-64 h-32 2xl:w-96 2xl:h-48 order-2 ${company.reverse ? '2xl:order-2' : '2xl:order-1'}`}>
                   <Image 
                     src={company.logo} 
                     alt="Logo société" 
@@ -109,7 +109,7 @@ export default function SocietesPresentation() {
 
               {/* Text Section */}
               <div 
-                className="company-text hidden md:block w-full md:w-5/12 text-[var(--color-secondary)] font-futura text-base leading-relaxed whitespace-pre-line text-justify"
+                className="company-text hidden 2xl:block w-full 2xl:w-5/12 text-[var(--color-secondary)] font-futura text-base leading-relaxed whitespace-pre-line text-justify"
                 data-reverse={company.reverse}
               >
                 {company.text}

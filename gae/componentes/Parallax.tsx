@@ -66,7 +66,7 @@ export const Parallax = ({
 
   return (
     <div
-      className={`hidden md:block w-full m-0 bg-[#6a8faa] font-['Euclid_Circular_A','Poppins'] ${className}`}
+      className={`hidden 2xl:block w-full m-0 bg-[#6a8faa] font-['Euclid_Circular_A','Poppins'] ${className}`}
       ref={containerRef}
     >
       <div

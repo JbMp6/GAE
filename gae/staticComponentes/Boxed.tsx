@@ -24,7 +24,7 @@ export default function Boxed({ children, color, w_size, className }: BoxedProps
     };
 
     return (
-        <div className={`flex flex-col items-center justify-center h-auto ${widthClasses[w_size]} ${colorClasses[color]} ${className ?? ''}`}>
+        <div className={`flex flex-col items-center justify-center h-auto max-w-[1920px] ${widthClasses[w_size]} ${colorClasses[color]} ${className ?? ''}`}>
             {children}
         </div>
     );

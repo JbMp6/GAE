@@ -20,7 +20,7 @@ export default function ImgBanner({ children, img_src }: ImgBannerProps) {
             <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-white to-transparent pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-white to-transparent pointer-events-none" />
             
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-64 h-64 md:hidden z-10">
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-64 h-64 2xl:hidden z-10">
                 <Image
                     src="/ilstr/gae_logo_02.svg"
                     alt="Logo GAE"

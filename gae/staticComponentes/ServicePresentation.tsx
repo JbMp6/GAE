@@ -33,11 +33,11 @@ const services = [
 export default function ServicePresentation() {
   return (
     <Boxed w_size="70%" color="white" className="py-25 px-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
+      <div className="grid grid-cols-1 2xl:grid-cols-4 gap-10 w-full">
         {services.map((service, index) => (
-          <div key={index} className="flex flex-col items-center">
-            <div className={`${service.bg} w-3/4 md:w-full aspect-square rounded-[30px] flex flex-col items-center justify-center p-6 relative group transition-all hover:scale-105 hover:shadow-2xl duration-300`}>
-              <div className="relative w-40 h-40 mb-6">
+          <div key={index} className="flex flex-col items-center w-full">
+            <div className={`${service.bg} aspect-square rounded-[30px] flex flex-col items-center justify-center p-4 2xl:w-full 2xl:p-6 w-[60vw] max-w-[600px] mx-auto 2xl:max-w-full transition-all duration-300 group hover:scale-105 hover:shadow-2xl`}>
+              <div className="relative w-2/3 h-2/3 mx-auto">
                  <Image 
                    src={service.icon} 
                    alt={service.title} 
@@ -45,7 +45,7 @@ export default function ServicePresentation() {
                    className="object-contain"
                  />
               </div>
-              <h3 className="text-[var(--color-secondary)] text-center font-futura text-sm font-medium leading-tight">
+              <h3 className="text-[var(--color-secondary)] text-center font-futura text-lg font-medium leading-tight mt-4">
                 {service.title}
               </h3>
             </div>

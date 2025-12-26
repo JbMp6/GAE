@@ -99,9 +99,9 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
   const lastThreeItems = items.slice(-3);
 
   return (
-    <div className="w-full py-16">
+    <div className="w-full flex justify-center items-center py-16">
       {/* --- Desktop Slider --- */}
-      <div className="hidden md:flex items-center justify-center gap-0 w-full">
+      <div className="hidden 2xl:flex items-center justify-center gap-0 w-full max-w-[1920px]">
         {/* --- Left Arrow --- */}
         <div className="w-[15%] flex justify-center">
           <button
@@ -170,9 +170,9 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
       </div>
 
       {/* --- Mobile List --- */}
-      <div className="flex md:hidden flex-col items-center gap-8 w-full px-4">
+      <div className="flex 2xl:hidden flex-col justify-center items-center gap-8 w-full px-4">
         {lastThreeItems.map((item, index) => (
-          <div key={`mobile-${item.id}-${index}`} className="w-[85%]">
+          <div key={`mobile-${item.id}-${index}`} className="w-[85%] flex justify-center items-center">
             <ActuCard
               image={item.image}
               imageAlt={item.imageAlt}
