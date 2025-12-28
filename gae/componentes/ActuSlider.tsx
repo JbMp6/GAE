@@ -23,10 +23,11 @@ interface ActuItem {
 interface ActuSliderProps {
   items: ActuItem[];
   w_size?: '100%' | '70%' | '50%';
+  onSelect?: (item: ActuItem) => void;
 }
 
 // Main slider component
-export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
+export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSliderProps) {
   // Ref for the sliding container
   const containerRef = useRef<HTMLDivElement>(null);
   // Current index of the centered card
@@ -142,7 +143,7 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
                       title={item.title}
                       subtitle={item.subtitle}
                       description={item.description + " ..."}
-                      href={item.href}
+                      onClick={() => onSelect && onSelect(item)}
                     />
                   </div>
                 </div>
@@ -179,7 +180,7 @@ export default function ActuSlider({ items, w_size = '70%' }: ActuSliderProps) {
               title={item.title}
               subtitle={item.subtitle}
               description={item.description}
-              href={item.href}
+              onClick={() => onSelect && onSelect(item)}
             />
           </div>
         ))}

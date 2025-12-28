@@ -9,15 +9,14 @@ interface ActuCardProps {
   title: string;
   subtitle: string;
   description: string;
-  href?: string;
   onClick?: () => void;
 }
 
-export default function ActuCard({image,imageAlt,title,subtitle,description,href,onClick,}: ActuCardProps) {
+export default function ActuCard({image,imageAlt,title,subtitle,description,onClick}: ActuCardProps) {
   return (
-    <div className="bg-white rounded-2xl overflow-hidden border border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-[480px] flex flex-col">
+    <div className="bg-white rounded-2xl overflow-hidden border-2 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-[480px] flex flex-col">
       {/* Image Container */}
-      <div className="relative w-full h-48 bg-gray-100">
+      <div className="relative w-full h-48 bg-gray-100 rounded-2xl">
         <Image
           src={image}
           alt={imageAlt}
@@ -48,7 +47,6 @@ export default function ActuCard({image,imageAlt,title,subtitle,description,href
           <Button
             title="+"
             onClick={onClick}
-            href={href}
           />
         </div>
       </div>
