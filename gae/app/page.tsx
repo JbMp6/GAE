@@ -20,7 +20,7 @@ export default function Home() {
   const actuItems = [
     {
       id: '1',
-      image: '/images.jpeg',
+      image: '/img/actu/Firefly_batiment appartement dans la ville avec voiture et personnage 422534.jpg',
       imageAlt: 'Immeuble résidentiel moderne',
       title: 'Nouveau projet résidentiel',
       subtitle: 'Immobilier urbain',
@@ -63,7 +63,9 @@ export default function Home() {
   return (
     <>
       <Header onHeaderBottomChange={setHeaderBottom} />
+
       {/* Modal Article */}
+
       {selectedArticle && (
         <ActuCardModal
           image={selectedArticle.image}
@@ -74,15 +76,29 @@ export default function Home() {
           onClose={() => setSelectedArticle(null)}
         />
       )}
+
       <main className="flex flex-col items-center justify-start bg-white pt-header min-h-screen h-auto">
-        <ImgBanner img_src="/img/home_banner.jpg"/>
 
-        <SeparatorTitle id="actualites" title='actualites' headerBottom={headerBottom} />
+        <ImgBanner 
+          img_src="/img/home_banner.jpg"
+        />
 
-        <ActuSlider items={actuItems} onSelect={setSelectedArticle} />
+        <SeparatorTitle 
+          id="actualites" 
+          title='actualites' 
+          headerBottom={headerBottom} 
+        />
 
-        <SeparatorTitle id="groupe" title='groupe allanic' headerBottom={headerBottom} />
+        <ActuSlider 
+          items={actuItems} 
+          onSelect={setSelectedArticle} 
+        />
 
+        <SeparatorTitle 
+          id="groupe" 
+          title='groupe allanic' 
+          headerBottom={headerBottom} 
+        />
         <GroupePresentation />
 
         <Parallax 
@@ -90,12 +106,19 @@ export default function Home() {
           height="500px" 
         />
 
-        <SeparatorTitle id="services" title='services' headerBottom={headerBottom} />
+        <SeparatorTitle 
+          id="services" 
+          title='services' 
+          headerBottom={headerBottom} 
+        />
 
         <ServicePresentation />
 
-        <SeparatorTitle id="societes" title='societes' headerBottom={headerBottom} />
-
+        <SeparatorTitle 
+          id="societes" 
+          title='societes' 
+          headerBottom={headerBottom} 
+        />
         <SocietesPresentation />
 
         <Parallax 

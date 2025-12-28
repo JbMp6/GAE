@@ -240,10 +240,7 @@ export default function GroupePresentation() {
                     <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full">
                         <div></div>
                         <div className="flex justify-center">
-                            <Button title="+" />
-                        </div>
-                        <div className="pl-4">
-                            <span className="text-[var(--color-secondary)] font-futura text-sm italic">En savoir plus ...</span>
+                            <Button title="En savoir plus ..." />
                         </div>
                     </div>
                 </Boxed>

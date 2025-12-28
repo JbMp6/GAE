@@ -29,23 +29,23 @@ export default function ActuCard({image,imageAlt,title,subtitle,description,onCl
       <div className="p-6 flex flex-col">
         {/* Title and Subtitle */}
         <div className="mb-4">
-          <h3 className="text-xl font-futura font-bold text-secondary mb-1">
+          <h3 className="text-2xl font-futura font-bold text-secondary mb-1">
             {title}
           </h3>
-          <p className="text-sm font-futura text-primary font-semibold">
+          <p className="text-lg font-futura text-primary font-semibold">
             {subtitle}
           </p>
         </div>
 
         {/* Description */}
-        <p className="text-sm text-secondary font-futura leading-relaxed mb-6 flex-grow">
+        <p className="text-lg text-secondary font-futura leading-relaxed mb-6 flex-grow">
           {description}
         </p>
 
         {/* Button */}
         <div className="flex justify-center">
           <Button
-            title="+"
+            title="Lire la suite ..."
             onClick={onClick}
           />
         </div>

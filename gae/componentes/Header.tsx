@@ -154,7 +154,7 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
         <nav className={`
           fixed top-header left-0 w-full h-[calc(100vh-var(--spacing-header))]
           bg-secondary
-          flex flex-col items-center justify-center gap-10
+          flex flex-col items-center justify-start gap-10 pt-5
           font-futura text-xl font-normal
           transition-all duration-300 ease-in-out
           ${isMenuOpen ? 'opacity-100 translate-x-0 visible' : 'opacity-0 -translate-x-full invisible'}

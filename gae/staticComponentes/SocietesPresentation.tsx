@@ -124,10 +124,7 @@ export default function SocietesPresentation() {
           <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full">
             <div></div>
             <div className="flex justify-center">
-              <Button title="+" onClick={() => {}} />
-            </div>
-            <div className="pl-4">
-              <span className="text-[var(--color-secondary)] font-futura text-sm italic">En savoir plus ...</span>
+              <Button title="En savoir plus ..." onClick={() => {}} />
             </div>
           </div>
         </Boxed>

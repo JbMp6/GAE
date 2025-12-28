@@ -20,8 +20,8 @@ export default function ActuCardModal({ image, imageAlt, title, subtitle, conten
     };
   }, []);
   return (
-    <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-2">
-      <div className="relative bg-white rounded-[2.5rem] border-4 border-primary shadow-2xl w-[70vw] h-[calc(100vh-180px)] flex flex-row md:flex-row p-20 animate-fadeIn overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-2 ">
+      <div className="relative bg-white rounded-[2.5rem] border-4 border-primary shadow-2xl w-[70vw] h-[calc(100vh-180px)] flex flex-row md:flex-row p-20 fade-in-modal overflow-hidden">
         {/* Bouton fermer */}
         <button
           className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full border-3 border-primary bg-white text-primary hover:border-secondary hover:text-secondary transition-colors focus:outline-none z-10"
@@ -37,16 +37,16 @@ export default function ActuCardModal({ image, imageAlt, title, subtitle, conten
                 src={image} 
                 alt={imageAlt}
                 fill
-                className="object-cover"
+                className="object-cover rounded-t-4xl"
             />
             </div>
             
             <div className='h-[40%] flex flex-col justify-center items-center text-center'>
-              <h2 className="font-futura font-bold text-secondary text-3xl leading-tight">{title}</h2>
-              <h3 className="font-futura italic text-secondary text-xl mt-1">{subtitle}</h3>
+              <h2 className="font-futura font-bold text-secondary text-5xl leading-tight">{title}</h2>
+              <h3 className="font-futura italic text-secondary text-4xl mt-1">{subtitle}</h3>
             </div>
         </div>
-        <div className='w-[50%] pl-5 pt-10 flex flex-col min-h-0 '>
+        <div className='w-[50%] pl-5 pt-25 flex flex-col min-h-0 '>
           <div className="mt-auto flex flex-col items-start w-full overflow-y-auto">
             <p className='text-secondary font-futura text-2xl mb-4 text-justify'>
             {content}
