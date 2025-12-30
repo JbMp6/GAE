@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Button from '@/componentes/Button';
 import { useState } from 'react';
-import { on } from 'events';
 
 interface ActuCardProps {
   image: string;
@@ -16,17 +15,16 @@ interface ActuCardProps {
   onClick?: () => void;
 }
 
-export default function ActuCard({image, imageAlt, title, subtitle, description, content, onClick}: ActuCardProps) {
+export default function ActuCard({image, imageAlt, title, subtitle, description, content, real = false, onClick}: ActuCardProps) {
   const [descriptionMobile, setDescriptionMobile] = useState(0);
   // Set real to false by default if not provided
-  const real = typeof arguments[0].real === 'undefined' ? false : arguments[0].real;
   const developText = () => {
     if (descriptionMobile === 1) return setDescriptionMobile(0);
     setDescriptionMobile(1);
   };
   const handleClick = onClick ? onClick : developText;
   return (
-    <div className="bg-white rounded-2xl overflow-hidden border-2 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-full flex flex-col">
+    <div className="bg-white relative rounded-2xl overflow-hidden border-2 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-full flex flex-col">
       {/* Image Container */}
       <div className="relative w-full h-48 bg-gray-100 rounded-2xl">
         <Image
@@ -40,7 +38,7 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
       {/* Content Container */}
       <div className={`p-6 flex flex-col ${real ? 'justify-center items-center' : ''}`}>
         {/* Title and Subtitle */}
-        <div className="mb-4">
+        <div className={`mb-4 ${real ? 'justify-center items-center text-center' : ''}`}>
           <h3 className="text-2xl font-futura font-bold text-secondary mb-1">
             {title}
           </h3>
@@ -65,6 +63,9 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
             </div>
           </>
         )}
+        {real && (
+            <div className='absolute bottom-0 w-[45%] h-[5px] bg-primary'></div>
+          )}
       </div>
     </div>
   );

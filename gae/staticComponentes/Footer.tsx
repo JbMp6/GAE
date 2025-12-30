@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[var(--color-secondary)] text-white py-12 px-4 2xl:px-20 min-h-[calc(100vh-240px)] 2xl:min-h-0">
+    <footer className="w-full bg-[var(--color-secondary)] text-white py-12 px-4 2xl:px-20 min-h-[calc(100vh-240px)] 2xl:min-h-0 z-25">
         <div className="w-full grid grid-cols-1 2xl:grid-cols-3 gap-8 2xl:gap-4">
           
           {/* Colonne 1 : Groupe */}
