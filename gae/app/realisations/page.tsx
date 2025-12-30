@@ -17,7 +17,7 @@ export default function Home() {
 
   // Les données
   const actuItems = [
-    ...Array.from({ length: 15 }, (_, i) => ({
+    ...Array.from({ length: 52 }, (_, i) => ({
       id: String(i + 1),
       image: '/img/actu/Firefly_batiment appartement dans la ville avec voiture et personnage 422534.jpg',
       imageAlt: 'Immeuble résidentiel moderne',
@@ -60,7 +60,7 @@ export default function Home() {
 
       <main className="flex flex-col justify-center items-center bg-white pt-header min-h-screen h-auto">
 
-        <div className="grid 2xl:grid-cols-3 grid-cols-1 2xl:grid-rows-3 grid-rows-9 gap-8 max-w-5xl w-[70%] mx-auto my-15 justify-items-center">
+        <div className="grid 2xl:grid-cols-3 grid-cols-1 2xl:grid-rows-3 grid-rows-9 gap-8 max-w-6xl w-[80%] mx-auto my-15 justify-items-center">
           {currentItems.map((item) => (
             <ActuCard key={item.id} {...item} />
           ))}
@@ -76,15 +76,47 @@ export default function Home() {
           >
             <Image src="/ilstr/bouton_fleche.svg" alt="Précédent" width={36} height={36} className="w-10 h-10 transition-transform duration-150 hover:scale-125" />
           </button>
-          {Array.from({ length: totalPages }, (_, i) => (
-            <button
-              key={i + 1}
-              onClick={() => goToPage(i + 1)}
-              className={`w-10 h-10 flex items-center justify-center border-2 rounded-md transition-transform duration-150 border-primary bg-white hover:border-secondary hover:text-secondary text-xl hover:scale-110 ${currentPage === i + 1 ? 'text-secondary' : 'text-primary'}`}
-            >
-              {i + 1}
-            </button>
-          ))}
+          {/* Pagination centrale max 3 boutons */}
+          {(() => {
+            let start = 1;
+            let end = totalPages;
+            if (totalPages <= 3) {
+              start = 1;
+              end = totalPages;
+            } else if (currentPage === 1) {
+              start = 1;
+              end = 3;
+            } else if (currentPage === totalPages) {
+              start = totalPages - 2;
+              end = totalPages;
+            } else {
+              start = currentPage - 1;
+              end = currentPage + 1;
+            }
+            // Clamp pour éviter les pages négatives ou hors bornes
+            if (start < 1) {
+              end += 1 - start;
+              start = 1;
+            }
+            if (end > totalPages) {
+              start -= end - totalPages;
+              end = totalPages;
+            }
+            start = Math.max(1, start);
+            end = Math.min(totalPages, end);
+            return Array.from({ length: end - start + 1 }, (_, i) => {
+              const pageNum = start + i;
+              return (
+                <button
+                  key={pageNum}
+                  onClick={() => goToPage(pageNum)}
+                  className={`w-10 h-10 flex items-center justify-center border-2 rounded-md transition-transform duration-150 border-primary bg-white hover:border-secondary hover:text-secondary text-xl hover:scale-110 ${currentPage === pageNum ? 'text-secondary' : 'text-primary'}`}
+                >
+                  {pageNum}
+                </button>
+              );
+            });
+          })()}
           <button
             onClick={() => goToPage(currentPage + 1)}
             aria-label="Page suivante"

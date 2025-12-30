@@ -164,7 +164,10 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
             <Link
               key={link.href}
               href={link.href}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={e => {
+                handleNavClick(e, link);
+                setIsMenuOpen(false);
+              }}
               className={`${
                 pathname === link.href
                   ? 'text-primary'
