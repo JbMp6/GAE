@@ -1,15 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Header from '@/componentes/Header';
 import ActuCard from '@/componentes/ActuCard';
 import FixedFooter from '@/staticComponentes/FixedFooter';
 import Footer from '@/staticComponentes/Footer';
+import RealisationsSearchParamsWrapper from './RealisationsSearchParamsWrapper';
 
-export default function Home() {
+function HomeWithSearchParams() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);
+  const { useSearchParams } = require('next/navigation');
   const searchParams = useSearchParams();
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,7 +48,7 @@ export default function Home() {
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) return;
     // Met à jour le paramètre de page dans l'URL
-    const params = new URLSearchParams(Array.from(searchParams.entries()));
+    const params = new URLSearchParams([...searchParams.entries()]);
     if (page === 1) {
       params.delete('page');
     } else {
@@ -57,15 +60,12 @@ export default function Home() {
   return (
     <>
       <Header onHeaderBottomChange={setHeaderBottom} />
-
       <main className="flex flex-col justify-center items-center bg-white pt-header min-h-screen h-auto">
-
         <div className="grid 2xl:grid-cols-3 grid-cols-1 2xl:grid-rows-3 grid-rows-9 gap-8 max-w-6xl w-[80%] mx-auto my-15 justify-items-center">
           {currentItems.map((item) => (
             <ActuCard key={item.id} {...item} />
           ))}
         </div>
-
         {/* Pagination controls */}
         <div className="flex justify-center items-center mb-[60px] gap-4 select-none">
           <button
@@ -126,14 +126,20 @@ export default function Home() {
             <Image src="/ilstr/bouton_fleche.svg" alt="Suivant" width={36} height={36} className="w-10 h-10 rotate-180 transition-transform duration-150 hover:scale-105" />
           </button>
         </div>
-
         <div className="fixed bottom-footer left-0 w-full h-70 bg-gradient-to-t from-white to-transparent pointer-events-none" />
-      
-      <FixedFooter />
-
-      <Footer />
-
+        <FixedFooter />
+        <Footer />
       </main>
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <RealisationsSearchParamsWrapper>
+        <HomeWithSearchParams />
+      </RealisationsSearchParamsWrapper>
+    </Suspense>
   );
 }
