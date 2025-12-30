@@ -91,7 +91,7 @@ export default function Home() {
 
         <main className="flex flex-col justify-center items-center bg-white pt-header min-h-screen h-auto">
 
-          <div className="grid 2xl:grid-cols-3 grid-cols-1 2xl:grid-rows-3 grid-rows-9 gap-8 w-full max-w-5xl mx-auto my-15 justify-items-center">
+          <div className="grid 2xl:grid-cols-3 grid-cols-1 2xl:grid-rows-3 grid-rows-9 gap-8 max-w-5xl w-[70%] mx-auto my-15 justify-items-center">
             {actuItems.map((item) => (
                 <ActuCard key={item.id} {...item} />
               ))}
