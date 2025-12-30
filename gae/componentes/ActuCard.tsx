@@ -10,13 +10,16 @@ interface ActuCardProps {
   imageAlt: string;
   title: string;
   subtitle: string;
-  description: string;
-  content: string;
+  description?: string;
+  content?: string;
+  real?: boolean;
   onClick?: () => void;
 }
 
 export default function ActuCard({image, imageAlt, title, subtitle, description, content, onClick}: ActuCardProps) {
   const [descriptionMobile, setDescriptionMobile] = useState(0);
+  // Set real to false by default if not provided
+  const real = typeof arguments[0].real === 'undefined' ? false : arguments[0].real;
   const developText = () => {
     if (descriptionMobile === 1) return setDescriptionMobile(0);
     setDescriptionMobile(1);
@@ -35,7 +38,7 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
       </div>
 
       {/* Content Container */}
-      <div className="p-6 flex flex-col">
+      <div className={`p-6 flex flex-col ${real ? 'justify-center items-center' : ''}`}>
         {/* Title and Subtitle */}
         <div className="mb-4">
           <h3 className="text-2xl font-futura font-bold text-secondary mb-1">
@@ -46,18 +49,22 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
           </p>
         </div>
 
-        {/* Description */}
-        <p className="text-lg text-secondary font-futura leading-relaxed mb-6 flex-grow">
-          {descriptionMobile === 0 ? description : content}
-        </p>
+        {!real && (
+          <>
+            {/* Description */}
+            <p className="text-lg text-secondary font-futura leading-relaxed mb-6 flex-grow">
+              {descriptionMobile === 0 ? description : content}
+            </p>
 
-        {/* Button */}
-        <div className="flex justify-center">
-          <Button
-            title={descriptionMobile === 0 ? "Lire la suite ..." : "Réduire"}
-            onClick={handleClick}
-          />
-        </div>
+            {/* Button */}
+            <div className="flex justify-center">
+              <Button
+                title={descriptionMobile === 0 ? "Lire la suite ..." : "Retour ..."}
+                onClick={handleClick}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
