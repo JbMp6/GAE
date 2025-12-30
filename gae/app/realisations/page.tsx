@@ -126,7 +126,7 @@ function HomeWithSearchParams() {
             <Image src="/ilstr/bouton_fleche.svg" alt="Suivant" width={36} height={36} className="w-10 h-10 rotate-180 transition-transform duration-150 hover:scale-105" />
           </button>
         </div>
-        <div className="fixed bottom-footer left-0 w-full h-70 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+        <div className="2xl:fixed hidden bottom-footer left-0 w-full h-70 bg-gradient-to-t from-white to-transparent pointer-events-none" />
         <FixedFooter />
         <Footer />
       </main>
