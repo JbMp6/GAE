@@ -16,6 +16,7 @@ interface ActuItem {
   title: string;
   subtitle: string;
   description: string;
+  content: string;
   href?: string;
 }
 
@@ -142,7 +143,8 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
                       imageAlt={item.imageAlt}
                       title={item.title}
                       subtitle={item.subtitle}
-                      description={item.description + " ..."}
+                      description={item.description}
+                      content={item.content}
                       onClick={() => onSelect && onSelect(item)}
                     />
                   </div>
@@ -171,7 +173,7 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
       </div>
 
       {/* --- Mobile List --- */}
-      <div className="flex 2xl:hidden flex-col justify-center items-center gap-8 w-full px-4">
+      <div className="flex 2xl:hidden flex-col justify-center items-center gap-10 w-full px-4">
         {lastThreeItems.map((item, index) => (
           <div key={`mobile-${item.id}-${index}`} className="w-[85%] flex justify-center items-center">
             <ActuCard
@@ -180,7 +182,7 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
               title={item.title}
               subtitle={item.subtitle}
               description={item.description}
-              onClick={() => onSelect && onSelect(item)}
+              content={item.content}
             />
           </div>
         ))}
