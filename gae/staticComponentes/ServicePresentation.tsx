@@ -33,10 +33,10 @@ const services = [
 export default function ServicePresentation() {
   return (
     <Boxed w_size="70%" color="white" className="py-25 px-4">
-      <div className="grid grid-cols-1 2xl:grid-cols-4 gap-10 w-full">
+      <div className="grid grid-cols-1 xl:grid-cols-4 gap-10 w-full">
         {services.map((service, index) => (
           <div key={index} className="flex flex-col items-center w-full">
-            <div className={`${service.bg} aspect-square rounded-[30px] flex flex-col items-center justify-center p-4 2xl:w-full 2xl:p-6 w-[60vw] max-w-[600px] mx-auto 2xl:max-w-full transition-all duration-300 group hover:scale-105 hover:shadow-2xl`}>
+            <div className={`${service.bg} aspect-square rounded-[30px] flex flex-col items-center justify-center p-4 xl:w-full xl:p-6 w-[60vw] max-w-[600px] mx-auto xl:max-w-full transition-all duration-300 group hover:scale-105 hover:shadow-2xl`}>
               <div className="relative w-2/3 h-2/3 mx-auto">
                  <Image 
                    src={service.icon} 

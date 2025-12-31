@@ -61,7 +61,7 @@ function HomeWithSearchParams() {
     <>
       <Header onHeaderBottomChange={setHeaderBottom} />
       <main className="flex flex-col justify-center items-center bg-white pt-header min-h-screen h-auto">
-        <div className="grid 2xl:grid-cols-3 grid-cols-1 2xl:grid-rows-3 grid-rows-9 gap-8 max-w-6xl w-[80%] mx-auto my-15 justify-items-center">
+        <div className="grid xl:grid-cols-3 grid-cols-1 xl:grid-rows-3 grid-rows-9 gap-8 max-w-6xl w-[80%] mx-auto my-15 justify-items-center">
           {currentItems.map((item) => (
             <ActuCard key={item.id} {...item} />
           ))}
@@ -126,7 +126,7 @@ function HomeWithSearchParams() {
             <Image src="/ilstr/bouton_fleche.svg" alt="Suivant" width={36} height={36} className="w-10 h-10 rotate-180 transition-transform duration-150 hover:scale-105" />
           </button>
         </div>
-        <div className="2xl:fixed hidden bottom-footer left-0 w-full h-70 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+        <div className="xl:fixed hidden bottom-footer left-0 w-full h-70 bg-gradient-to-t from-white to-transparent pointer-events-none" />
         <FixedFooter />
         <Footer />
       </main>

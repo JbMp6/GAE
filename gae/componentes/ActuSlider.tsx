@@ -103,7 +103,7 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
   return (
     <div className="w-full flex justify-center items-center py-16">
       {/* --- Desktop Slider --- */}
-      <div className="hidden 2xl:flex items-center justify-center gap-0 w-full max-w-[1920px]">
+      <div className="hidden xl:flex items-center justify-center gap-0 w-full max-w-[1920px]">
         {/* --- Left Arrow --- */}
         <div className="w-[15%] flex justify-center">
           <button
@@ -124,10 +124,10 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
         {/* --- Cards in Boxed --- */}
         <Boxed color="white" w_size="70%">
           {/* Overflow hidden to keep cards inside the box, even on hover. min-h-[540px] ensures shadow is always visible. */}
-          <div className="relative w-full py-4 overflow-hidden min-h-[540px]">
+          <div className="relative flex justify-center items-center w-full py-4 overflow-hidden min-h-[540px]">
             <div
               ref={containerRef}
-              className="flex gap-20 justify-center"
+              className="flex 2xl:gap-20 gap-[35px] justify-center"
               style={{ transition: 'none' }}
             >
               {visibleItems.map((item, index) => (
@@ -173,7 +173,7 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
       </div>
 
       {/* --- Mobile List --- */}
-      <div className="flex 2xl:hidden flex-col justify-center items-center gap-10 w-full px-4">
+      <div className="flex xl:hidden flex-col justify-center items-center gap-10 w-full px-4">
         {lastThreeItems.map((item, index) => (
           <div key={`mobile-${item.id}-${index}`} className="w-[85%] flex justify-center items-center">
             <ActuCard

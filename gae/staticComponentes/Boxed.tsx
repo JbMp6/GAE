@@ -10,9 +10,9 @@ interface BoxedProps {
 
 export default function Boxed({ children, color, w_size, className }: BoxedProps) {
     const widthClasses = {
-        '100%': 'w-full 2xl:w-full',
-        '70%': 'w-full 2xl:w-[70%]',
-        '50%': 'w-full 2xl:w-1/2'
+        '100%': 'w-full xl:w-full',
+        '70%': 'w-full xl:w-[70%]',
+        '50%': 'w-full xl:w-1/2'
     };
 
     const colorClasses = {

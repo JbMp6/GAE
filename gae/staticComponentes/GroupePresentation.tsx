@@ -99,29 +99,29 @@ export default function GroupePresentation() {
     }, [hoveredCardId, hoveredMapLabel]);
 
     return (
-        <div className="bg-extra w-full flex flex-col items-center justify-center gap-10 2xl:gap-20 py-16 px-10 2xl:px-0">
-            <Boxed w_size="70%" color="extra" className="flex-col 2xl:flex-row gap-8 2xl:gap-0 items-start">
-                <div className="flex justify-start items-start w-full 2xl:w-[34%] h-full">
-                    <h3 className="font-syntha text-secondary text-2xl 2xl:text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">
+        <div className="bg-extra w-full flex flex-col items-center justify-center gap-10 xl:gap-20 py-16 px-10 xl:px-0">
+            <Boxed w_size="70%" color="extra" className="flex-col xl:flex-row gap-8 xl:gap-0 items-start">
+                <div className="flex justify-start items-start w-full xl:w-[34%] h-full">
+                    <h3 className="font-syntha text-secondary text-2xl xl:text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">
                         presentation
                     </h3>
                 </div>
-                <div className="flex justify-start items-start w-full 2xl:w-[66%] h-full">
-                    <p className="text-left text-secondary text-lg 2xl:text-2xl font-futura font-[300]">
+                <div className="flex justify-start items-start w-full xl:w-[66%] h-full">
+                    <p className="text-left text-secondary text-lg xl:text-2xl font-futura font-[300]">
                         Le Groupe Allanic Énergie propose une offre globale en génie électrique et climatique à travers quatre entités spécialisées. Ses expertises couvrent l'électricité générale, le chauffage, la ventilation (CVC) et les courants faibles pour les secteurs du bâtiment, de l'industrie et de l'agriculture.
                     </p>
                 </div>
             </Boxed>
 
             <Boxed w_size="70%" color="extra" className="flex-row">
-                <p className="text-left text-secondary text-base 2xl:text-2xl font-futura font-[400] columns-1 2xl:columns-3 gap-x-8">
+                <p className="text-left text-secondary text-base xl:text-2xl font-futura font-[400] columns-1 xl:columns-3 gap-x-8">
                     L’activité du groupe s’articule autour de deux piliers complémentaires : l’installation neuve ou la rénovation, et la maintenance opérationnelle des équipements. En maîtrisant l’ensemble de la chaîne des fluides et des réseaux de communication, le groupe assure la mise en œuvre de solutions techniques performantes et pérennes. De la gestion de l'énergie à la sécurisation des accès et des infrastructures, chaque filiale apporte ses compétences spécifiques pour garantir le bon fonctionnement et la sécurité des installations professionnelles et résidentielles.
                 </p>
             </Boxed>
 
-            <Boxed w_size="70%" color="extra" className="hidden 2xl:flex flex-col gap-12">
+            <Boxed w_size="70%" color="extra" className="hidden xl:flex flex-col gap-12">
                 <div className="flex justify-start items-start w-full">
-                    <h3 className="font-syntha text-secondary text-2xl 2xl:text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">
+                    <h3 className="font-syntha text-secondary text-2xl xl:text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">
                         implantation
                     </h3>
                 </div>
@@ -225,11 +225,11 @@ export default function GroupePresentation() {
 
             <Boxed w_size="70%" color="extra" className="flex-col gap-8">
                 <div className="flex justify-start items-start w-full">
-                    <h3 className="font-syntha text-secondary text-2xl 2xl:text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">
+                    <h3 className="font-syntha text-secondary text-2xl xl:text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">
                         valeurs du groupe
                     </h3>
                 </div>
-                <p className="text-left text-secondary text-base 2xl:text-2xl font-futura font-[400]">
+                <p className="text-left text-secondary text-base xl:text-2xl font-futura font-[400]">
                     Le Groupe Allanic Énergie cultive la synergie entre ses filiales pour offrir une expertise globale. Proximité et réactivité guident nos équipes au quotidien, garantissant des solutions techniques fiables en électricité et génie climatique. Nous plaçons la satisfaction client au cœur de nos engagements, alliant savoir-faire historique et innovation pour sécuriser vos infrastructures durablement.
                 </p>
             </Boxed>
