@@ -16,7 +16,7 @@ export default function ContactPage() {
           </div>
           <div className="w-full xl:w-[60%] h-full flex flex-col xl:pl-10 px-5">
             <div className="w-full h-[20%] flex justify-start items-center">
-              <h1 className="font-syntha text-secondary text-3xl">Contacte</h1>
+              <h1 className="font-syntha text-secondary text-3xl">Contact</h1>
             </div>
             <div className="w-full h-[80%] flex justify-start items-start pb-10">
               <FormulaireContact />
