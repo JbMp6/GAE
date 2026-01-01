@@ -48,7 +48,7 @@ export default function FormulaireContact() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-2xl h-full flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="w-full max-w-3xl h-full flex flex-col gap-4">
       {/* Prénom */}
       <input
         type="text"
@@ -83,7 +83,7 @@ export default function FormulaireContact() {
       />
 
       {/* Votre message avec checkbox et bouton */}
-      <div className="flex gap-4 items-end flex-1">
+      <div className="flex flex-col xl:flex-row gap-4 xl:items-end flex-1">
         {/* Votre message */}
         <textarea
           name="message"
@@ -91,7 +91,7 @@ export default function FormulaireContact() {
           onChange={handleChange}
           placeholder="Votre message"
           required
-          className="flex-1 h-full px-5 py-3 border border-secondary rounded-3xl bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors resize-none"
+          className="flex-1 xl:h-full h-32 px-5 py-3 border border-secondary rounded-3xl bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors resize-none"
         />
 
         {/* Colonne droite : Checkbox + Bouton */}
