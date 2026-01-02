@@ -173,7 +173,7 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
       </div>
 
       {/* --- Mobile List --- */}
-      <div className="flex xl:hidden flex-col justify-center items-center gap-10 w-full px-4">
+      <div className="flex xl:hidden flex-col justify-center items-center gap-10 w-full h-auto px-4">
         {lastThreeItems.map((item, index) => (
           <div key={`mobile-${item.id}-${index}`} className="w-[85%] flex justify-center items-center">
             <ActuCard

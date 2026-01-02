@@ -132,8 +132,8 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
               <Image 
                 src="/ilstr/eclair_01.svg" 
                 alt="Éclair" 
-                width={35} 
-                height={35}
+                width={30} 
+                height={30}
                 className="cursor-pointer"
                 priority
               />
@@ -160,6 +160,18 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
           ${isMenuOpen ? 'opacity-100 translate-x-0 visible' : 'opacity-0 -translate-x-full invisible'}
           z-20
         `}>
+          <Link
+            href="/"
+            onClick={() => setIsMenuOpen(false)}
+            className={`${
+              pathname === '/'
+                ? 'text-primary'
+                : 'text-white hover:text-primary'
+            } transition-colors duration-200`}
+          >
+            ACCUEIL
+          </Link>
+
           {navLinks.map((link) => (
             <Link
               key={link.href}
