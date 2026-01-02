@@ -15,7 +15,7 @@ const leftCards = [
     mapPoint: {
         label: "Plougourvest",
         top: "17%",
-        left: "27%",
+        left: "26%",
         },
     },
 
@@ -26,8 +26,8 @@ const leftCards = [
         address: ["26 Av. Bel Air", "29800 LANDERNEAU"],
         mapPoint: {
             label: "Landerneau",
-            top: "22%",
-            left: "19%",
+            top: "21%",
+            left: "22%",
         },
     },
 ];
@@ -40,8 +40,8 @@ const rightCards = [
         address: ["La Grée", "Route de Pluvigner", "56330 CAMORS"],
         mapPoint: {
             label: "Camors",
-            top: "68%",
-            left: "44%",
+            top: "52%",
+            left: "47%",
         },
     },
     {
@@ -51,8 +51,8 @@ const rightCards = [
         address: ["21 route d'Auray", "56330 CAMORS"],
         mapPoint: {
             label: "Camors",
-            top: "68%",
-            left: "44%",
+            top: "52%",
+            left: "47%",
         },
     },
     {
@@ -62,8 +62,8 @@ const rightCards = [
         address: ["La Grée", "Route de Pluvigner", "56330 CAMORS"],
         mapPoint: {
             label: "Camors",
-            top: "68%",
-            left: "44%",
+            top: "52%",
+            left: "47%",
         },
     },
 ];
@@ -153,10 +153,10 @@ export default function GroupePresentation() {
                     </div>
 
                     {/* Map + points */}
-                    <div className="flex justify-center items-center w-1/2">
-                        <div className="w-full aspect-[702.64/414.17] relative">
+                    <div className="flex justify-center items-center w-1/2 h-full">
+                        <div className="w-full aspect-[6/4] relative">
                             <Image
-                                src="/ilstr/carte_bretagne_02.svg"
+                                src="/ilstr/carte_bzh.svg"
                                 alt="Carte Implantation"
                                 fill
                                 className="object-contain"
