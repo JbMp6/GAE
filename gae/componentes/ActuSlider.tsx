@@ -101,9 +101,9 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
   const lastThreeItems = items.slice(-3);
 
   return (
-    <div className="w-full flex justify-center items-center py-16">
+    <div className="w-full flex justify-center items-center h-auto py-10 relative">
       {/* --- Desktop Slider --- */}
-      <div className="hidden xl:flex items-center justify-center gap-0 w-full max-w-[1920px]">
+      <div className="hidden xl:flex items-center justify-center gap-0 w-full max-w-[1920px] h-full">
         {/* --- Left Arrow --- */}
         <div className="w-[15%] flex justify-center">
           <button
@@ -123,11 +123,11 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
 
         {/* --- Cards in Boxed --- */}
         <Boxed color="white" w_size="70%">
-          {/* Overflow hidden to keep cards inside the box, even on hover. min-h-[540px] ensures shadow is always visible. */}
-          <div className="relative flex justify-center items-center w-full py-4 overflow-hidden min-h-[540px]">
+          {/* Overflow visible to allow shadow to show on hover */}
+          <div className="relative flex justify-center items-center w-full py-20 px-5 overflow-visible min-h-[540px] h-full overflow-x-hidden">
             <div
               ref={containerRef}
-              className="flex 2xl:gap-20 gap-[35px] justify-center"
+              className="flex 2xl:gap-20 gap-[35px] justify-center h-full"
               style={{ transition: 'none' }}
             >
               {visibleItems.map((item, index) => (

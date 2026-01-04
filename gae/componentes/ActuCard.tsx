@@ -24,7 +24,7 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
   };
   const handleClick = onClick ? onClick : developText;
   return (
-    <div className="bg-white relative rounded-2xl overflow-hidden border-2 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-full flex flex-col">
+    <div className="bg-white relative rounded-2xl overflow-hidden border-2 border-primary xl:hover:shadow-xl xl:hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-full flex flex-col">
       {/* Image Container */}
       <div className="relative w-full h-48 bg-gray-100 rounded-2xl">
         <Image
