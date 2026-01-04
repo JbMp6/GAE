@@ -44,7 +44,7 @@ export default function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`xl:absolute xl:flex hidden right-4 z-50 p-3 bg-secondary hover:scale-110 text-primary rounded-lg shadow-lg transition-all duration-300 ${
+      className={`hidden xl:flex items-center justify-center relative xl:absolute right-4 z-50 p-3 bg-secondary hover:scale-110 text-primary rounded-lg shadow-lg transition-all duration-300 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16 pointer-events-none'
       }`}
       aria-label="Retour en haut"
@@ -63,7 +63,7 @@ export default function ScrollToTop() {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2.5}
-          d="M5 15l7-7 7 7M5 9l7-7 7 7"
+          d="M5 17l7-6 7 6 M5 9l7-6 7 6"
         />
       </svg>
       
