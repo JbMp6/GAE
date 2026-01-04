@@ -5,7 +5,8 @@ import Header from '@/componentes/Header';
 import FixedFooter from '@/staticComponentes/FixedFooter';
 import ImgBanner from '@/staticComponentes/ImgBanner';
 import SeparatorTitle from '@/componentes/SeparatorTitle';
-import ActuSlider from '@/componentes/ActuSlider';
+import Slider from '@/componentes/Slider';
+import ActuCard from '@/componentes/ActuCard';
 import GroupePresentation from '@/staticComponentes/GroupePresentation';
 import ServicePresentation from '@/staticComponentes/ServicePresentation';
 import SocietesPresentation from '@/staticComponentes/SocietesPresentation';
@@ -89,10 +90,19 @@ export default function Home() {
           headerBottom={headerBottom} 
         />
 
-        <ActuSlider 
-          items={actuItems} 
-          onSelect={setSelectedArticle} 
-        />
+        <Slider items={actuItems}>
+          {(item) => (
+            <ActuCard
+              image={item.image}
+              imageAlt={item.imageAlt}
+              title={item.title}
+              subtitle={item.subtitle}
+              description={item.description}
+              content={item.content}
+              onClick={() => setSelectedArticle(item)}
+            />
+          )}
+        </Slider>
 
         <SeparatorTitle 
           id="groupe" 

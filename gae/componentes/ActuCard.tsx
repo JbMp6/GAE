@@ -22,7 +22,15 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
     if (descriptionMobile === 1) return setDescriptionMobile(0);
     setDescriptionMobile(1);
   };
-  const handleClick = onClick ? onClick : developText;
+  const handleClick = () => {
+    // En version desktop (xl), ouvrir la modal si onClick existe
+    if (onClick && window.innerWidth >= 1280) {
+      onClick();
+    } else {
+      // En version mobile, développer/réduire le texte
+      developText();
+    }
+  };
   return (
     <div className="bg-white relative rounded-2xl overflow-hidden border-2 border-primary xl:hover:shadow-xl xl:hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-full flex flex-col">
       {/* Image Container */}

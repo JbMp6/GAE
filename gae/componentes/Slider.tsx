@@ -1,34 +1,21 @@
 
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, ReactElement } from 'react';
 import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Boxed from '@/staticComponentes/Boxed';
-import ActuCard from '@/componentes/ActuCard';
-
-// TypeScript interface for a news item (card)
-interface ActuItem {
-  id: string;
-  image: string;
-  imageAlt: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  content: string;
-  href?: string;
-}
 
 // Props for the slider
-interface ActuSliderProps {
-  items: ActuItem[];
+interface GenericSliderProps<T> {
+  items: T[];
   w_size?: '100%' | '70%' | '50%';
-  onSelect?: (item: ActuItem) => void;
+  children: (item: T, index: number) => ReactElement;
 }
 
-// Main slider component
-export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSliderProps) {
+// Main slider component - now generic
+export default function Slider<T>({ items, w_size = '70%', children }: GenericSliderProps<T>) {
   // Ref for the sliding container
   const containerRef = useRef<HTMLDivElement>(null);
   // Current index of the centered card
@@ -132,21 +119,13 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
             >
               {visibleItems.map((item, index) => (
                 <div
-                  key={`${item.id}-${currentIndex}-${index}`}
+                  key={`slider-${currentIndex}-${index}`}
                   className="shrink-0 flex justify-center"
                   style={{ width: 'calc((100% - 10rem) / 3)', maxWidth: 400 }}
                 >
                   {/* Card with hover effect, but overflow is managed by parent */}
                   <div className="w-full h-full flex items-center justify-center">
-                    <ActuCard
-                      image={item.image}
-                      imageAlt={item.imageAlt}
-                      title={item.title}
-                      subtitle={item.subtitle}
-                      description={item.description}
-                      content={item.content}
-                      onClick={() => onSelect && onSelect(item)}
-                    />
+                    {children(item, index)}
                   </div>
                 </div>
               ))}
@@ -175,15 +154,8 @@ export default function ActuSlider({ items, w_size = '70%', onSelect }: ActuSlid
       {/* --- Mobile List --- */}
       <div className="flex xl:hidden flex-col justify-center items-center gap-10 w-full h-auto px-4">
         {lastThreeItems.map((item, index) => (
-          <div key={`mobile-${item.id}-${index}`} className="w-[85%] flex justify-center items-center">
-            <ActuCard
-              image={item.image}
-              imageAlt={item.imageAlt}
-              title={item.title}
-              subtitle={item.subtitle}
-              description={item.description}
-              content={item.content}
-            />
+          <div key={`mobile-${index}`} className="w-[85%] flex justify-center items-center">
+            {children(item, index)}
           </div>
         ))}
       </div>
