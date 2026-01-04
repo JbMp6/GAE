@@ -8,11 +8,11 @@ import SeparatorTitle from '@/componentes/SeparatorTitle';
 import Slider from '@/componentes/Slider';
 import ActuCard from '@/componentes/ActuCard';
 import GroupePresentation from '@/staticComponentes/GroupePresentation';
-import ServicePresentation from '@/staticComponentes/ServicePresentation';
 import SocietesPresentation from '@/staticComponentes/SocietesPresentation';
 import Footer from '@/staticComponentes/Footer';
 import { Parallax } from '@/componentes/Parallax';
 import ActuCardModal from '@/componentes/ActuCardModal';
+import ServiceCard from '@/componentes/ServiceCard';
 
 export default function Home() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);
@@ -61,6 +61,33 @@ export default function Home() {
     }
   ];
 
+  const services = [
+  {
+    title: 'Électricité',
+    icon: '/ilstr/eclair_02.svg',
+    bg: 'bg-extra',
+    buttonColor: 'bg-extra'
+  },
+  {
+    title: 'Courant faible',
+    icon: '/ilstr/courant_faible.svg',
+    bg: 'bg-primary',
+    buttonColor: 'bg-primary'
+  },
+  {
+    title: 'Chauffage & climatisation',
+    icon: '/ilstr/chauffage_climatisation.svg',
+    bg: 'bg-extra',
+    buttonColor: 'bg-extra'
+  },
+  {
+    title: 'Maintenance',
+    icon: '/ilstr/maintenance.svg',
+    bg: 'bg-primary',
+    buttonColor: 'bg-primary'
+  }
+];
+
   return (
     <>
       <Header onHeaderBottomChange={setHeaderBottom} />
@@ -92,15 +119,7 @@ export default function Home() {
 
         <Slider items={actuItems}>
           {(item) => (
-            <ActuCard
-              image={item.image}
-              imageAlt={item.imageAlt}
-              title={item.title}
-              subtitle={item.subtitle}
-              description={item.description}
-              content={item.content}
-              onClick={() => setSelectedArticle(item)}
-            />
+            <ActuCard {...item} onClick={() => setSelectedArticle(item)} />
           )}
         </Slider>
 
@@ -122,7 +141,11 @@ export default function Home() {
           headerBottom={headerBottom} 
         />
 
-        <ServicePresentation />
+        <Slider items={services}>
+          {(item) => (
+            <ServiceCard {...item} />
+          )}
+        </Slider>
 
         <SeparatorTitle 
           id="societes" 

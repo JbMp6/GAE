@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Boxed from '@/staticComponentes/Boxed';
+import Button from './Button';
 
 // Props for the slider
 interface GenericSliderProps<T> {
@@ -22,6 +23,8 @@ export default function Slider<T>({ items, w_size = '70%', children }: GenericSl
   const [currentIndex, setCurrentIndex] = useState(0);
   // Ref to keep track of animation direction
   const directionRef = useRef<'left' | 'right' | null>(null);
+  // State for showing all items on mobile
+  const [showAllMobile, setShowAllMobile] = useState(false);
 
   // GSAP context for animation
   const { contextSafe } = useGSAP({ scope: containerRef });
@@ -153,11 +156,23 @@ export default function Slider<T>({ items, w_size = '70%', children }: GenericSl
 
       {/* --- Mobile List --- */}
       <div className="flex xl:hidden flex-col justify-center items-center gap-10 w-full h-auto px-4">
-        {lastThreeItems.map((item, index) => (
+        {(showAllMobile ? items : lastThreeItems).map((item, index) => (
           <div key={`mobile-${index}`} className="w-[85%] flex justify-center items-center">
             {children(item, index)}
           </div>
         ))}
+        {!showAllMobile && items.length > 3 && (
+          <Button 
+            title="Voir plus..." 
+            onClick={() => setShowAllMobile(true)} 
+          />
+        )}
+        {showAllMobile && (
+          <Button 
+            title="Voir moins" 
+            onClick={() => setShowAllMobile(false)} 
+          />
+        )}
       </div>
     </div>
   );
