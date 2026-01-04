@@ -57,17 +57,27 @@ export default function Home() {
           img_src="/img/home_banner.jpg"
         />
 
+        <Parallax 
+          image="/img/elec.jpg" 
+          height="500px" 
+        />
+
         <SeparatorTitle 
           id="actualites" 
           title='actualites' 
           headerBottom={headerBottom} 
         />
 
-        <Slider items={actuItems}>
+        <Slider items={actuItems} gap="80px">
           {(item) => (
             <ActuCard {...item} onClick={() => setSelectedArticle(item)} />
           )}
         </Slider>
+
+        <Parallax 
+          image="/img/elec.jpg" 
+          height="500px" 
+        />
 
         <SeparatorTitle 
           id="groupe" 
@@ -87,11 +97,16 @@ export default function Home() {
           headerBottom={headerBottom} 
         />
 
-        <Slider items={services}>
+        <Slider items={services} gap="150px">
           {(item) => (
             <ServiceCard {...item} />
           )}
         </Slider>
+
+        <Parallax 
+          image="/img/elec.jpg" 
+          height="500px" 
+        />
 
         <SeparatorTitle 
           id="societes" 
