@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/componentes/Header';
 import FixedFooter from '@/staticComponentes/FixedFooter';
 import ImgBanner from '@/staticComponentes/ImgBanner';
@@ -13,80 +13,36 @@ import Footer from '@/staticComponentes/Footer';
 import { Parallax } from '@/componentes/Parallax';
 import ActuCardModal from '@/componentes/ActuCardModal';
 import ServiceCard from '@/componentes/ServiceCard';
+import { getActus, getServices } from '@/lib/queries';
+import type { Actu, Service } from '@/lib/queries';
 
 export default function Home() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);
-  const [selectedArticle, setSelectedArticle] = useState<any | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<Actu | null>(null);
+  const [actuItems, setActuItems] = useState<Actu[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const actuItems = [
-    {
-      id: '1',
-      image: '/img/actu/Firefly_batiment appartement dans la ville avec voiture et personnage 422534.jpg',
-      imageAlt: 'Immeuble résidentiel moderne',
-      title: 'Nouveau projet résidentiel',
-      subtitle: 'Immobilier urbain',
-      description: 'Découvrez notre nouveau complexe résidentiel situé au cœur de la ville, offrant des espaces de vie modernes et confortables pour tous.',
-      content : "Découvrez notre nouveau complexe résidentiel situé au cœur de la ville, offrant des espaces de vie modernes et confortables pour tous. Ce projet innovant intègre des technologies durables et des aménagements paysagers pour créer un environnement harmonieux et convivial. Découvrez notre nouveau complexe résidentiel situé au cœur de la ville, offrant des espaces de vie modernes et confortables pour tous. Ce projet innovant intègre des technologies durables et des aménagements paysagers pour créer un environnement harmonieux et convivial. Découvrez notre nouveau complexe résidentiel situé au cœur de la ville, offrant des espaces de vie modernes et confortables pour tous. Ce projet innovant intègre des technologies durables et des aménagements paysagers pour créer un environnement harmonieux et convivial. Découvrez notre nouveau complexe résidentiel situé au cœur de la ville, offrant des espaces de vie modernes et confortables pour tous. Ce projet innovant intègre des technologies durables et des aménagements paysagers pour créer un environnement harmonieux et convivial. Découvrez notre nouveau complexe résidentiel situé au cœur de la ville, offrant des espaces de vie modernes et confortables pour tous. Ce projet innovant intègre des technologies durables et des aménagements paysagers pour créer un environnement harmonieux et convivial. Découvrez notre nouveau complexe résidentiel situé au cœur de la ville, offrant des espaces de vie modernes et confortables pour tous. Ce projet innovant intègre des technologies durables et des aménagements paysagers pour créer un environnement harmonieux et convivial. Découvrez notre nouveau complexe résidentiel situé au cœur de la ville, offrant des espaces de vie modernes et confortables pour tous. Ce projet innovant intègre des technologies durables et des aménagements paysagers pour créer un environnement harmonieux et convivial. Découvrez notre nouveau complexe résidentiel situé au cœur de la ville, offrant des espaces de vie modernes et confortables pour tous. Ce projet innovant intègre des technologies durables et des aménagements paysagers pour créer un environnement harmonieux et convivial.",
-      href: '/actualites'
-    },
-    {
-      id: '2',
-      image: '/img/actu/Firefly_batiment appartement dans la ville avec voiture et personnage 574205.jpg',
-      imageAlt: 'Architecture contemporaine',
-      title: 'Design architectural innovant',
-      subtitle: 'Architecture durable',
-      description: 'Notre équipe présente une approche innovante de l\'architecture durable, alliant esthétique contemporaine et respect de l\'environnement.',
-      content : "Notre équipe présente une approche innovante de l'architecture durable, alliant esthétique contemporaine et respect de l'environnement. Ce projet met en œuvre des matériaux écologiques et des solutions énergétiques renouvelables pour minimiser l'empreinte carbone.",
-      href: '/actualites'
-    },
-    {
-      id: '3',
-      image: '/img/actu/Firefly_batiment appartement dans la ville avec voiture et personnage 878696.jpg',
-      imageAlt: 'Rénovation urbaine',
-      title: 'Projet de rénovation urbaine',
-      subtitle: 'Développement urbain',
-      description: 'Transformation complète d\'un quartier historique avec préservation du patrimoine et intégration de solutions modernes pour une ville durable.',
-      content : "Transformation complète d'un quartier historique avec préservation du patrimoine et intégration de solutions modernes pour une ville durable. Ce projet vise à revitaliser la communauté tout en respectant son héritage culturel. Des espaces verts, des infrastructures modernes et des logements abordables sont au cœur de cette initiative. Transformation complète d'un quartier historique avec préservation du patrimoine et intégration de solutions modernes pour une ville durable. Ce projet vise à revitaliser la communauté tout en respectant son héritage culturel. Des espaces verts, des infrastructures modernes et des logements abordables sont au cœur de cette initiative. Transformation complète d'un quartier historique avec préservation du patrimoine et intégration de solutions modernes pour une ville durable. Ce projet vise à revitaliser la communauté tout en respectant son héritage culturel. Des espaces verts, des infrastructures modernes et des logements abordables sont au cœur de cette initiative. Transformation complète d'un quartier historique avec préservation du patrimoine et intégration de solutions modernes pour une ville durable. Ce projet vise à revitaliser la communauté tout en respectant son héritage culturel. Des espaces verts, des infrastructures modernes et des logements abordables sont au cœur de cette initiative. Transformation complète d'un quartier historique avec préservation du patrimoine et intégration de solutions modernes pour une ville durable. Ce projet vise à revitaliser la communauté tout en respectant son héritage culturel. Des espaces verts, des infrastructures modernes et des logements abordables sont au cœur de cette initiative. Transformation complète d'un quartier historique avec préservation du patrimoine et intégration de solutions modernes pour une ville durable. Ce projet vise à revitaliser la communauté tout en respectant son héritage culturel. Des espaces verts, des infrastructures modernes et des logements abordables sont au cœur de cette initiative.",
-      href: '/actualites'
-    },
-    {
-      id: '4',
-      image: '/img/actu/Firefly_des batiments appartement moderne avec voiture et personnage 497604.jpg',
-      imageAlt: 'Bâtiment écologique',
-      title: 'Construction écologique',
-      subtitle: 'Développement durable',
-      description: 'Notre dernier projet met en avant des techniques de construction écologiques et des matériaux durables pour un avenir plus vert.',
-      content : "Notre dernier projet met en avant des techniques de construction écologiques et des matériaux durables pour un avenir plus vert. Nous utilisons des sources d'énergie renouvelables et des pratiques de construction respectueuses de l'environnement pour réduire l'impact écologique.",
-      href: '/actualites'
-    }
-  ];
+  useEffect(() => {
+    Promise.all([
+      getActus(),
+      getServices()
+    ])
+      .then(([actus, servicesData]) => {
+        setActuItems(actus);
+        setServices(servicesData);
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
 
-  const services = [
-  {
-    title: 'Électricité',
-    icon: '/ilstr/eclair_02.svg',
-    bg: 'bg-extra',
-    buttonColor: 'bg-extra'
-  },
-  {
-    title: 'Courant faible',
-    icon: '/ilstr/courant_faible.svg',
-    bg: 'bg-primary',
-    buttonColor: 'bg-primary'
-  },
-  {
-    title: 'Chauffage & climatisation',
-    icon: '/ilstr/chauffage_climatisation.svg',
-    bg: 'bg-extra',
-    buttonColor: 'bg-extra'
-  },
-  {
-    title: 'Maintenance',
-    icon: '/ilstr/maintenance.svg',
-    bg: 'bg-primary',
-    buttonColor: 'bg-primary'
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-2xl">Chargement...</p>
+      </div>
+    );
   }
-];
 
   return (
     <>
