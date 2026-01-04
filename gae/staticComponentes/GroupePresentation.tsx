@@ -11,7 +11,7 @@ const leftCards = [
     id: "gae-holding",
     title: "GROUPE ALLANIC ÉNERGIE",
     subtitle: null,
-    address: ["4 Impasse des Bleuets", "29400 PLOUGOURVEST"],
+    address: ["4, Impasse des Bleuets", "29400 PLOUGOURVEST"],
     mapPoint: {
         label: "Plougourvest",
         top: "17%",
@@ -23,7 +23,7 @@ const leftCards = [
         id: "allanic-29",
         title: "ALLANIC 29",
         subtitle: "",
-        address: ["26 Av. Bel Air", "29800 LANDERNEAU"],
+        address: ["26, Av. Bel Air", "29800 LANDERNEAU"],
         mapPoint: {
             label: "Landerneau",
             top: "21%",
@@ -37,7 +37,7 @@ const rightCards = [
         id: "allanic-56",
         title: "ALLANIC 56",
         subtitle: "",
-        address: ["La Grée", "Route de Pluvigner", "56330 CAMORS"],
+        address: ["Route de Pluvigner", "Le Groho", "56330 CAMORS"],
         mapPoint: {
             label: "Camors",
             top: "52%",
@@ -48,7 +48,7 @@ const rightCards = [
         id: "allanic-56-cvc",
         title: "ALLANIC C.V.C 56",
         subtitle: null,
-        address: ["21 route d'Auray", "56330 CAMORS"],
+        address: ["Route de Pluvigner", "Le Groho", "56330 CAMORS"],
         mapPoint: {
             label: "Camors",
             top: "52%",
@@ -59,7 +59,7 @@ const rightCards = [
         id: "acf-56",
         title: "A.C.F 56",
         subtitle: null,
-        address: ["La Grée", "Route de Pluvigner", "56330 CAMORS"],
+        address: ["Route de Pluvigner", "Le Groho", "56330 CAMORS"],
         mapPoint: {
             label: "Camors",
             top: "52%",
