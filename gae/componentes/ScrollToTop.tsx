@@ -44,7 +44,7 @@ export default function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`absolute right-4 z-50 p-3 bg-secondary hover:scale-110 text-primary rounded-lg shadow-lg transition-all duration-300 ${
+      className={`xl:absolute xl:flex hidden right-4 z-50 p-3 bg-secondary hover:scale-110 text-primary rounded-lg shadow-lg transition-all duration-300 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16 pointer-events-none'
       }`}
       aria-label="Retour en haut"
