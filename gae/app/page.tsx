@@ -68,7 +68,7 @@ export default function Home() {
           headerBottom={headerBottom} 
         />
 
-        <Slider items={actuItems} gap="80px">
+        <Slider items={actuItems}>
           {(item) => (
             <ActuCard {...item} onClick={() => setSelectedArticle(item)} />
           )}
@@ -97,7 +97,7 @@ export default function Home() {
           headerBottom={headerBottom} 
         />
 
-        <Slider items={services} gap="150px">
+        <Slider items={services}>
           {(item) => (
             <ServiceCard {...item} />
           )}
