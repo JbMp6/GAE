@@ -3,13 +3,19 @@
 
 import React, { useState } from "react";
 
-export default function FormulaireContact() {
+interface FormulaireContactProps {
+  postuler?: boolean;
+}
+
+export default function FormulaireContact({ postuler = false }: FormulaireContactProps) {
   const [formData, setFormData] = useState({
     prenom: '',
     nom: '',
     email: '',
     message: '',
     acceptePolicy: false,
+    cv: null as File | null,
+    lettre: null as File | null,
   });
 
   const [isSuccess, setIsSuccess] = useState(false);
@@ -23,6 +29,11 @@ export default function FormulaireContact() {
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fieldName: 'cv' | 'lettre') => {
+    const file = e.target.files?.[0] || null;
+    setFormData(prev => ({ ...prev, [fieldName]: file }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,6 +52,8 @@ export default function FormulaireContact() {
       email: '',
       message: '',
       acceptePolicy: false,
+      cv: null,
+      lettre: null,
     });
     
     // Masquer le message après 5 secondes
@@ -83,7 +96,7 @@ export default function FormulaireContact() {
       />
 
       {/* Votre message avec checkbox et bouton */}
-      <div className="flex flex-col xl:flex-row gap-4 xl:items-end flex-1">
+      <div className="flex flex-col xl:flex-row gap-4 flex-1">
         {/* Votre message */}
         <textarea
           name="message"
@@ -94,8 +107,35 @@ export default function FormulaireContact() {
           className="flex-1 xl:h-full h-32 px-5 py-3 border border-secondary rounded-3xl bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors resize-none"
         />
 
-        {/* Colonne droite : Checkbox + Bouton */}
+        {/* Colonne droite : Upload CV/Lettre (si postuler) OU juste Checkbox + Bouton */}
         <div className="flex flex-col gap-4">
+          {/* Upload CV et Lettre de motivation (si postuler) - même hauteur que textarea */}
+          {postuler && (
+            <div className="flex flex-col gap-4 xl:h-full h-auto justify-start">
+              {/* Upload CV */}
+              <div className="flex flex-col">
+                <label className="block text-xs text-secondary font-futura mb-1">CV</label>
+                <input
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={(e) => handleFileChange(e, 'cv')}
+                  className="w-full px-4 py-2 border border-secondary rounded-2xl bg-white text-secondary font-futura text-sm file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-futura file:bg-primary file:text-secondary hover:file:bg-secondary hover:file:text-white cursor-pointer focus:outline-none focus:border-primary transition-colors"
+                />
+              </div>
+
+              {/* Upload Lettre de motivation */}
+              <div className="flex flex-col">
+                <label className="block text-xs text-secondary font-futura mb-1">Lettre de motivation</label>
+                <input
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={(e) => handleFileChange(e, 'lettre')}
+                  className="w-full px-4 py-2 border border-secondary rounded-2xl bg-white text-secondary font-futura text-sm file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-futura file:bg-primary file:text-secondary hover:file:bg-secondary hover:file:text-white cursor-pointer focus:outline-none focus:border-primary transition-colors"
+                />
+              </div>
+            </div>
+          )}
+
           {/* Checkbox politique de confidentialité */}
           <div className="flex items-start gap-2">
             <input
