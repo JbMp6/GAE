@@ -21,7 +21,6 @@ export default function Home() {
   const [selectedArticle, setSelectedArticle] = useState<Actu | null>(null);
   const [actuItems, setActuItems] = useState<Actu[]>([]);
   const [services, setServices] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
@@ -32,17 +31,8 @@ export default function Home() {
         setActuItems(actus);
         setServices(servicesData);
       })
-      .catch(console.error)
-      .finally(() => setLoading(false));
+      .catch(console.error);
   }, []);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-2xl">Chargement...</p>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -122,4 +112,4 @@ export default function Home() {
       </main>
     </>
   );
-} 
+}

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import LoadingProvider from "@/componentes/LoadingProvider";
 
 export const viewport: Viewport = {
   themeColor: 'white',
@@ -63,7 +64,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr">
       <body className={`${futura.variable} ${futuraCondensed.variable} ${syntha.variable} font-futura`}>
-        {children}
+        <LoadingProvider>
+          {children}
+        </LoadingProvider>
       </body>
     </html>
   );

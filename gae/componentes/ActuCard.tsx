@@ -35,12 +35,18 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
     <div className="bg-white relative rounded-2xl overflow-hidden border-2 border-primary xl:hover:shadow-xl xl:hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-full flex flex-col">
       {/* Image Container */}
       <div className="relative w-full h-48 bg-gray-100 rounded-2xl">
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          className="object-cover"
-        />
+        {image ? (
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            className="object-cover"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gray-200">
+            <span className="text-gray-400">No image</span>
+          </div>
+        )}
       </div>
 
       {/* Content Container */}
