@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import ScrollToTop from '@/componentes/ScrollToTop';
 
 export default function FixedFooter() {
     const currentYear = new Date().getFullYear();
@@ -48,6 +49,8 @@ export default function FixedFooter() {
             </div>
 
             <p className="block xl:absolute xl:pt-0 pt-2.5 left-15 font-futura text-[12px] font-normal">© {currentYear} GROUPE ALLANIC ENERGIE • Tous droits réservés</p>
+
+            <ScrollToTop />
 
         </footer>
     );
