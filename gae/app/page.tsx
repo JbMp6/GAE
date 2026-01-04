@@ -5,7 +5,6 @@ import Header from '@/componentes/Header';
 import FixedFooter from '@/staticComponentes/FixedFooter';
 import ImgBanner from '@/staticComponentes/ImgBanner';
 import SeparatorTitle from '@/componentes/SeparatorTitle';
-import Slider from '@/componentes/Slider';
 import ActuCard from '@/componentes/ActuCard';
 import GroupePresentation from '@/staticComponentes/GroupePresentation';
 import SocietesPresentation from '@/staticComponentes/SocietesPresentation';
@@ -15,6 +14,7 @@ import ActuCardModal from '@/componentes/ActuCardModal';
 import ServiceCard from '@/componentes/ServiceCard';
 import { getActus, getServices } from '@/lib/queries';
 import type { Actu, Service } from '@/lib/queries';
+import NewSlider from '@/componentes/NewSlider';
 
 export default function Home() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);
@@ -68,11 +68,11 @@ export default function Home() {
           headerBottom={headerBottom} 
         />
 
-        <Slider items={actuItems}>
+        <NewSlider items={actuItems}>
           {(item) => (
             <ActuCard {...item} onClick={() => setSelectedArticle(item)} />
           )}
-        </Slider>
+        </NewSlider>
 
         <Parallax 
           image="/img/elec.jpg" 
@@ -97,11 +97,12 @@ export default function Home() {
           headerBottom={headerBottom} 
         />
 
-        <Slider items={services}>
+
+        <NewSlider items={services}>
           {(item) => (
             <ServiceCard {...item} />
           )}
-        </Slider>
+        </NewSlider>
 
         <Parallax 
           image="/img/elec.jpg" 
