@@ -37,7 +37,7 @@ const rightCards = [
         id: "allanic-56",
         title: "ALLANIC 56",
         subtitle: "",
-        address: ["Route de Pluvigner", "Le Groho", "56330 CAMORS"],
+        address: ["21, route d'Auray", "Le Groho", "56330 CAMORS"],
         mapPoint: {
             label: "Camors",
             top: "52%",
@@ -48,7 +48,7 @@ const rightCards = [
         id: "allanic-56-cvc",
         title: "ALLANIC C.V.C 56",
         subtitle: null,
-        address: ["Route de Pluvigner", "Le Groho", "56330 CAMORS"],
+        address: ["21, route d'Auray", "Le Groho", "56330 CAMORS"],
         mapPoint: {
             label: "Camors",
             top: "52%",
@@ -59,7 +59,7 @@ const rightCards = [
         id: "acf-56",
         title: "A.C.F 56",
         subtitle: null,
-        address: ["Route de Pluvigner", "Le Groho", "56330 CAMORS"],
+        address: ["21, route d'Auray", "Le Groho", "56330 CAMORS"],
         mapPoint: {
             label: "Camors",
             top: "52%",
@@ -122,7 +122,7 @@ export default function GroupePresentation() {
             <Boxed w_size="70%" color="extra" className="hidden xl:flex flex-col gap-12">
                 <div className="flex justify-start items-start w-full">
                     <h3 className="font-syntha text-secondary text-2xl xl:text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">
-                        implantation
+                        implantations
                     </h3>
                 </div>
                 <div className="flex flex-row justify-between items-start w-full gap-4">

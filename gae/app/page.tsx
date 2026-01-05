@@ -81,7 +81,7 @@ export default function Home() {
 
         <SeparatorTitle 
           id="groupe" 
-          title='groupe allanic' 
+          title='groupe allanic energie' 
           headerBottom={headerBottom} 
         />
         <GroupePresentation />
