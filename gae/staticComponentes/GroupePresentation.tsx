@@ -99,7 +99,7 @@ export default function GroupePresentation() {
     }, [hoveredCardId, hoveredMapLabel]);
 
     return (
-        <div className="bg-extra w-full flex flex-col items-center justify-center gap-10 xl:gap-20 py-16 px-10 xl:px-0">
+        <div className="bg-extra w-full flex flex-col items-center justify-center gap-10 xl:gap-20 py-25 px-10 xl:px-0">
             <Boxed w_size="70%" color="extra" className="flex-col xl:flex-row gap-8 xl:gap-0 items-start">
                 <div className="flex justify-start items-start w-full xl:w-[34%] h-full">
                     <h3 className="font-syntha text-secondary text-2xl xl:text-3xl relative after:content-[''] after:block after:h-[4px] after:bg-primary after:w-35 after:mt-2">
@@ -234,17 +234,6 @@ export default function GroupePresentation() {
                 </p>
             </Boxed>
 
-                        {/* Bouton En savoir plus en bas */}
-            <div className="w-full flex justify-center bg-[var(--color-extra)]/20 mt-8">
-                <Boxed w_size="70%" color="transparent" className="py-12">
-                    <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full">
-                        <div></div>
-                        <div className="flex justify-center">
-                            <Button title="En savoir plus ..." />
-                        </div>
-                    </div>
-                </Boxed>
-            </div>
         </div>
     );
 }

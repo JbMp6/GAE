@@ -57,11 +57,6 @@ export default function Home() {
           img_src="/img/home_banner.jpg"
         />
 
-        <Parallax 
-          image="/img/elec.jpg" 
-          height="500px" 
-        />
-
         <SeparatorTitle 
           id="actualites" 
           title='actualites' 
@@ -85,11 +80,6 @@ export default function Home() {
           headerBottom={headerBottom} 
         />
         <GroupePresentation />
-
-        <Parallax 
-          image="/img/elec.jpg" 
-          height="500px" 
-        />
 
         <SeparatorTitle 
           id="services" 
@@ -115,12 +105,7 @@ export default function Home() {
           headerBottom={headerBottom} 
         />
         <SocietesPresentation />
-
-        <Parallax 
-          image="/img/salon.jpg" 
-          height="500px" 
-        />
-
+        
         <FixedFooter />
 
         <Footer />
