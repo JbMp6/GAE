@@ -33,7 +33,34 @@ export async function getServices(): Promise<Service[]> {
     throw error;
   }
   
-  return data || [];
+  // Réorganiser les services pour alterner les couleurs de fond
+  if (!data) return [];
+  
+  // Séparer par couleur de fond
+  const groupedByBg = data.reduce((acc, service) => {
+    if (!acc[service.bg]) {
+      acc[service.bg] = [];
+    }
+    acc[service.bg].push(service);
+    return acc;
+  }, {} as Record<string, Service[]>);
+  
+  // Obtenir les groupes de couleurs
+  const bgGroups: Service[][] = Object.values(groupedByBg);
+  
+  // Alterner entre les groupes
+  const alternated: Service[] = [];
+  const maxLength = Math.max(...bgGroups.map(g => g.length));
+  
+  for (let i = 0; i < maxLength; i++) {
+    bgGroups.forEach(group => {
+      if (group[i]) {
+        alternated.push(group[i]);
+      }
+    });
+  }
+  
+  return alternated;
 }
 
 export async function getActus(): Promise<Actu[]> {

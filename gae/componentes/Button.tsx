@@ -5,11 +5,13 @@ import Link from 'next/link';
 interface ButtonProps {
   title: string;
   href?: string;
+  hoverColor?: string;
   onClick?: () => void;
 }
 
-export default function Button({ title, href, onClick }: ButtonProps) {
-  const buttonClasses = 'font-futura text-xl italic text-secondary hover:text-primary transition-colors duration-300';
+export default function Button({ title, href, hoverColor, onClick }: ButtonProps) {
+
+  const buttonClasses = `font-futura text-xl italic text-secondary ${hoverColor} transition-colors duration-300`;
 
   if (href) {
     return (

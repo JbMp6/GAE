@@ -35,7 +35,7 @@ export default function SeparatorTitle({ title, headerBottom = 0, onPositionChan
             ref={separatorRef}
             className={`relative w-full h-[150px] flex justify-center items-center transition-colors duration-400 ease-in-out ${isHeaderInside ? 'bg-[#6b7173]' : 'bg-secondary'}`}
         >
-            <h2 className={`text-3xl xl:text-4xl font-syntha text-primary absolute bottom-10`}>
+            <h2 className={`text-2xl xl:text-4xl font-syntha text-primary absolute bottom-10`}>
                 {title}
             </h2>
             <div className='h-[6px] bg-primary absolute bottom-0 w-75'></div>

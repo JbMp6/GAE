@@ -11,6 +11,7 @@ import SocietesPresentation from '@/staticComponentes/SocietesPresentation';
 import Footer from '@/staticComponentes/Footer';
 import { Parallax } from '@/componentes/Parallax';
 import ActuCardModal from '@/componentes/ActuCardModal';
+import ServiceCardModal from '@/componentes/ServiceCardModal';
 import ServiceCard from '@/componentes/ServiceCard';
 import { getActus, getServices } from '@/lib/queries';
 import type { Actu, Service } from '@/lib/queries';
@@ -19,6 +20,7 @@ import NewSlider from '@/componentes/NewSlider';
 export default function Home() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);
   const [selectedArticle, setSelectedArticle] = useState<Actu | null>(null);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [actuItems, setActuItems] = useState<Actu[]>([]);
   const [services, setServices] = useState<Service[]>([]);
 
@@ -48,6 +50,17 @@ export default function Home() {
           subtitle={selectedArticle.subtitle}
           content={selectedArticle.content}
           onClose={() => setSelectedArticle(null)}
+        />
+      )}
+
+      {/* Modal Service */}
+
+      {selectedService && (
+        <ServiceCardModal
+          icon={selectedService.icon}
+          title={selectedService.title}
+          description={selectedService.description || ''}
+          onClose={() => setSelectedService(null)}
         />
       )}
 
@@ -90,7 +103,7 @@ export default function Home() {
 
         <NewSlider items={services}>
           {(item) => (
-            <ServiceCard {...item} />
+            <ServiceCard {...item} onClick={() => setSelectedService(item)} />
           )}
         </NewSlider>
 
