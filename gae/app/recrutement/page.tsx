@@ -124,7 +124,7 @@ export default function RecrutementPage() {
     return (
       <>
         <Header />
-        <main className="w-full xl:bg-white bg-extra flex flex-col pt-header xl:h-[calc(100vh-80px)] min-h-screen">
+        <main className="w-full xl:bg-white bg-extra flex flex-col pt-header xl:h-[calc(100vh-100px)] min-h-screen xl:min-h-0">
           {/* Desktop Layout */}
           <div className="hidden xl:flex flex-row w-full h-full">
             {/* Side Bar*/}
@@ -150,7 +150,7 @@ export default function RecrutementPage() {
                   {currentView === 'postuler' ? 'postuler' : 'Nos offres d\'emploi & de stage'}
                 </h1>
               </div>
-              <div className="w-full h-[80%] flex flex-col justify-start items-start px-10 pb-10 overflow-y-auto">
+              <div className="w-full h-[80%] flex flex-col justify-start items-start overflow-y-auto">
                 {renderContent()}
               </div>
             </div>
