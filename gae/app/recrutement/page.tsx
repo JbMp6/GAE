@@ -51,9 +51,26 @@ const offres: Offre[] = [
 export default function RecrutementPage() {
     const [currentView, setCurrentView] = useState<ViewType>('home');
     const [selectedOffre, setSelectedOffre] = useState<number>(0);
+    const [mobileStep, setMobileStep] = useState<'list' | 'description' | 'form'>('list');
 
     const handleOffreClick = (index: number) => {
       setSelectedOffre(index);
+      setCurrentView('offre');
+      setMobileStep('description');
+    };
+
+    const handlePostulerClick = () => {
+      setCurrentView('postuler');
+      setMobileStep('form');
+    };
+
+    const handleBackToList = () => {
+      setMobileStep('list');
+      setCurrentView('home');
+    };
+
+    const handleBackToDescription = () => {
+      setMobileStep('description');
       setCurrentView('offre');
     };
 
@@ -87,7 +104,7 @@ export default function RecrutementPage() {
               </div>
 
               <div className="flex justify-center w-full pt-5">
-                <ButtonRecrutement text="POSTULER" onClick={() => setCurrentView('postuler')} />
+                <ButtonRecrutement text="POSTULER" onClick={handlePostulerClick} />
               </div>
             </>
           );
@@ -107,8 +124,9 @@ export default function RecrutementPage() {
     return (
       <>
         <Header />
-        <main className="w-full bg-white flex flex-col pt-header h-[calc(100vh-80px)]">
-          <div className="flex flex-row w-full h-full">
+        <main className="w-full xl:bg-white bg-extra flex flex-col pt-header xl:h-[calc(100vh-80px)] min-h-screen">
+          {/* Desktop Layout */}
+          <div className="hidden xl:flex flex-row w-full h-full">
             {/* Side Bar*/}
             <div className="w-[40%] h-full flex justify-center items-end">
               <div className="bg-extra w-full h-[80%] flex flex-col">
@@ -136,6 +154,74 @@ export default function RecrutementPage() {
                 {renderContent()}
               </div>
             </div>
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="xl:hidden flex flex-col w-full min-h-full bg-white">
+            {/* Step 1: Liste des offres */}
+            {mobileStep === 'list' && (
+              <div className="w-full flex flex-col">
+                <div className="w-full flex justify-center items-center py-8">
+                  <h1 className="font-syntha text-secondary text-3xl text-center px-4">
+                    Nos offres d'emploi & de stage
+                  </h1>
+                </div>
+                <div className="bg-extra w-full flex flex-col">
+                  {offres.map((offre, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleOffreClick(index)}
+                      className="font-futura text-xl h-12 text-secondary w-full py-6 px-5 border-b-5 border-white flex items-center cursor-pointer transition-all hover:bg-white/20 active:bg-secondary active:text-primary"
+                    >
+                      {offre.title}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 2: Description de l'offre */}
+            {mobileStep === 'description' && (
+              <div className="w-full flex flex-col px-4 py-8">
+                <button
+                  onClick={handleBackToList}
+                  className="mb-6 text-primary font-futura text-lg flex items-center gap-2"
+                >
+                  ← Retour aux offres
+                </button>
+                <h2 className="font-futura font-bold text-secondary text-3xl mb-6">
+                  {offres[selectedOffre].title}
+                </h2>
+                
+                <div className="space-y-4 mb-8">
+                  {offres[selectedOffre].description.map((paragraph, index) => (
+                    <p key={index} className="font-futura text-gray-700 text-base leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+
+                <div className="flex justify-center w-full pt-5">
+                  <ButtonRecrutement text="POSTULER" onClick={handlePostulerClick} />
+                </div>
+              </div>
+            )}
+
+            {/* Step 3: Formulaire */}
+            {mobileStep === 'form' && (
+              <div className="w-full flex flex-col px-4 py-8">
+                <button
+                  onClick={handleBackToDescription}
+                  className="mb-6 text-primary font-futura text-lg flex items-center gap-2"
+                >
+                  ← Retour à l'offre
+                </button>
+                <h1 className="font-syntha text-secondary text-3xl text-center mb-8">
+                  Postuler
+                </h1>
+                <FormulaireContact postuler={true} />
+              </div>
+            )}
           </div>
         </main>
         <FixedFooter />
