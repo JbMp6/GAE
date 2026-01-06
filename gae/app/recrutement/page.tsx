@@ -90,7 +90,7 @@ export default function RecrutementPage() {
         
         case 'offre':
           return (
-            <>
+            <div className="w-full h-full px-8 py-8 overflow-y-auto">
               <h2 className="font-futura font-bold text-secondary text-4xl mb-6">
                 {offres[selectedOffre].title}
               </h2>
@@ -106,12 +106,12 @@ export default function RecrutementPage() {
               <div className="flex justify-center w-full pt-5">
                 <ButtonRecrutement text="POSTULER" onClick={handlePostulerClick} />
               </div>
-            </>
+            </div>
           );
         
         case 'postuler':
           return (
-            <div className="w-full h-full">
+            <div className="w-full h-full px-8 py-8 overflow-y-auto">
               <FormulaireContact postuler={true} />
             </div>
           );
