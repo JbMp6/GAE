@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, ReactElement } from 'react';
+import { useState, ReactElement, useRef } from 'react';
 import Image from 'next/image';
 import Boxed from '@/staticComponentes/Boxed';
 import Button from './Button';
@@ -15,6 +15,22 @@ export default function NewSlider<T>({ items, w_size = '70%', children }: Generi
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAllMobile, setShowAllMobile] = useState(false);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const savedScrollPosition = useRef<number>(0);
+
+  const handleShowMore = () => {
+    // Sauvegarder la position avant d'ouvrir
+    savedScrollPosition.current = window.scrollY;
+    setShowAllMobile(true);
+  };
+
+  const handleShowLess = () => {
+    setShowAllMobile(false);
+    // Restaurer la position après la fermeture
+    setTimeout(() => {
+      window.scrollTo({ top: savedScrollPosition.current, behavior: 'smooth' });
+    }, 0);
+  };
 
   const handlePrevious = () => {
     setDirection('prev');
@@ -38,7 +54,7 @@ export default function NewSlider<T>({ items, w_size = '70%', children }: Generi
   const lastThreeItems = items.slice(-3);
 
   return (
-    <div className="w-full flex justify-center items-center h-auto py-10 relative">
+    <div ref={sliderRef} className="w-full flex justify-center items-center h-auto py-10 relative">
       {/* Desktop Slider */}
       <div className="hidden xl:flex items-center justify-center gap-0 w-full max-w-[1920px] h-full">
         {/* Left Arrow */}
@@ -102,13 +118,13 @@ export default function NewSlider<T>({ items, w_size = '70%', children }: Generi
         {!showAllMobile && items.length > 3 && (
           <Button 
             title="Voir plus..." 
-            onClick={() => setShowAllMobile(true)} 
+            onClick={handleShowMore} 
           />
         )}
         {showAllMobile && (
           <Button 
             title="Voir moins" 
-            onClick={() => setShowAllMobile(false)} 
+            onClick={handleShowLess} 
           />
         )}
       </div>

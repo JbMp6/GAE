@@ -42,7 +42,7 @@ export default function ServiceCardModal({ icon, title, description, onClose }: 
                 </div>
             </div>
             
-            <div className='flex flex-col justify-center items-center text-center mt-4'>
+            <div className='flex flex-col justify-center items-center text-center xl:pb-45'>
               <h2 className="font-futura font-bold text-secondary text-3xl xl:text-5xl leading-tight">{title}</h2>
             </div>
         </div>

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Button from '@/componentes/Button';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 interface ActuCardProps {
   image: string;
@@ -17,10 +17,22 @@ interface ActuCardProps {
 
 export default function ActuCard({image, imageAlt, title, subtitle, description, content, real = false, onClick}: ActuCardProps) {
   const [descriptionMobile, setDescriptionMobile] = useState(0);
-  // Set real to false by default if not provided
+  const cardRef = useRef<HTMLDivElement>(null);
+  
   const developText = () => {
-    if (descriptionMobile === 1) return setDescriptionMobile(0);
-    setDescriptionMobile(1);
+    if (descriptionMobile === 1) {
+      setDescriptionMobile(0);
+    } else {
+      // Sauvegarder la position avant d'agrandir
+      if (cardRef.current) {
+        const cardTop = cardRef.current.getBoundingClientRect().top + window.scrollY;
+        setDescriptionMobile(1);
+        // Maintenir la position après le rendu
+        setTimeout(() => {
+          window.scrollTo({ top: cardTop - 20, behavior: 'smooth' });
+        }, 0);
+      }
+    }
   };
   const handleClick = () => {
     // En version desktop (xl), ouvrir la modal si onClick existe
@@ -32,7 +44,7 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
     }
   };
   return (
-    <div className="bg-white relative rounded-2xl overflow-hidden border-2 border-primary xl:hover:shadow-xl xl:hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-full flex flex-col">
+    <div ref={cardRef} className="bg-white relative rounded-2xl overflow-hidden border-2 border-primary xl:hover:shadow-xl xl:hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-full flex flex-col">
       {/* Image Container */}
       <div className="relative w-full h-48 bg-gray-100 rounded-2xl">
         {image ? (
