@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from "@/componentes/Header";
 import FixedFooter from "@/staticComponentes/FixedFooter";
 import Footer from "@/staticComponentes/Footer";
@@ -52,6 +52,10 @@ export default function RecrutementPage() {
     const [currentView, setCurrentView] = useState<ViewType>('home');
     const [selectedOffre, setSelectedOffre] = useState<number>(0);
     const [mobileStep, setMobileStep] = useState<'list' | 'description' | 'form'>('list');
+
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [mobileStep]);
 
     const handleOffreClick = (index: number) => {
       setSelectedOffre(index);
@@ -124,7 +128,7 @@ export default function RecrutementPage() {
     return (
       <>
         <Header />
-        <main className="w-full xl:bg-white bg-extra flex flex-col pt-header xl:h-[calc(100vh-100px)] min-h-screen xl:min-h-0">
+        <main className="w-full bg-white flex flex-col pt-header xl:h-[calc(100vh-80px)]">
           {/* Desktop Layout */}
           <div className="hidden xl:flex flex-row w-full h-full">
             {/* Side Bar*/}
@@ -157,16 +161,16 @@ export default function RecrutementPage() {
           </div>
 
           {/* Mobile Layout */}
-          <div className="xl:hidden flex flex-col w-full min-h-full bg-white">
+          <div className="xl:hidden flex flex-col w-full min-h-screen bg-white">
             {/* Step 1: Liste des offres */}
             {mobileStep === 'list' && (
-              <div className="w-full flex flex-col">
+              <div className="w-full h-full min-h-screen flex flex-col">
                 <div className="w-full flex justify-center items-center py-8">
                   <h1 className="font-syntha text-secondary text-3xl text-center px-4">
                     Nos offres d'emploi & de stage
                   </h1>
                 </div>
-                <div className="bg-extra w-full flex flex-col">
+                <div className="bg-extra w-full flex flex-col flex-1">
                   {offres.map((offre, index) => (
                     <div
                       key={index}
