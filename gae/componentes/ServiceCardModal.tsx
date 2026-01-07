@@ -20,7 +20,7 @@ export default function ServiceCardModal({ icon, title, description, onClose }: 
   
   return (
     <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-2">
-      <div className="relative bg-white rounded-[2.5rem] border-4 border-primary shadow-2xl w-[95vw] xl:w-[70vw] h-[calc(100vh-100px)] xl:h-[calc(100vh-180px)] flex flex-col xl:flex-row p-8 xl:p-20 fade-in-modal overflow-hidden">
+      <div className="relative bg-white rounded-[2.5rem] border-4 border-primary shadow-2xl w-[95vw] xl:w-[70vw] h-[80vh] xl:h-[calc(100vh-180px)] flex flex-col xl:flex-row p-8 xl:p-20 fade-in-modal overflow-hidden">
         {/* Bouton fermer */}
         <button
           className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full border-3 border-primary bg-white text-primary hover:border-secondary hover:text-secondary transition-colors focus:outline-none z-10"
