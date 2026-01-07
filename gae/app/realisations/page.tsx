@@ -9,6 +9,7 @@ import ActuCard from '@/componentes/ActuCard';
 import FixedFooter from '@/staticComponentes/FixedFooter';
 import Footer from '@/staticComponentes/Footer';
 import RealisationsSearchParamsWrapper from './RealisationsSearchParamsWrapper';
+import { getRealisations, type Realisation } from '@/lib/queries';
 
 function HomeWithSearchParams() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);
@@ -16,20 +17,23 @@ function HomeWithSearchParams() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
+  const [actuItems, setActuItems] = useState<Realisation[]>([]);
   const itemsPerPage = 9;
 
-  // Les données
-  const actuItems = [
-    ...Array.from({ length: 52 }, (_, i) => ({
-      id: String(i + 1),
-      image: '/img/actu/Firefly_batiment appartement dans la ville avec voiture et personnage 422534.jpg',
-      imageAlt: 'Immeuble résidentiel moderne',
-      title: `Nouveau projet résidentiel ${i + 1}`,
-      subtitle: 'Immobilier urbain',
-      description: i === 8 ? 'Découvrez notre dernier projet résidentiel situé au cœur de la ville, offrant des appartements modernes avec toutes les commodités.' : undefined,
-      real: true,
-    }))
-  ];
+  // Récupérer les réalisations depuis la base de données
+  useEffect(() => {
+    async function fetchRealisations() {
+      try {
+        const data = await getRealisations();
+        console.log('Données récupérées:', data);
+        console.log('Nombre de réalisations:', data.length);
+        setActuItems(data);
+      } catch (error) {
+        console.error('Erreur lors du chargement des réalisations:', error);
+      }
+    }
+    fetchRealisations();
+  }, []);
 
   // Synchronise currentPage with query param
   useEffect(() => {
@@ -42,6 +46,11 @@ function HomeWithSearchParams() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = actuItems.slice(indexOfFirstItem, indexOfLastItem);
+
+  console.log('actuItems:', actuItems);
+  console.log('currentItems:', currentItems);
+  console.log('currentPage:', currentPage);
+  console.log('totalPages:', Math.ceil(actuItems.length / itemsPerPage));
 
   const totalPages = Math.ceil(actuItems.length / itemsPerPage);
 
@@ -63,7 +72,7 @@ function HomeWithSearchParams() {
       <main className="flex flex-col justify-center items-center bg-white pt-header min-h-screen h-auto">
         <div className="grid xl:grid-cols-3 grid-cols-1 xl:grid-rows-3 grid-rows-9 gap-8 max-w-6xl w-[80%] mx-auto my-15 justify-items-center">
           {currentItems.map((item) => (
-            <ActuCard key={item.id} {...item} />
+            <ActuCard key={item.id} {...item} real={true} />
           ))}
         </div>
         {/* Pagination controls */}

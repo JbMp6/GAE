@@ -22,6 +22,23 @@ export interface Actu {
   created_at?: string;
 }
 
+export interface Realisation {
+  id: string;
+  title: string;
+  subtitle: string;
+  description?: string;
+  image: string;
+  imageAlt: string;
+  created_at?: string;
+}
+
+export interface OffreRecrutement {
+  id: number;
+  title: string;
+  description: string;
+  created_at?: string;
+}
+
 export async function getServices(): Promise<Service[]> {
   const { data, error } = await supabase
     .from('services')
@@ -75,4 +92,68 @@ export async function getActus(): Promise<Actu[]> {
   }
   
   return data || [];
+}
+
+export async function getRealisations(): Promise<Realisation[]> {
+  const { data, error } = await supabase
+    .from('real')
+    .select('*')
+    .order('created_at', { ascending: false });
+  
+  if (error) {
+    console.error('Error fetching realisations:', error);
+    throw error;
+  }
+  
+  return data || [];
+}
+
+export async function getOffresRecrutement(): Promise<OffreRecrutement[]> {
+  const { data, error } = await supabase
+    .from('recrutement_offre')
+    .select('*')
+    .order('created_at', { ascending: false });
+  
+  if (error) {
+    console.error('Error fetching offres recrutement:', error);
+    throw error;
+  }
+  
+  return data || [];
+}
+
+export async function submitContact(contact: {
+  prenom: string;
+  nom: string;
+  mail: string;
+  tel: string;
+  message: string;
+}) {
+  const { error } = await supabase
+    .from('contact')
+    .insert([contact]);
+  
+  if (error) {
+    console.error('Error submitting contact:', error);
+    throw new Error('Erreur lors de l\'envoi du formulaire.');
+  }
+}
+
+export async function submitCandidature(candidature: {
+  id_offre: number;
+  prenom: string;
+  nom: string;
+  mail: string;
+  tel: string;
+  cv: string | null;
+  ldm: string | null;
+}) {
+  const { error } = await supabase
+    .from('recrutement_rep')
+    .insert([candidature]);
+  
+  if (error) {
+    console.error('Error submitting candidature:', error);
+    throw new Error('Erreur lors de l\'envoi de la candidature.');
+  }
 }

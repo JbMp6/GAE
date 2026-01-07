@@ -5,13 +5,30 @@ import React, { useState } from "react";
 
 interface FormulaireContactProps {
   postuler?: boolean;
+  onSubmit?: (formData: {
+    prenom: string;
+    nom: string;
+    email: string;
+    tel: string;
+    message: string;
+  }) => Promise<void>;
+  onSubmitRecrutement?: (formData: {
+    prenom: string;
+    nom: string;
+    email: string;
+    tel: string;
+    message: string;
+    cv: File | null;
+    lettre: File | null;
+  }) => Promise<void>;
 }
 
-export default function FormulaireContact({ postuler = false }: FormulaireContactProps) {
+export default function FormulaireContact({ postuler = false, onSubmit, onSubmitRecrutement }: FormulaireContactProps) {
   const [formData, setFormData] = useState({
     prenom: '',
     nom: '',
     email: '',
+    tel: '',
     message: '',
     acceptePolicy: false,
     cv: null as File | null,
@@ -19,6 +36,7 @@ export default function FormulaireContact({ postuler = false }: FormulaireContac
   });
 
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -39,25 +57,56 @@ export default function FormulaireContact({ postuler = false }: FormulaireContac
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simuler l'envoi du formulaire
-    console.log('Form data:', formData);
+    setError(null);
     
-    // Afficher le message de succès
-    setIsSuccess(true);
-    
-    // Réinitialiser le formulaire
-    setFormData({
-      prenom: '',
-      nom: '',
-      email: '',
-      message: '',
-      acceptePolicy: false,
-      cv: null,
-      lettre: null,
-    });
-    
-    // Masquer le message après 5 secondes
-    setTimeout(() => setIsSuccess(false), 5000);
+    try {
+      // Si une fonction onSubmitRecrutement est fournie (cas du formulaire recrutement avec postuler)
+      if (onSubmitRecrutement && postuler) {
+        await onSubmitRecrutement({
+          prenom: formData.prenom,
+          nom: formData.nom,
+          email: formData.email,
+          tel: formData.tel,
+          message: formData.message,
+          cv: formData.cv,
+          lettre: formData.lettre,
+        });
+      }
+      // Si une fonction onSubmit est fournie (cas du formulaire contact)
+      else if (onSubmit) {
+        await onSubmit({
+          prenom: formData.prenom,
+          nom: formData.nom,
+          email: formData.email,
+          tel: formData.tel,
+          message: formData.message,
+        });
+      } else {
+        // Sinon, simuler l'envoi
+        console.log('Form data:', formData);
+      }
+      
+      // Afficher le message de succès
+      setIsSuccess(true);
+      
+      // Réinitialiser le formulaire
+      setFormData({
+        prenom: '',
+        nom: '',
+        email: '',
+        tel: '',
+        message: '',
+        acceptePolicy: false,
+        cv: null,
+        lettre: null,
+      });
+      
+      // Masquer le message après 5 secondes
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
+      setTimeout(() => setError(null), 5000);
+    }
   };
 
   return (
@@ -84,16 +133,27 @@ export default function FormulaireContact({ postuler = false }: FormulaireContac
         className="w-full px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors"
       />
 
-      {/* E-mail */}
-      <input
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="E-mail"
-        required
-        className="w-full px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors"
-      />
+      {/* E-mail et Téléphone sur la même ligne */}
+      <div className="flex flex-col xl:flex-row gap-4">
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="E-mail"
+          required
+          className="flex-1 px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors"
+        />
+        <input
+          type="tel"
+          name="tel"
+          value={formData.tel}
+          onChange={handleChange}
+          placeholder="Téléphone"
+          required
+          className="flex-1 px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors"
+        />
+      </div>
 
       {/* Votre message avec checkbox et bouton */}
       <div className="flex flex-col xl:flex-row gap-4 flex-1">
@@ -166,6 +226,13 @@ export default function FormulaireContact({ postuler = false }: FormulaireContac
       {isSuccess && (
         <p className="text-primary font-futura text-center">
           Message envoyé avec succès.
+        </p>
+      )}
+      
+      {/* Message d'erreur */}
+      {error && (
+        <p className="text-red-600 font-futura text-center">
+          {error}
         </p>
       )}
     </form>

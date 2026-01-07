@@ -6,6 +6,7 @@ import FixedFooter from "@/staticComponentes/FixedFooter";
 import Footer from "@/staticComponentes/Footer";
 import Image from "next/image";
 import FormulaireContact from "@/componentes/FormulaireContact";
+import { getOffresRecrutement, submitCandidature, type OffreRecrutement } from "@/lib/queries";
 
 type ViewType = 'home' | 'offre' | 'postuler';
 
@@ -25,33 +26,24 @@ const ButtonRecrutement = ({ text, onClick }: ButtonRecrutementProps) => {
   );
 };
 
-interface Offre {
-  title: string;
-  description: string[];
-}
-
-const offres: Offre[] = [
-  { 
-    title: "ELECTRICIEN BATIMENT (H/F)",
-    description: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-      "Lorem ipsum dolor sit amet, cons adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-    ]
-  },
-  { 
-    title: "TECHNICO COMMERCIAL (H/F)",
-    description: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-      "Lorem ipsum dolor sit amet, cons adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-    ]
-  },
-];
-
 export default function RecrutementPage() {
     const [currentView, setCurrentView] = useState<ViewType>('home');
     const [selectedOffre, setSelectedOffre] = useState<number>(0);
     const [mobileStep, setMobileStep] = useState<'list' | 'description' | 'form'>('list');
+    const [offres, setOffres] = useState<OffreRecrutement[]>([]);
+
+    useEffect(() => {
+      const fetchOffres = async () => {
+        try {
+          const data = await getOffresRecrutement();
+          setOffres(data);
+        } catch (error) {
+          console.error('Erreur lors du chargement des offres:', error);
+        }
+      };
+
+      fetchOffres();
+    }, []);
 
     useEffect(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -78,6 +70,28 @@ export default function RecrutementPage() {
       setCurrentView('offre');
     };
 
+    const handleRecrutementSubmit = async (formData: {
+      prenom: string;
+      nom: string;
+      email: string;
+      tel: string;
+      message: string;
+      cv: File | null;
+      lettre: File | null;
+    }) => {
+      // Pour l'instant, on stocke juste les noms de fichiers
+      // TODO: Implémenter l'upload des fichiers vers Supabase Storage
+      await submitCandidature({
+        id_offre: offres[selectedOffre].id,
+        prenom: formData.prenom,
+        nom: formData.nom,
+        mail: formData.email,
+        tel: formData.tel,
+        cv: formData.cv?.name || null,
+        ldm: formData.lettre?.name || null,
+      });
+    };
+
     const renderContent = () => {
       switch(currentView) {
         case 'home':
@@ -96,15 +110,13 @@ export default function RecrutementPage() {
           return (
             <div className="w-full h-full px-8 py-8 overflow-y-auto">
               <h2 className="font-futura font-bold text-secondary text-4xl mb-6">
-                {offres[selectedOffre].title}
+                {offres[selectedOffre]?.title}
               </h2>
               
               <div className="space-y-4 mb-8">
-                {offres[selectedOffre].description.map((paragraph, index) => (
-                  <p key={index} className="font-futura text-gray-700 text-base leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
+                <p className="font-futura text-gray-700 text-base leading-relaxed whitespace-pre-wrap">
+                  {offres[selectedOffre]?.description}
+                </p>
               </div>
 
               <div className="flex justify-center w-full pt-5">
@@ -115,8 +127,8 @@ export default function RecrutementPage() {
         
         case 'postuler':
           return (
-            <div className="w-full h-full px-8 py-8 overflow-y-auto">
-              <FormulaireContact postuler={true} />
+            <div className="w-full h-full px-8 pb-8 overflow-y-auto">
+              <FormulaireContact postuler={true} onSubmitRecrutement={handleRecrutementSubmit} />
             </div>
           );
         
@@ -194,15 +206,13 @@ export default function RecrutementPage() {
                   ← Retour aux offres
                 </button>
                 <h2 className="font-futura font-bold text-secondary text-3xl mb-6">
-                  {offres[selectedOffre].title}
+                  {offres[selectedOffre]?.title}
                 </h2>
                 
                 <div className="space-y-4 mb-8">
-                  {offres[selectedOffre].description.map((paragraph, index) => (
-                    <p key={index} className="font-futura text-gray-700 text-base leading-relaxed">
-                      {paragraph}
-                    </p>
-                  ))}
+                  <p className="font-futura text-gray-700 text-base leading-relaxed whitespace-pre-wrap">
+                    {offres[selectedOffre]?.description}
+                  </p>
                 </div>
 
                 <div className="flex justify-center w-full pt-5">
@@ -223,7 +233,7 @@ export default function RecrutementPage() {
                 <h1 className="font-syntha text-secondary text-3xl text-center mb-8">
                   Postuler
                 </h1>
-                <FormulaireContact postuler={true} />
+                <FormulaireContact postuler={true} onSubmitRecrutement={handleRecrutementSubmit} />
               </div>
             )}
           </div>

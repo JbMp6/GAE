@@ -1,11 +1,30 @@
 
+'use client';
+
 import React from "react";
 import Header from "@/componentes/Header";
 import FixedFooter from "@/staticComponentes/FixedFooter";
 import Footer from "@/staticComponentes/Footer";
 import FormulaireContact from "@/componentes/FormulaireContact";
+import { submitContact } from "@/lib/queries";
 
 export default function ContactPage() {
+  const handleContactSubmit = async (formData: {
+    prenom: string;
+    nom: string;
+    email: string;
+    tel: string;
+    message: string;
+  }) => {
+    await submitContact({
+      prenom: formData.prenom,
+      nom: formData.nom,
+      mail: formData.email,
+      tel: formData.tel,
+      message: formData.message,
+    });
+  };
+
   return (
     <>
       <Header />
@@ -19,7 +38,7 @@ export default function ContactPage() {
               <h1 className="font-syntha text-secondary text-3xl">Contact</h1>
             </div>
             <div className="w-full h-[80%] flex justify-start items-start pb-10">
-              <FormulaireContact />
+              <FormulaireContact onSubmit={handleContactSubmit} />
             </div>
           </div>
         </div>
