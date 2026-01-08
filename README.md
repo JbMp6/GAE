@@ -1,185 +1,274 @@
-# GAE
+# GAE - Plan d'Actions Correctives
 
-# Cahier des charges  
-## Composposants Next.js + Tailwind CSS v4 + GSAP
-
----
-
-## 1. Objectif
-
-Ce document définit les règles et contraintes à respecter pour le développement de composants UI avec :
-
-- **Next.js**
-- **Tailwind CSS v4**
-- **GSAP**
-
-Objectifs :
-- Cohérence visuelle et technique
-- Performance optimale
-- Code maintenable et réutilisable
-- Animations maîtrisées
-- Accessibilité respectée
+> **Date d'analyse** : 8 janvier 2026  
+> **Statut** : En attente de corrections
 
 ---
 
-## 2. Stack technique
+## 🔴 PRIORITÉ CRITIQUE - Sécurité
 
-### Technologies obligatoires
-- Next.js (App Router recommandé)
-- React 18+
-- Tailwind CSS **v4**
-- GSAP
-- TypeScript (obligatoire)
+### 1. Sécuriser l'upload de fichiers
+**Fichier** : `gae/app/recrutement/page.tsx`  
+**Problème** : Aucune validation des fichiers uploadés (CV, lettre de motivation)
 
-### Outils
-- ESLint
-- Prettier
-- Node.js LTS
+**Actions** :
+- [ ] Créer `gae/lib/fileValidation.ts` avec :
+  - Validation du type MIME (PDF, DOC, DOCX uniquement)
+  - Limitation de taille (max 5MB)
+  - Scan du contenu malveillant
+- [ ] Implémenter l'upload vers Supabase Storage
+- [ ] Générer des noms de fichiers sécurisés (UUID)
+- [ ] Ajouter la gestion d'erreurs utilisateur
 
----
-
-## 3. Architecture des composants
-
-### Organisation recommandée
-```
-/components
-  /ui
-    Button.tsx
-    Card.tsx
-  /layout
-    Header.tsx
-    Footer.tsx
-  /animations
-    fadeIn.ts
-    scrollReveal.ts
+```typescript
+// À créer : gae/lib/fileValidation.ts
+const ALLOWED_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 ```
 
-### Principes
-- Un composant = une responsabilité
-- Séparation UI / logique métier
-- Animations découplées quand possible
-- Composants réutilisables par défaut
+### 2. Vérifier l'exposition des secrets
+**Fichiers** : `.env.local`, `gae/lib/supabase.ts`
+
+**Actions** :
+- [ ] Vérifier que `.env.local` est dans `.gitignore`
+- [ ] S'assurer qu'aucune clé API n'est exposée côté client
+- [ ] Utiliser les variables d'environnement Next.js correctement (`NEXT_PUBLIC_` uniquement pour le client)
+- [ ] Créer un fichier `.env.example` pour la documentation
 
 ---
 
-## 4. Règles Next.js
+## 🟡 PRIORITÉ HAUTE - Cohérence du Code
 
-### Server / Client Components
-- Les composants utilisant GSAP doivent être déclarés :
-```ts
-"use client"
+### 3. Renommer les dossiers (incohérence FR/EN)
+**Problème** : Nommage incohérent des dossiers
+
+**Actions** :
+- [ ] Renommer `gae/componentes/` → `gae/components/`
+- [ ] Renommer `gae/staticComponentes/` → `gae/staticComponents/`
+- [ ] Mettre à jour tous les imports dans les fichiers
+
+```bash
+# Commandes à exécuter
+cd gae
+mv componentes components
+mv staticComponentes staticComponents
+# Puis mise à jour des imports
 ```
-- Limiter les Client Components au strict nécessaire
 
-### Optimisation
-- Utilisation de `next/image`
-- Utilisation de `next/font`
-- Lazy loading pour les composants lourds
+### 4. Unifier la gestion d'état
+**Fichier** : `gae/app/recrutement/page.tsx`  
+**Problème** : Duplication avec `currentView` et `mobileStep`
+
+**Actions** :
+- [ ] Créer un seul état unifié
+- [ ] Simplifier la logique de navigation
+- [ ] Supprimer la redondance
+
+```typescript
+// Solution proposée
+type RecrutementStep = 'home' | 'list' | 'offre-detail' | 'postuler';
+const [step, setStep] = useState<RecrutementStep>('home');
+```
+
+### 5. Créer un système de typage centralisé
+**Actions** :
+- [ ] Créer `gae/types/index.ts` pour les types partagés
+- [ ] Déplacer `OffreRecrutement`, `ButtonRecrutementProps`, etc.
+- [ ] Typer correctement les props de `FormulaireContact`
 
 ---
 
-## 5. Règles Tailwind CSS v4
+## 🟠 PRIORITÉ MOYENNE - Maintenabilité
 
-### Principes généraux
-- Tailwind CSS v4 obligatoire
-- Approche **CSS-first**
-- Design **light uniquement**
-- ❌ Aucun dark mode
+### 6. Découper le composant RecrutementPage
+**Fichier** : `gae/app/recrutement/page.tsx` (250+ lignes)
 
-### Configuration
-- `tailwind.config.ts` minimal
-- Tokens définis via CSS (`@theme`)
-- Pas de logique JS complexe
+**Actions** :
+- [ ] Créer `gae/components/recrutement/OffresList.tsx`
+- [ ] Créer `gae/components/recrutement/OffreDetail.tsx`
+- [ ] Créer `gae/components/recrutement/PostulerForm.tsx`
+- [ ] Créer `gae/components/recrutement/ButtonRecrutement.tsx`
+- [ ] Refactoriser la page principale
 
-### Styles
-- Classes Tailwind uniquement
-- CSS custom autorisé uniquement via `@layer`
+### 7. Externaliser les classes CSS longues
+**Problème** : Classes Tailwind trop longues et répétitives
+
+**Actions** :
+- [ ] Créer `gae/app/globals.css` avec des classes custom via `@layer`
+- [ ] Extraire les styles répétitifs
+- [ ] Simplifier les className
 
 ```css
+/* Exemple à ajouter dans globals.css */
 @layer components {
-  .btn-primary {
-    @apply px-4 py-2 rounded-lg font-medium;
+  .offre-item {
+    @apply font-futura text-2xl w-full h-20 pl-5 border-b-5 border-white flex items-center cursor-pointer transition-all;
   }
 }
 ```
 
-### Design system
-- Variables CSS comme source de vérité
-- Palette light figée
-- Breakpoints standards Tailwind v4
-- ❌ Interdiction des classes `dark:`
+### 8. Créer un fichier de configuration
+**Actions** :
+- [ ] Créer `gae/config/constants.ts`
+- [ ] Déplacer les magic numbers et strings hardcodés
+
+```typescript
+// gae/config/constants.ts
+export const RECRUITMENT_CONFIG = {
+  MAX_FILE_SIZE: 5 * 1024 * 1024,
+  ALLOWED_FILE_TYPES: ['application/pdf', 'application/msword'],
+  LAYOUT: {
+    SIDEBAR_WIDTH: '40%',
+    CONTENT_WIDTH: '60%',
+  },
+} as const;
+
+export const TEXTS = {
+  FR: {
+    RECRUITMENT_TITLE: "Nos offres d'emploi & de stage",
+    APPLY: "POSTULER",
+    BACK_TO_LIST: "← Retour aux offres",
+    // ...
+  },
+} as const;
+```
+
+### 9. Améliorer la gestion d'erreurs
+**Fichiers** : Tous les composants avec appels API
+
+**Actions** :
+- [ ] Ajouter un état d'erreur UI dans `RecrutementPage`
+- [ ] Créer un composant `ErrorMessage.tsx`
+- [ ] Afficher des messages d'erreur utilisateur
+- [ ] Ajouter un système de retry
+
+```typescript
+const [error, setError] = useState<string | null>(null);
+const [isLoading, setIsLoading] = useState(false);
+
+// Dans fetchOffres
+catch (error) {
+  setError('Impossible de charger les offres. Veuillez réessayer.');
+  console.error(error);
+}
+```
+
+### 10. Optimiser les images Next.js
+**Fichier** : `gae/app/recrutement/page.tsx`
+
+**Actions** :
+- [ ] Ajouter la prop `sizes` à toutes les images
+- [ ] Ajouter des placeholders blur
+- [ ] Vérifier le format des images (utiliser WebP)
+
+```typescript
+<Image
+  src="/img/elec.jpg"
+  alt="Recrutement Illustration"
+  fill
+  sizes="(max-width: 1280px) 100vw, 60vw"
+  placeholder="blur"
+  blurDataURL="data:image/..."
+  className="object-cover"
+/>
+```
 
 ---
 
-## 6. Règles GSAP
+## 🔵 PRIORITÉ BASSE - Améliorations
 
-### Bonnes pratiques
-- `gsap.context()` obligatoire
-- Cleanup au unmount
-- `useLayoutEffect` recommandé
+### 11. Retirer le scroll automatique intrusif
+**Fichier** : `gae/app/recrutement/page.tsx`
+
+**Actions** :
+- [ ] Évaluer si le scroll automatique est nécessaire
+- [ ] Si oui, ajouter une option de désactivation
+- [ ] Sinon, supprimer le useEffect
+
+### 12. Ajouter des tests
+**Actions** :
+- [ ] Installer Jest et React Testing Library
+- [ ] Configurer les tests dans Next.js
+- [ ] Créer des tests pour les composants critiques
+- [ ] Tester la validation des fichiers
+
+### 13. Mettre en place un système i18n (optionnel)
+**Actions** :
+- [ ] Installer `next-intl` ou équivalent
+- [ ] Externaliser tous les textes
+- [ ] Préparer pour le multilingue
+
+### 14. Documenter les composants
+**Actions** :
+- [ ] Ajouter JSDoc à tous les composants
+- [ ] Documenter les props
+- [ ] Créer un Storybook (optionnel)
+
+---
+
+## 📋 Checklist de Conformité au Cahier des Charges
+
+### TypeScript
+- [ ] ✅ TypeScript activé partout
+- [ ] ❌ Vérifier qu'il n'y a pas de `any`
+- [ ] ❌ Mode strict activé dans `tsconfig.json`
+
+### Architecture
+- [ ] ❌ Renommer les dossiers (componentes → components)
+- [ ] ❌ Séparer les composants UI / logique métier
+- [ ] ❌ Un composant = une responsabilité
 
 ### Performance
-- Privilégier `transform` et `opacity`
-- ScrollTrigger uniquement si nécessaire
-- Animations fluides (60fps)
+- [ ] ❌ Optimiser les images (`sizes`, `placeholder`)
+- [ ] ❌ Lazy loading pour les composants lourds
+- [ ] ❌ Vérifier le score Lighthouse
 
 ### Accessibilité
-- Respect de `prefers-reduced-motion`
-- Animations non bloquantes
+- [ ] ❌ Tester la navigation clavier
+- [ ] ❌ Vérifier les contrastes
+- [ ] ❌ Ajouter les ARIA labels manquants
+
+### Qualité
+- [ ] ❌ Ajouter des tests
+- [ ] ❌ Props documentées (JSDoc)
+- [ ] ❌ Gestion d'erreurs complète
 
 ---
 
-## 7. Accessibilité (a11y)
+## 🎯 Plan d'Exécution Recommandé
 
-- WCAG 2.1
-- Navigation clavier
-- Focus visible
-- Contrastes suffisants (light)
+### Phase 1 - Sécurité (1-2 jours)
+1. Implémenter la validation des fichiers
+2. Sécuriser l'upload vers Supabase
+3. Vérifier les variables d'environnement
 
----
+### Phase 2 - Cohérence (2-3 jours)
+4. Renommer les dossiers
+5. Refactoriser la gestion d'état
+6. Créer le système de typage centralisé
 
-## 8. Performance
+### Phase 3 - Maintenabilité (3-5 jours)
+7. Découper RecrutementPage
+8. Externaliser les CSS
+9. Créer le fichier de configuration
+10. Améliorer la gestion d'erreurs
 
-- Lighthouse > 90
-- Pas de CLS
-- Pas de reflow inutile
-
----
-
-## 9. Qualité & tests
-
-- TypeScript strict
-- ❌ Pas de `any`
-- Props documentées
-- Tests recommandés
-
----
-
-## 10. Documentation des composants
-
-Chaque composant doit inclure :
-- Description
-- Props
-- Variantes
-- Exemple d’utilisation
+### Phase 4 - Améliorations (optionnel)
+11. Optimiser les images
+12. Ajouter des tests
+13. i18n si nécessaire
 
 ---
 
-## 11. Critères de validation
+## 📊 Indicateurs de Réussite
 
-- Responsive
-- Accessible
-- Réutilisable
-- Performant
-
----
-
-## 12. Évolutivité
-
-- Animations extensibles
-- Design system scalable
-- Compatibilité Next.js future
+- [ ] Aucune faille de sécurité détectée
+- [ ] Code coverage > 70% (si tests implémentés)
+- [ ] Lighthouse score > 90
+- [ ] 0 warnings ESLint
+- [ ] Architecture cohérente et maintenable
+- [ ] Documentation complète
 
 ---
 
-**Fin du cahier des charges**
+**Dernière mise à jour** : 8 janvier 2026
