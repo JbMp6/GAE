@@ -145,8 +145,8 @@ export async function submitCandidature(candidature: {
   nom: string;
   mail: string;
   tel: string;
-  cv: string | null;
-  ldm: string | null;
+  cv: string | null; // URL du fichier dans Supabase Storage
+  ldm: string | null; // URL du fichier dans Supabase Storage
 }) {
   const { error } = await supabase
     .from('recrutement_rep')

@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useState } from "react";
+import { validateFile } from '../lib/fileValidation';
 
 interface FormulaireContactProps {
   postuler?: boolean;
@@ -37,6 +38,10 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fileErrors, setFileErrors] = useState({
+    cv: '',
+    lettre: '',
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -51,6 +56,23 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fieldName: 'cv' | 'lettre') => {
     const file = e.target.files?.[0] || null;
+    
+    // Valider le fichier
+    if (file) {
+      const validation = validateFile(file);
+      if (!validation.valid) {
+        setFileErrors(prev => ({ ...prev, [fieldName]: validation.error || '' }));
+        setFormData(prev => ({ ...prev, [fieldName]: null }));
+        // Réinitialiser l'input
+        e.target.value = '';
+        return;
+      }
+      // Réinitialiser l'erreur si le fichier est valide
+      setFileErrors(prev => ({ ...prev, [fieldName]: '' }));
+    } else {
+      setFileErrors(prev => ({ ...prev, [fieldName]: '' }));
+    }
+    
     setFormData(prev => ({ ...prev, [fieldName]: file }));
   };
 
@@ -181,6 +203,9 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
                   onChange={(e) => handleFileChange(e, 'cv')}
                   className="w-full px-4 py-2 border border-secondary rounded-2xl bg-white text-secondary font-futura text-sm file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-futura file:bg-primary file:text-secondary hover:file:bg-secondary hover:file:text-white cursor-pointer focus:outline-none focus:border-primary transition-colors"
                 />
+                {fileErrors.cv && (
+                  <p className="text-red-600 text-xs mt-1 font-futura">{fileErrors.cv}</p>
+                )}
               </div>
 
               {/* Upload Lettre de motivation */}
@@ -192,6 +217,9 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
                   onChange={(e) => handleFileChange(e, 'lettre')}
                   className="w-full px-4 py-2 border border-secondary rounded-2xl bg-white text-secondary font-futura text-sm file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-futura file:bg-primary file:text-secondary hover:file:bg-secondary hover:file:text-white cursor-pointer focus:outline-none focus:border-primary transition-colors"
                 />
+                {fileErrors.lettre && (
+                  <p className="text-red-600 text-xs mt-1 font-futura">{fileErrors.lettre}</p>
+                )}
               </div>
             </div>
           )}

@@ -7,6 +7,7 @@ import Footer from "@/staticComponentes/Footer";
 import Image from "next/image";
 import FormulaireContact from "@/componentes/FormulaireContact";
 import { getOffresRecrutement, submitCandidature, type OffreRecrutement } from "@/lib/queries";
+import { uploadCV, uploadLettreMotivation } from "@/lib/fileValidation";
 
 type ViewType = 'home' | 'offre' | 'postuler';
 
@@ -79,17 +80,41 @@ export default function RecrutementPage() {
       cv: File | null;
       lettre: File | null;
     }) => {
-      // Pour l'instant, on stocke juste les noms de fichiers
-      // TODO: Implémenter l'upload des fichiers vers Supabase Storage
-      await submitCandidature({
-        id_offre: offres[selectedOffre].id,
-        prenom: formData.prenom,
-        nom: formData.nom,
-        mail: formData.email,
-        tel: formData.tel,
-        cv: formData.cv?.name || null,
-        ldm: formData.lettre?.name || null,
-      });
+      try {
+        // Upload du CV si présent
+        let cvUrl: string | null = null;
+        if (formData.cv) {
+          const cvResult = await uploadCV(formData.cv);
+          if (!cvResult.success) {
+            throw new Error(cvResult.error || 'Erreur lors de l\'upload du CV');
+          }
+          cvUrl = cvResult.url || null;
+        }
+
+        // Upload de la lettre de motivation si présente
+        let lettreUrl: string | null = null;
+        if (formData.lettre) {
+          const lettreResult = await uploadLettreMotivation(formData.lettre);
+          if (!lettreResult.success) {
+            throw new Error(lettreResult.error || 'Erreur lors de l\'upload de la lettre de motivation');
+          }
+          lettreUrl = lettreResult.url || null;
+        }
+
+        // Soumettre la candidature avec les URLs des fichiers
+        await submitCandidature({
+          id_offre: offres[selectedOffre].id,
+          prenom: formData.prenom,
+          nom: formData.nom,
+          mail: formData.email,
+          tel: formData.tel,
+          cv: cvUrl,
+          ldm: lettreUrl,
+        });
+      } catch (error) {
+        console.error('Erreur lors de la soumission:', error);
+        throw error; // Re-throw pour que FormulaireContact puisse gérer l'erreur
+      }
     };
 
     const renderContent = () => {

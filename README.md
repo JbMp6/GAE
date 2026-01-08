@@ -12,13 +12,13 @@
 **Problème** : Aucune validation des fichiers uploadés (CV, lettre de motivation)
 
 **Actions** :
-- [ ] Créer `gae/lib/fileValidation.ts` avec :
+- [x] Créer `gae/lib/fileValidation.ts` avec :
   - Validation du type MIME (PDF, DOC, DOCX uniquement)
   - Limitation de taille (max 5MB)
   - Scan du contenu malveillant
-- [ ] Implémenter l'upload vers Supabase Storage
-- [ ] Générer des noms de fichiers sécurisés (UUID)
-- [ ] Ajouter la gestion d'erreurs utilisateur
+- [x] Implémenter l'upload vers Supabase Storage
+- [x] Générer des noms de fichiers sécurisés (UUID)
+- [x] Ajouter la gestion d'erreurs utilisateur
 
 ```typescript
 // À créer : gae/lib/fileValidation.ts
@@ -30,10 +30,10 @@ const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 **Fichiers** : `.env.local`, `gae/lib/supabase.ts`
 
 **Actions** :
-- [ ] Vérifier que `.env.local` est dans `.gitignore`
-- [ ] S'assurer qu'aucune clé API n'est exposée côté client
-- [ ] Utiliser les variables d'environnement Next.js correctement (`NEXT_PUBLIC_` uniquement pour le client)
-- [ ] Créer un fichier `.env.example` pour la documentation
+- [x] Vérifier que `.env.local` est dans `.gitignore` ✅
+- [x] S'assurer qu'aucune clé API n'est exposée côté client ✅
+- [x] Utiliser les variables d'environnement Next.js correctement (`NEXT_PUBLIC_` uniquement pour le client) ✅
+- [x] Créer un fichier `.env.example` pour la documentation ✅
 
 ---
 
