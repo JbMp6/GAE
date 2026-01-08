@@ -43,9 +43,9 @@ const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 **Problème** : Nommage incohérent des dossiers
 
 **Actions** :
-- [ ] Renommer `gae/componentes/` → `gae/components/`
-- [ ] Renommer `gae/staticComponentes/` → `gae/staticComponents/`
-- [ ] Mettre à jour tous les imports dans les fichiers
+- [x] Renommer `gae/componentes/` → `gae/components/` ✅
+- [x] Renommer `gae/staticComponentes/` → `gae/staticComponents/` ✅
+- [x] Mettre à jour tous les imports dans les fichiers ✅
 
 ```bash
 # Commandes à exécuter
@@ -60,21 +60,21 @@ mv staticComponentes staticComponents
 **Problème** : Duplication avec `currentView` et `mobileStep`
 
 **Actions** :
-- [ ] Créer un seul état unifié
-- [ ] Simplifier la logique de navigation
-- [ ] Supprimer la redondance
+- [x] Créer un seul état unifié ✅
+- [x] Simplifier la logique de navigation ✅
+- [x] Supprimer la redondance ✅
 
 ```typescript
 // Solution proposée
-type RecrutementStep = 'home' | 'list' | 'offre-detail' | 'postuler';
+type RecrutementStep = 'home' | 'offre-list' | 'offre-detail' | 'postuler';
 const [step, setStep] = useState<RecrutementStep>('home');
 ```
 
 ### 5. Créer un système de typage centralisé
 **Actions** :
-- [ ] Créer `gae/types/index.ts` pour les types partagés
-- [ ] Déplacer `OffreRecrutement`, `ButtonRecrutementProps`, etc.
-- [ ] Typer correctement les props de `FormulaireContact`
+- [x] Créer `gae/types/index.ts` pour les types partagés ✅
+- [x] Déplacer `OffreRecrutement`, `ButtonRecrutementProps`, etc. ✅
+- [x] Typer correctement les props de `FormulaireContact` ✅
 
 ---
 

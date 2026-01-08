@@ -3,11 +3,7 @@
  * Utilise le même style que LoadingProvider
  */
 
-interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg';
-  showText?: boolean;
-  text?: string;
-}
+import type { LoadingSpinnerProps } from '@/types';
 
 export default function LoadingSpinner({ 
   size = 'md', 

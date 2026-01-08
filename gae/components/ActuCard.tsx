@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Button from '@/componentes/Button';
+import Button from '@/components/Button';
 import { useState, useRef } from 'react';
 
 interface ActuCardProps {

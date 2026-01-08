@@ -1,20 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Header from "@/componentes/Header";
-import FixedFooter from "@/staticComponentes/FixedFooter";
-import Footer from "@/staticComponentes/Footer";
+import Header from "@/components/Header";
+import FixedFooter from "@/staticComponents/FixedFooter";
+import Footer from "@/staticComponents/Footer";
 import Image from "next/image";
-import FormulaireContact from "@/componentes/FormulaireContact";
-import { getOffresRecrutement, submitCandidature, type OffreRecrutement } from "@/lib/queries";
+import FormulaireContact from "@/components/FormulaireContact";
+import { getOffresRecrutement, submitCandidature } from "@/lib/queries";
 import { uploadCV, uploadLettreMotivation } from "@/lib/fileValidation";
-
-type ViewType = 'home' | 'offre' | 'postuler';
-
-interface ButtonRecrutementProps {
-  text: string;
-  onClick: () => void;
-}
+import type { OffreRecrutement, RecrutementStep, ButtonRecrutementProps } from '@/types';
 
 const ButtonRecrutement = ({ text, onClick }: ButtonRecrutementProps) => {
   return (
@@ -28,9 +22,8 @@ const ButtonRecrutement = ({ text, onClick }: ButtonRecrutementProps) => {
 };
 
 export default function RecrutementPage() {
-    const [currentView, setCurrentView] = useState<ViewType>('home');
+    const [step, setStep] = useState<RecrutementStep>('home');
     const [selectedOffre, setSelectedOffre] = useState<number>(0);
-    const [mobileStep, setMobileStep] = useState<'list' | 'description' | 'form'>('list');
     const [offres, setOffres] = useState<OffreRecrutement[]>([]);
 
     useEffect(() => {
@@ -48,27 +41,23 @@ export default function RecrutementPage() {
 
     useEffect(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, [mobileStep]);
+    }, [step]);
 
     const handleOffreClick = (index: number) => {
       setSelectedOffre(index);
-      setCurrentView('offre');
-      setMobileStep('description');
+      setStep('offre-detail');
     };
 
     const handlePostulerClick = () => {
-      setCurrentView('postuler');
-      setMobileStep('form');
+      setStep('postuler');
     };
 
     const handleBackToList = () => {
-      setMobileStep('list');
-      setCurrentView('home');
+      setStep('offre-list');
     };
 
     const handleBackToDescription = () => {
-      setMobileStep('description');
-      setCurrentView('offre');
+      setStep('offre-detail');
     };
 
     const handleRecrutementSubmit = async (formData: {
@@ -118,8 +107,9 @@ export default function RecrutementPage() {
     };
 
     const renderContent = () => {
-      switch(currentView) {
+      switch(step) {
         case 'home':
+        case 'offre-list':
           return (
             <div className="w-full h-full relative">
               <Image
@@ -131,7 +121,7 @@ export default function RecrutementPage() {
             </div>
           );
         
-        case 'offre':
+        case 'offre-detail':
           return (
             <div className="w-full h-full px-8 py-8 overflow-y-auto">
               <h2 className="font-futura font-bold text-secondary text-4xl mb-6">
@@ -176,7 +166,7 @@ export default function RecrutementPage() {
                     key={index} 
                     onClick={() => handleOffreClick(index)}
                     className={`font-futura text-2xl w-full h-20 pl-5 border-b-5 border-white flex items-center cursor-pointer transition-all ${
-                      (currentView === 'offre' || currentView === 'postuler') && selectedOffre === index ? 'bg-secondary !text-primary' : 'text-secondary hover:bg-white/20'
+                      (step === 'offre-detail' || step === 'postuler') && selectedOffre === index ? 'bg-secondary !text-primary' : 'text-secondary hover:bg-white/20'
                     }`}
                   >
                     {offre.title}
@@ -188,7 +178,7 @@ export default function RecrutementPage() {
             <div className="w-[60%] h-full flex flex-col justify-start items-start overflow-hidden">
               <div className="w-full h-[20%] flex justify-center items-center">
                 <h1 className="font-syntha text-secondary text-3xl">
-                  {currentView === 'postuler' ? 'postuler' : 'Nos offres d\'emploi & de stage'}
+                  {step === 'postuler' ? 'postuler' : 'Nos offres d\'emploi & de stage'}
                 </h1>
               </div>
               <div className="w-full h-[80%] flex flex-col justify-start items-start overflow-y-auto">
@@ -200,7 +190,7 @@ export default function RecrutementPage() {
           {/* Mobile Layout */}
           <div className="xl:hidden flex flex-col w-full min-h-screen bg-white">
             {/* Step 1: Liste des offres */}
-            {mobileStep === 'list' && (
+            {(step === 'home' || step === 'offre-list') && (
               <div className="w-full h-full min-h-screen flex flex-col">
                 <div className="w-full flex justify-center items-center py-8">
                   <h1 className="font-syntha text-secondary text-3xl text-center px-4">
@@ -222,7 +212,7 @@ export default function RecrutementPage() {
             )}
 
             {/* Step 2: Description de l'offre */}
-            {mobileStep === 'description' && (
+            {step === 'offre-detail' && (
               <div className="w-full flex flex-col px-4 py-8">
                 <button
                   onClick={handleBackToList}
@@ -247,7 +237,7 @@ export default function RecrutementPage() {
             )}
 
             {/* Step 3: Formulaire */}
-            {mobileStep === 'form' && (
+            {step === 'postuler' && (
               <div className="w-full flex flex-col px-4 py-8">
                 <button
                   onClick={handleBackToDescription}

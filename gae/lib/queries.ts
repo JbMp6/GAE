@@ -1,43 +1,7 @@
 import { supabase } from './supabase';
+import type { Service, Actu, Realisation, OffreRecrutement } from '@/types';
 
-export interface Service {
-  id: string;
-  title: string;
-  icon: string;
-  bg: string;
-  buttonColor: string;
-  description?: string;
-  created_at?: string;
-}
-
-export interface Actu {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  content: string;
-  image: string;
-  imageAlt: string;
-  href: string;
-  created_at?: string;
-}
-
-export interface Realisation {
-  id: string;
-  title: string;
-  subtitle: string;
-  description?: string;
-  image: string;
-  imageAlt: string;
-  created_at?: string;
-}
-
-export interface OffreRecrutement {
-  id: number;
-  title: string;
-  description: string;
-  created_at?: string;
-}
+export type { Service, Actu, Realisation, OffreRecrutement };
 
 export async function getServices(): Promise<Service[]> {
   const { data, error } = await supabase

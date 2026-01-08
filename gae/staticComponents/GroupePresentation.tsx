@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Boxed from "@/staticComponentes/Boxed";
-import Button from "@/componentes/Button";
+import Boxed from "@/staticComponents/Boxed";
+import Button from "@/components/Button";
 import { useState, useMemo } from "react";
 
 const leftCards = [

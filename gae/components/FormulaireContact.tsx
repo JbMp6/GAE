@@ -4,26 +4,7 @@
 import React, { useState } from "react";
 import { validateFile } from '../lib/fileValidation';
 import LoadingSpinner from './LoadingSpinner';
-
-interface FormulaireContactProps {
-  postuler?: boolean;
-  onSubmit?: (formData: {
-    prenom: string;
-    nom: string;
-    email: string;
-    tel: string;
-    message: string;
-  }) => Promise<void>;
-  onSubmitRecrutement?: (formData: {
-    prenom: string;
-    nom: string;
-    email: string;
-    tel: string;
-    message: string;
-    cv: File | null;
-    lettre: File | null;
-  }) => Promise<void>;
-}
+import type { FormulaireContactProps } from '@/types';
 
 export default function FormulaireContact({ postuler = false, onSubmit, onSubmitRecrutement }: FormulaireContactProps) {
   const [formData, setFormData] = useState({

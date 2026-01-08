@@ -2,7 +2,7 @@
 
 import { useState, ReactElement, useRef } from 'react';
 import Image from 'next/image';
-import Boxed from '@/staticComponentes/Boxed';
+import Boxed from '@/staticComponents/Boxed';
 import Button from './Button';
 
 interface GenericSliderProps<T> {

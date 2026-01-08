@@ -4,10 +4,10 @@
 import { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import Header from '@/componentes/Header';
-import ActuCard from '@/componentes/ActuCard';
-import FixedFooter from '@/staticComponentes/FixedFooter';
-import Footer from '@/staticComponentes/Footer';
+import Header from '@/components/Header';
+import ActuCard from '@/components/ActuCard';
+import FixedFooter from '@/staticComponents/FixedFooter';
+import Footer from '@/staticComponents/Footer';
 import RealisationsSearchParamsWrapper from './RealisationsSearchParamsWrapper';
 import { getRealisations, type Realisation } from '@/lib/queries';
 

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import LoadingProvider from "@/componentes/LoadingProvider";
+import LoadingProvider from "@/components/LoadingProvider";
 
 export const viewport: Viewport = {
   themeColor: 'white',

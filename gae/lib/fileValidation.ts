@@ -4,6 +4,9 @@
  */
 
 import { supabase } from './supabase';
+import type { FileValidationResult, FileUploadResult } from '@/types';
+
+export type { FileValidationResult, FileUploadResult };
 
 /**
  * Types de fichiers autorisés avec leurs MIME types
@@ -18,23 +21,6 @@ export const ALLOWED_FILE_TYPES = {
  * Taille maximale des fichiers (5MB)
  */
 export const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-
-/**
- * Résultat de la validation d'un fichier
- */
-export interface FileValidationResult {
-  valid: boolean;
-  error?: string;
-}
-
-/**
- * Résultat de l'upload d'un fichier
- */
-export interface FileUploadResult {
-  success: boolean;
-  url?: string;
-  error?: string;
-}
 
 /**
  * Valide un fichier selon les critères de sécurité
