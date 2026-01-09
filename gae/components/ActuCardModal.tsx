@@ -21,10 +21,10 @@ export default function ActuCardModal({ image, imageAlt, title, subtitle, conten
   }, []);
   return (
     <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-2 ">
-      <div className="relative bg-white rounded-[2.5rem] border-4 border-primary shadow-2xl w-[70vw] h-[calc(100vh-180px)] flex flex-row md:flex-row p-20 fade-in-modal overflow-hidden">
+      <div className="modal-container fade-in-modal w-[70vw] h-[calc(100vh-180px)] flex flex-row md:flex-row p-20">
         {/* Bouton fermer */}
         <button
-          className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full border-3 border-primary bg-white text-primary hover:border-secondary hover:text-secondary transition-colors focus:outline-none z-10"
+          className="btn-close absolute top-6 right-6 z-10"
           onClick={onClose}
           aria-label="Fermer"
         >
@@ -37,6 +37,7 @@ export default function ActuCardModal({ image, imageAlt, title, subtitle, conten
                 src={image} 
                 alt={imageAlt}
                 fill
+                sizes="(max-width: 1280px) 100vw, 50vw"
                 className="object-cover rounded-t-4xl"
             />
             </div>

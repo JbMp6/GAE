@@ -91,7 +91,8 @@ export default function SocietesPresentation() {
                   <Image 
                     src={company.icon} 
                     alt="Icone métier" 
-                    fill 
+                    fill
+                    sizes="(max-width: 1280px) 64px, 96px"
                     className="object-contain"
                   />
                 </div>
@@ -101,7 +102,8 @@ export default function SocietesPresentation() {
                   <Image 
                     src={company.logo} 
                     alt="Logo société" 
-                    fill 
+                    fill
+                    sizes="(max-width: 1280px) 256px, 384px"
                     className="object-contain"
                   />
                 </div>

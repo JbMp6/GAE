@@ -5,21 +5,12 @@ import Header from "@/components/Header";
 import FixedFooter from "@/staticComponents/FixedFooter";
 import Footer from "@/staticComponents/Footer";
 import Image from "next/image";
-import FormulaireContact from "@/components/FormulaireContact";
 import { getOffresRecrutement, submitCandidature } from "@/lib/queries";
 import { uploadCV, uploadLettreMotivation } from "@/lib/fileValidation";
-import type { OffreRecrutement, RecrutementStep, ButtonRecrutementProps } from '@/types';
-
-const ButtonRecrutement = ({ text, onClick }: ButtonRecrutementProps) => {
-  return (
-    <button
-      onClick={onClick}
-      className="px-8 py-3 bg-secondary text-white font-futura font-bold text-sm tracking-wider hover:bg-primary transition-colors duration-300"
-    >
-      {text}
-    </button>
-  );
-};
+import type { OffreRecrutement, RecrutementStep } from '@/types';
+import OffresList from "@/components/recrutement/OffresList";
+import OffreDetail from "@/components/recrutement/OffreDetail";
+import PostulerForm from "@/components/recrutement/PostulerForm";
 
 export default function RecrutementPage() {
     const [step, setStep] = useState<RecrutementStep>('home');
@@ -38,10 +29,6 @@ export default function RecrutementPage() {
 
       fetchOffres();
     }, []);
-
-    useEffect(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, [step]);
 
     const handleOffreClick = (index: number) => {
       setSelectedOffre(index);
@@ -123,28 +110,15 @@ export default function RecrutementPage() {
         
         case 'offre-detail':
           return (
-            <div className="w-full h-full px-8 py-8 overflow-y-auto">
-              <h2 className="font-futura font-bold text-secondary text-4xl mb-6">
-                {offres[selectedOffre]?.title}
-              </h2>
-              
-              <div className="space-y-4 mb-8">
-                <p className="font-futura text-gray-700 text-base leading-relaxed whitespace-pre-wrap">
-                  {offres[selectedOffre]?.description}
-                </p>
-              </div>
-
-              <div className="flex justify-center w-full pt-5">
-                <ButtonRecrutement text="POSTULER" onClick={handlePostulerClick} />
-              </div>
-            </div>
+            <OffreDetail 
+              offre={offres[selectedOffre]} 
+              onPostulerClick={handlePostulerClick}
+            />
           );
         
         case 'postuler':
           return (
-            <div className="w-full h-full px-8 pb-8 overflow-y-auto">
-              <FormulaireContact postuler={true} onSubmitRecrutement={handleRecrutementSubmit} />
-            </div>
+            <PostulerForm onSubmit={handleRecrutementSubmit} />
           );
         
         default:
@@ -158,22 +132,13 @@ export default function RecrutementPage() {
         <main className="w-full bg-white flex flex-col pt-header xl:h-[calc(100vh-80px)]">
           {/* Desktop Layout */}
           <div className="hidden xl:flex flex-row w-full h-full">
-            {/* Side Bar*/}
-            <div className="w-[40%] h-full flex justify-center items-end">
-              <div className="bg-extra w-full h-[80%] flex flex-col">
-                {offres.map((offre, index) => (
-                  <div 
-                    key={index} 
-                    onClick={() => handleOffreClick(index)}
-                    className={`font-futura text-2xl w-full h-20 pl-5 border-b-5 border-white flex items-center cursor-pointer transition-all ${
-                      (step === 'offre-detail' || step === 'postuler') && selectedOffre === index ? 'bg-secondary !text-primary' : 'text-secondary hover:bg-white/20'
-                    }`}
-                  >
-                    {offre.title}
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Side Bar */}
+            <OffresList 
+              offres={offres}
+              selectedOffre={selectedOffre}
+              step={step}
+              onOffreClick={handleOffreClick}
+            />
             {/* Change Content */}
             <div className="w-[60%] h-full flex flex-col justify-start items-start overflow-hidden">
               <div className="w-full h-[20%] flex justify-center items-center">
@@ -191,65 +156,32 @@ export default function RecrutementPage() {
           <div className="xl:hidden flex flex-col w-full min-h-screen bg-white">
             {/* Step 1: Liste des offres */}
             {(step === 'home' || step === 'offre-list') && (
-              <div className="w-full h-full min-h-screen flex flex-col">
-                <div className="w-full flex justify-center items-center py-8">
-                  <h1 className="font-syntha text-secondary text-3xl text-center px-4">
-                    Nos offres d'emploi & de stage
-                  </h1>
-                </div>
-                <div className="bg-extra w-full flex flex-col flex-1">
-                  {offres.map((offre, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleOffreClick(index)}
-                      className="font-futura text-xl h-12 text-secondary w-full py-6 px-5 border-b-5 border-white flex items-center cursor-pointer transition-all hover:bg-white/20 active:bg-secondary active:text-primary"
-                    >
-                      {offre.title}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <OffresList 
+                offres={offres}
+                selectedOffre={selectedOffre}
+                step={step}
+                onOffreClick={handleOffreClick}
+                isMobile
+              />
             )}
 
             {/* Step 2: Description de l'offre */}
             {step === 'offre-detail' && (
-              <div className="w-full flex flex-col px-4 py-8">
-                <button
-                  onClick={handleBackToList}
-                  className="mb-6 text-primary font-futura text-lg flex items-center gap-2"
-                >
-                  ← Retour aux offres
-                </button>
-                <h2 className="font-futura font-bold text-secondary text-3xl mb-6">
-                  {offres[selectedOffre]?.title}
-                </h2>
-                
-                <div className="space-y-4 mb-8">
-                  <p className="font-futura text-gray-700 text-base leading-relaxed whitespace-pre-wrap">
-                    {offres[selectedOffre]?.description}
-                  </p>
-                </div>
-
-                <div className="flex justify-center w-full pt-5">
-                  <ButtonRecrutement text="POSTULER" onClick={handlePostulerClick} />
-                </div>
-              </div>
+              <OffreDetail 
+                offre={offres[selectedOffre]}
+                onPostulerClick={handlePostulerClick}
+                onBackToList={handleBackToList}
+                isMobile
+              />
             )}
 
             {/* Step 3: Formulaire */}
             {step === 'postuler' && (
-              <div className="w-full flex flex-col px-4 py-8">
-                <button
-                  onClick={handleBackToDescription}
-                  className="mb-6 text-primary font-futura text-lg flex items-center gap-2"
-                >
-                  ← Retour à l'offre
-                </button>
-                <h1 className="font-syntha text-secondary text-3xl text-center mb-8">
-                  Postuler
-                </h1>
-                <FormulaireContact postuler={true} onSubmitRecrutement={handleRecrutementSubmit} />
-              </div>
+              <PostulerForm 
+                onSubmit={handleRecrutementSubmit}
+                onBack={handleBackToDescription}
+                isMobile
+              />
             )}
           </div>
         </main>

@@ -16,7 +16,7 @@ export default function FixedFooter() {
                         alt="Facebook" 
                         width={40} 
                         height={40}
-                        className="hover:scale-110 hover:drop-shadow-lg transition-all duration-300 ease-in-out cursor-pointer"
+                        className="icon-hover"
                     />
                 </a>
                 <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -25,7 +25,7 @@ export default function FixedFooter() {
                         alt="Instagram" 
                         width={40} 
                         height={40}
-                        className="hover:scale-110 hover:drop-shadow-lg transition-all duration-300 ease-in-out cursor-pointer"
+                        className="icon-hover"
                     />
                 </a>
                 <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -34,7 +34,7 @@ export default function FixedFooter() {
                         alt="LinkedIn" 
                         width={40} 
                         height={40}
-                        className="hover:scale-110 hover:drop-shadow-lg transition-all duration-300 ease-in-out cursor-pointer"
+                        className="icon-hover"
                     />
                 </a>
                 <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
@@ -43,7 +43,7 @@ export default function FixedFooter() {
                         alt="X (Twitter)" 
                         width={40} 
                         height={40}
-                        className="hover:scale-110 hover:drop-shadow-lg transition-all duration-300 ease-in-out cursor-pointer"
+                        className="icon-hover"
                     />
                 </a>
             </div>

@@ -1,3 +1,32 @@
+/**
+ * Formulaire de contact et de recrutement
+ * 
+ * Composant polyvalent qui gère à la fois :
+ * - Les demandes de contact simples (sans fichiers)
+ * - Les candidatures de recrutement (avec CV et lettre de motivation)
+ * 
+ * Inclut :
+ * - Validation en temps réel des fichiers (taille, type MIME)
+ * - Upload sécurisé vers Supabase Storage
+ * - Gestion d'état de chargement avec overlay
+ * - Messages de succès et d'erreur
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * // Mode contact
+ * <FormulaireContact 
+ *   postuler={false}
+ *   onSubmit={handleContactSubmit}
+ * />
+ * 
+ * // Mode recrutement
+ * <FormulaireContact 
+ *   postuler={true}
+ *   onSubmitRecrutement={handleRecrutementSubmit}
+ * />
+ * ```
+ */
 
 'use client';
 
@@ -6,6 +35,14 @@ import { validateFile } from '../lib/fileValidation';
 import LoadingSpinner from './LoadingSpinner';
 import type { FormulaireContactProps } from '@/types';
 
+/**
+ * Affiche un formulaire de contact ou de candidature
+ * @param {FormulaireContactProps} props - Les propriétés du composant
+ * @param {boolean} [props.postuler=false] - Mode recrutement activé (affiche upload CV/lettre)
+ * @param {Function} [props.onSubmit] - Callback pour soumission contact simple
+ * @param {Function} [props.onSubmitRecrutement] - Callback pour soumission candidature
+ * @returns {JSX.Element} Formulaire
+ */
 export default function FormulaireContact({ postuler = false, onSubmit, onSubmitRecrutement }: FormulaireContactProps) {
   const [formData, setFormData] = useState({
     prenom: '',
@@ -129,7 +166,7 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
         placeholder="Prénom"
         required
         disabled={isLoading}
-        className="w-full px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="input-base"
       />
 
       {/* Nom */}
@@ -141,7 +178,7 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
         placeholder="Nom"
         required
         disabled={isLoading}
-        className="w-full px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="input-base"
       />
 
       {/* E-mail et Téléphone sur la même ligne */}
@@ -154,7 +191,7 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
           placeholder="E-mail"
           required
           disabled={isLoading}
-          className="flex-1 px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="input-base flex-1"
         />
         <input
           type="tel"
@@ -164,7 +201,7 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
           placeholder="Téléphone"
           required
           disabled={isLoading}
-          className="flex-1 px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="input-base flex-1"
         />
       </div>
 

@@ -1,10 +1,26 @@
 /**
  * Composant de chargement réutilisable avec animation de rotation
- * Utilise le même style que LoadingProvider
+ * 
+ * Affiche un spinner animé avec icône d'éclair, similaire au LoadingProvider.
+ * Supporte trois tailles (sm, md, lg) et un texte optionnel.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <LoadingSpinner size="md" showText={true} text="Chargement..." />
+ * ```
  */
 
 import type { LoadingSpinnerProps } from '@/types';
 
+/**
+ * Affiche un indicateur de chargement animé
+ * @param {LoadingSpinnerProps} props - Les propriétés du composant
+ * @param {'sm' | 'md' | 'lg'} [props.size='md'] - Taille du spinner
+ * @param {boolean} [props.showText=false] - Afficher le texte de chargement
+ * @param {string} [props.text='Chargement en cours...'] - Texte à afficher
+ * @returns {JSX.Element} Spinner de chargement
+ */
 export default function LoadingSpinner({ 
   size = 'md', 
   showText = false,

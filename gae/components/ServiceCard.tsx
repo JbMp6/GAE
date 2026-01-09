@@ -20,7 +20,8 @@ export default function ServiceCard({ title, icon, iconAlt, bg, onClick }: Servi
             <Image 
               src={icon} 
               alt={title} 
-              fill 
+              fill
+              sizes="(max-width: 1536px) 240px, 300px"
               className="object-contain"
             />
           ) : (
