@@ -1,21 +1,21 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Header from '@/components/Header';
-import FixedFooter from '@/staticComponents/FixedFooter';
-import ImgBanner from '@/staticComponents/ImgBanner';
-import SeparatorTitle from '@/components/SeparatorTitle';
-import ActuCard from '@/components/ActuCard';
-import GroupePresentation from '@/staticComponents/GroupePresentation';
-import SocietesPresentation from '@/staticComponents/SocietesPresentation';
-import Footer from '@/staticComponents/Footer';
-import { Parallax } from '@/components/Parallax';
-import ActuCardModal from '@/components/ActuCardModal';
-import ServiceCardModal from '@/components/ServiceCardModal';
-import ServiceCard from '@/components/ServiceCard';
+import Header from '@/components/layout/Header';
+import FixedFooter from '@/components/layout/FixedFooter';
+import ImgBanner from '@/components/layout/ImgBanner';
+import SeparatorTitle from '@/components/ui/SeparatorTitle';
+import ActuCard from '@/components/cards/ActuCard';
+import GroupePresentation from '@/components/sections/GroupePresentation';
+import SocietesPresentation from '@/components/sections/SocietesPresentation';
+import Footer from '@/components/layout/Footer';
+import { Parallax } from '@/components/ui/Parallax';
+import ActuCardModal from '@/components/cards/ActuCardModal';
+import ServiceCardModal from '@/components/cards/ServiceCardModal';
+import ServiceCard from '@/components/cards/ServiceCard';
 import { getActus, getServices } from '@/lib/queries';
 import type { Actu, Service } from '@/lib/queries';
-import NewSlider from '@/components/NewSlider';
+import NewSlider from '@/components/sliders/NewSlider';
 
 export default function Home() {
   const [headerBottom, setHeaderBottom] = useState<number>(0);

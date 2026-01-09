@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import ScrollToTop from '@/components/ScrollToTop';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 
 export default function FixedFooter() {
     const currentYear = new Date().getFullYear();

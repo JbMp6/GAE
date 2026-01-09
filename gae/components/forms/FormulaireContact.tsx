@@ -31,8 +31,8 @@
 'use client';
 
 import React, { useState } from "react";
-import { validateFile } from '../lib/fileValidation';
-import LoadingSpinner from './LoadingSpinner';
+import { validateFile } from '@/lib/fileValidation';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import type { FormulaireContactProps } from '@/types';
 
 /**

@@ -15,7 +15,7 @@
  * ```
  */
 
-import FormulaireContact from '@/components/FormulaireContact';
+import FormulaireContact from '@/components/forms/FormulaireContact';
 import type { RecrutementFormData } from '@/types';
 
 /**

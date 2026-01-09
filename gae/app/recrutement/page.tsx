@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Header from "@/components/Header";
-import FixedFooter from "@/staticComponents/FixedFooter";
-import Footer from "@/staticComponents/Footer";
+import Header from "@/components/layout/Header";
+import FixedFooter from "@/components/layout/FixedFooter";
+import Footer from "@/components/layout/Footer";
 import Image from "next/image";
 import { getOffresRecrutement, submitCandidature } from "@/lib/queries";
 import { uploadCV, uploadLettreMotivation } from "@/lib/fileValidation";

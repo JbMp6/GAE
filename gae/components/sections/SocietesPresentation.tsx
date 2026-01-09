@@ -2,8 +2,8 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import Boxed from './Boxed';
-import Button from '@/components/Button';
+import Boxed from '@/components/layout/Boxed';
+import Button from '@/components/ui/Button';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
