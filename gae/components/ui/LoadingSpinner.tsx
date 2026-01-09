@@ -61,7 +61,7 @@ export default function LoadingSpinner({
         
         {/* Lightning icon */}
         <img
-          src="/ilstr/eclair_01.svg"
+          src="/icons/ui/eclair_01.svg"
           alt="Loading"
           width={iconSizes[size].width}
           height={iconSizes[size].height}

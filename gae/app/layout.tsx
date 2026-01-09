@@ -16,27 +16,27 @@ export const metadata: Metadata = {
 const futura = localFont({
   src: [
     {
-      path: "../public/font/Futura.otf",
+      path: "../public/fonts/Futura.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/font/FuturaBT-Book.otf",
+      path: "../public/fonts/FuturaBT-Book.otf",
       weight: "450",
       style: "normal",
     },
     {
-      path: "../public/font/FuturaBT-BookItalic.otf",
+      path: "../public/fonts/FuturaBT-BookItalic.otf",
       weight: "450",
       style: "italic",
     },
     {
-      path: "../public/font/Futura-CondensedBold.otf",
+      path: "../public/fonts/Futura-CondensedBold.otf",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../public/font/Futura-ExtraBold.otf",
+      path: "../public/fonts/Futura-ExtraBold.otf",
       weight: "800",
       style: "normal",
     },
@@ -47,7 +47,7 @@ const futura = localFont({
 const futuraCondensed = localFont({
   src: [
     {
-      path: "../public/font/Futura-Condensed.otf",
+      path: "../public/fonts/Futura-Condensed.otf",
       weight: "400",
       style: "normal",
     },
@@ -56,7 +56,7 @@ const futuraCondensed = localFont({
 });
 
 const syntha = localFont({
-  src: "../public/font/Syntha.ttf",
+  src: "../public/fonts/Syntha.ttf",
   variable: "--font-syntha",
 });
 

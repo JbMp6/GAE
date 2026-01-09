@@ -67,7 +67,7 @@ export default function Home() {
       <main className="flex flex-col items-center justify-start bg-white pt-header min-h-screen h-auto">
 
         <ImgBanner 
-          img_src="/img/home_banner.jpg"
+          img_src="/images/banners/home_banner.jpg"
         />
 
         <SeparatorTitle 
@@ -83,7 +83,7 @@ export default function Home() {
         </NewSlider>
 
         <Parallax 
-          image="/img/elec.jpg" 
+          image="/images/services/elec.jpg" 
           height="500px" 
         />
 
@@ -108,7 +108,7 @@ export default function Home() {
         </NewSlider>
 
         <Parallax 
-          image="/img/elec.jpg" 
+          image="/images/services/elec.jpg" 
           height="500px" 
         />
 

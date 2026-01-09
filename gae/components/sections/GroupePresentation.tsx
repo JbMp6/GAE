@@ -156,7 +156,7 @@ export default function GroupePresentation() {
                     <div className="flex justify-center items-center w-1/2 h-full">
                         <div className="w-full aspect-[6/4] relative">
                             <Image
-                                src="/ilstr/carte_bzh.svg"
+                                src="/icons/ui/carte_bzh.svg"
                                 alt="Carte Implantation"
                                 fill
                                 className="object-contain"

@@ -12,7 +12,7 @@ export default function FixedFooter() {
             <div className="flex flex-row justify-center items-center gap-6">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <Image 
-                        src="/ilstr/facebook_logo.svg" 
+                        src="/icons/social/facebook_logo.svg" 
                         alt="Facebook" 
                         width={40} 
                         height={40}
@@ -21,7 +21,7 @@ export default function FixedFooter() {
                 </a>
                 <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <Image 
-                        src="/ilstr/instagram_logo.svg" 
+                        src="/icons/social/instagram_logo.svg" 
                         alt="Instagram" 
                         width={40} 
                         height={40}
@@ -30,7 +30,7 @@ export default function FixedFooter() {
                 </a>
                 <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                     <Image 
-                        src="/ilstr/linkedin_logo.svg" 
+                        src="/icons/social/linkedin_logo.svg" 
                         alt="LinkedIn" 
                         width={40} 
                         height={40}
@@ -39,7 +39,7 @@ export default function FixedFooter() {
                 </a>
                 <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
                     <Image 
-                        src="/ilstr/x_logo.svg" 
+                        src="/icons/social/x_logo.svg" 
                         alt="X (Twitter)" 
                         width={40} 
                         height={40}

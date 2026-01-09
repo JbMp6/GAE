@@ -100,7 +100,7 @@ export default function RecrutementPage() {
           return (
             <div className="w-full h-full relative">
               <Image
-                src="/img/elec.jpg"
+                src="/images/services/elec.jpg"
                 alt="Recrutement Illustration"
                 fill
                 className="object-cover"

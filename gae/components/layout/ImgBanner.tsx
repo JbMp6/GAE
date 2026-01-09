@@ -24,7 +24,7 @@ export default function ImgBanner({ children, img_src }: ImgBannerProps) {
             
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-64 h-64 2xl:hidden z-10">
                 <Image
-                    src="/ilstr/gae_logo_02.svg"
+                    src="/icons/logos/gae_logo_02.svg"
                     alt="Logo GAE"
                     fill
                     sizes="256px"

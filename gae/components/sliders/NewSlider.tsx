@@ -64,7 +64,7 @@ export default function NewSlider<T>({ items, w_size = '70%', children }: Generi
             className="hover:scale-125 transition-transform duration-300 cursor-pointer w-16 h-16 relative"
           >
             <Image
-              src="/ilstr/bouton_fleche.svg"
+              src="/icons/ui/bouton_fleche.svg"
               alt="Précédent"
               fill
               className="object-contain"
@@ -99,7 +99,7 @@ export default function NewSlider<T>({ items, w_size = '70%', children }: Generi
             className="hover:scale-125 transition-transform duration-300 cursor-pointer w-16 h-16 relative"
           >
             <Image
-              src="/ilstr/bouton_fleche.svg"
+              src="/icons/ui/bouton_fleche.svg"
               alt="Suivant"
               fill
               className="object-contain rotate-180"
