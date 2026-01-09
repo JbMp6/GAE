@@ -2,10 +2,10 @@
 'use client';
 
 import React from "react";
-import Header from "@/componentes/Header";
-import FixedFooter from "@/staticComponentes/FixedFooter";
-import Footer from "@/staticComponentes/Footer";
-import FormulaireContact from "@/componentes/FormulaireContact";
+import Header from "@/components/layout/Header";
+import FixedFooter from "@/components/layout/FixedFooter";
+import Footer from "@/components/layout/Footer";
+import FormulaireContact from "@/components/forms/FormulaireContact";
 import { submitContact } from "@/lib/queries";
 
 export default function ContactPage() {

@@ -69,7 +69,7 @@ export default function ScrollToTop() {
       
       {/* Éclair */}
       <Image
-        src="/ilstr/eclair_01.svg"
+        src="/icons/ui/eclair_01.svg"
         alt="éclair"
         width={15}
         height={15}

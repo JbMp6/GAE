@@ -84,3 +84,52 @@ code, pre {
 .fade-in-modal {
   animation: fadeInModal 0.7s cubic-bezier(0.4,0,0.2,1);
 }
+
+/* ============================================
+   COMPOSANTS RÉUTILISABLES
+   Classes custom pour éviter la répétition
+   ============================================ */
+
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply px-8 py-3 bg-secondary text-white font-futura font-bold text-sm tracking-wider hover:bg-primary transition-colors duration-300;
+  }
+
+  .btn-close {
+    @apply w-10 h-10 flex items-center justify-center rounded-full border-3 border-primary bg-white text-primary hover:border-secondary hover:text-secondary transition-colors focus:outline-none;
+  }
+
+  /* Form inputs */
+  .input-base {
+    @apply w-full px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Offres de recrutement */
+  .offre-item {
+    @apply font-futura text-xl h-12 text-secondary w-full py-6 px-5 border-b-5 border-white flex items-center cursor-pointer transition-all hover:bg-white/20 active:bg-secondary active:text-primary;
+  }
+
+  /* Cards */
+  .card-base {
+    @apply bg-white relative rounded-2xl overflow-hidden border-2 border-primary xl:hover:shadow-xl xl:hover:scale-105 transition-all duration-300 w-full;
+  }
+
+  .modal-container {
+    @apply relative bg-white rounded-[2.5rem] border-4 border-primary shadow-2xl overflow-hidden;
+  }
+
+  /* Icon hover effects */
+  .icon-hover {
+    @apply hover:scale-110 hover:drop-shadow-lg transition-all duration-300 ease-in-out cursor-pointer;
+  }
+
+  /* Gradients */
+  .gradient-top {
+    @apply absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-white to-transparent pointer-events-none;
+  }
+
+  .gradient-bottom {
+    @apply absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-white to-transparent pointer-events-none;
+  }
+}

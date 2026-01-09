@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Button from '@/componentes/Button';
+import Button from '@/components/ui/Button';
 import { useState, useRef } from 'react';
 
 interface ActuCardProps {
@@ -44,7 +44,7 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
     }
   };
   return (
-    <div ref={cardRef} className="bg-white relative rounded-2xl overflow-hidden border-2 border-primary xl:hover:shadow-xl xl:hover:scale-105 transition-all duration-300 w-full max-w-[370px] h-full flex flex-col">
+    <div ref={cardRef} className="card-base max-w-[370px] h-full flex flex-col">
       {/* Image Container */}
       <div className="relative w-full h-48 bg-gray-100 rounded-2xl">
         {image ? (
@@ -52,6 +52,7 @@ export default function ActuCard({image, imageAlt, title, subtitle, description,
             src={image}
             alt={imageAlt}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 370px"
             className="object-cover"
           />
         ) : (

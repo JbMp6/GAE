@@ -80,7 +80,7 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
           <Link href="/"
             className="absolute left-20 top-1.5">
             <Image 
-              src="/ilstr/gae_logo_02.svg" 
+              src="/icons/logos/gae_logo_02.svg" 
               alt="G.a.e Logo" 
               width={252} 
               height={90}
@@ -89,7 +89,7 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
           />
         </Link>
         <Image 
-          src="/ilstr/eclair_01.svg" 
+          src="/icons/ui/eclair_01.svg" 
           alt="Éclair" 
           width={30} 
           height={30}
@@ -130,7 +130,7 @@ export default function Header({ onHeaderBottomChange }: HeaderProps = {}) {
               }}
             >
               <Image 
-                src="/ilstr/eclair_01.svg" 
+                src="/icons/ui/eclair_01.svg" 
                 alt="Éclair" 
                 width={30} 
                 height={30}

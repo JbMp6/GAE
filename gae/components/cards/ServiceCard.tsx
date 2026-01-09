@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Button from './Button';
+import Button from '@/components/ui/Button';
 
 interface ServiceCardProps {
   title: string;
@@ -20,7 +20,8 @@ export default function ServiceCard({ title, icon, iconAlt, bg, onClick }: Servi
             <Image 
               src={icon} 
               alt={title} 
-              fill 
+              fill
+              sizes="(max-width: 1536px) 240px, 300px"
               className="object-contain"
             />
           ) : (

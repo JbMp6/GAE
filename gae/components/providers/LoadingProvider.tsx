@@ -30,7 +30,7 @@ const LoadingScreen = ({ progress, isExiting }: { progress: number; isExiting: b
         
         {/* Lightning icon */}
         <img
-          src="/ilstr/eclair_01.svg"
+          src="/icons/ui/eclair_01.svg"
           alt="Loading"
           width={40}
           height={40}

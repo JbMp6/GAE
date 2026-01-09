@@ -1,28 +1,48 @@
+/**
+ * Formulaire de contact et de recrutement
+ * 
+ * Composant polyvalent qui gère à la fois :
+ * - Les demandes de contact simples (sans fichiers)
+ * - Les candidatures de recrutement (avec CV et lettre de motivation)
+ * 
+ * Inclut :
+ * - Validation en temps réel des fichiers (taille, type MIME)
+ * - Upload sécurisé vers Supabase Storage
+ * - Gestion d'état de chargement avec overlay
+ * - Messages de succès et d'erreur
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * // Mode contact
+ * <FormulaireContact 
+ *   postuler={false}
+ *   onSubmit={handleContactSubmit}
+ * />
+ * 
+ * // Mode recrutement
+ * <FormulaireContact 
+ *   postuler={true}
+ *   onSubmitRecrutement={handleRecrutementSubmit}
+ * />
+ * ```
+ */
 
 'use client';
 
 import React, { useState } from "react";
+import { validateFile } from '@/lib/fileValidation';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
+import type { FormulaireContactProps } from '@/types';
 
-interface FormulaireContactProps {
-  postuler?: boolean;
-  onSubmit?: (formData: {
-    prenom: string;
-    nom: string;
-    email: string;
-    tel: string;
-    message: string;
-  }) => Promise<void>;
-  onSubmitRecrutement?: (formData: {
-    prenom: string;
-    nom: string;
-    email: string;
-    tel: string;
-    message: string;
-    cv: File | null;
-    lettre: File | null;
-  }) => Promise<void>;
-}
-
+/**
+ * Affiche un formulaire de contact ou de candidature
+ * @param {FormulaireContactProps} props - Les propriétés du composant
+ * @param {boolean} [props.postuler=false] - Mode recrutement activé (affiche upload CV/lettre)
+ * @param {Function} [props.onSubmit] - Callback pour soumission contact simple
+ * @param {Function} [props.onSubmitRecrutement] - Callback pour soumission candidature
+ * @returns {JSX.Element} Formulaire
+ */
 export default function FormulaireContact({ postuler = false, onSubmit, onSubmitRecrutement }: FormulaireContactProps) {
   const [formData, setFormData] = useState({
     prenom: '',
@@ -37,6 +57,11 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [fileErrors, setFileErrors] = useState({
+    cv: '',
+    lettre: '',
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -51,6 +76,23 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fieldName: 'cv' | 'lettre') => {
     const file = e.target.files?.[0] || null;
+    
+    // Valider le fichier
+    if (file) {
+      const validation = validateFile(file);
+      if (!validation.valid) {
+        setFileErrors(prev => ({ ...prev, [fieldName]: validation.error || '' }));
+        setFormData(prev => ({ ...prev, [fieldName]: null }));
+        // Réinitialiser l'input
+        e.target.value = '';
+        return;
+      }
+      // Réinitialiser l'erreur si le fichier est valide
+      setFileErrors(prev => ({ ...prev, [fieldName]: '' }));
+    } else {
+      setFileErrors(prev => ({ ...prev, [fieldName]: '' }));
+    }
+    
     setFormData(prev => ({ ...prev, [fieldName]: file }));
   };
 
@@ -58,6 +100,7 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
     e.preventDefault();
     
     setError(null);
+    setIsLoading(true);
     
     try {
       // Si une fonction onSubmitRecrutement est fournie (cas du formulaire recrutement avec postuler)
@@ -106,11 +149,14 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Une erreur est survenue');
       setTimeout(() => setError(null), 5000);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-3xl h-full flex flex-col gap-4">
+    <div className="relative w-full max-w-3xl h-full">
+      <form onSubmit={handleSubmit} className="w-full h-full flex flex-col gap-4">
       {/* Prénom */}
       <input
         type="text"
@@ -119,7 +165,8 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
         onChange={handleChange}
         placeholder="Prénom"
         required
-        className="w-full px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors"
+        disabled={isLoading}
+        className="input-base"
       />
 
       {/* Nom */}
@@ -130,7 +177,8 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
         onChange={handleChange}
         placeholder="Nom"
         required
-        className="w-full px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors"
+        disabled={isLoading}
+        className="input-base"
       />
 
       {/* E-mail et Téléphone sur la même ligne */}
@@ -142,7 +190,8 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
           onChange={handleChange}
           placeholder="E-mail"
           required
-          className="flex-1 px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors"
+          disabled={isLoading}
+          className="input-base flex-1"
         />
         <input
           type="tel"
@@ -151,7 +200,8 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
           onChange={handleChange}
           placeholder="Téléphone"
           required
-          className="flex-1 px-5 py-3 border border-secondary rounded-full bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors"
+          disabled={isLoading}
+          className="input-base flex-1"
         />
       </div>
 
@@ -164,7 +214,8 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
           onChange={handleChange}
           placeholder="Votre message"
           required
-          className="flex-1 xl:h-full h-32 px-5 py-3 border border-secondary rounded-3xl bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors resize-none"
+          disabled={isLoading}
+          className="flex-1 xl:h-full h-32 px-5 py-3 border border-secondary rounded-3xl bg-white text-secondary font-futura placeholder:text-secondary/50 focus:outline-none focus:border-primary transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed"
         />
 
         {/* Colonne droite : Upload CV/Lettre (si postuler) OU juste Checkbox + Bouton */}
@@ -179,8 +230,12 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
                   type="file"
                   accept=".pdf,.doc,.docx"
                   onChange={(e) => handleFileChange(e, 'cv')}
-                  className="w-full px-4 py-2 border border-secondary rounded-2xl bg-white text-secondary font-futura text-sm file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-futura file:bg-primary file:text-secondary hover:file:bg-secondary hover:file:text-white cursor-pointer focus:outline-none focus:border-primary transition-colors"
+                  disabled={isLoading}
+                  className="w-full px-4 py-2 border border-secondary rounded-2xl bg-white text-secondary font-futura text-sm file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-futura file:bg-primary file:text-secondary hover:file:bg-secondary hover:file:text-white cursor-pointer focus:outline-none focus:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 />
+                {fileErrors.cv && (
+                  <p className="text-red-600 text-xs mt-1 font-futura">{fileErrors.cv}</p>
+                )}
               </div>
 
               {/* Upload Lettre de motivation */}
@@ -190,8 +245,12 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
                   type="file"
                   accept=".pdf,.doc,.docx"
                   onChange={(e) => handleFileChange(e, 'lettre')}
-                  className="w-full px-4 py-2 border border-secondary rounded-2xl bg-white text-secondary font-futura text-sm file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-futura file:bg-primary file:text-secondary hover:file:bg-secondary hover:file:text-white cursor-pointer focus:outline-none focus:border-primary transition-colors"
+                  disabled={isLoading}
+                  className="w-full px-4 py-2 border border-secondary rounded-2xl bg-white text-secondary font-futura text-sm file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-futura file:bg-primary file:text-secondary hover:file:bg-secondary hover:file:text-white cursor-pointer focus:outline-none focus:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 />
+                {fileErrors.lettre && (
+                  <p className="text-red-600 text-xs mt-1 font-futura">{fileErrors.lettre}</p>
+                )}
               </div>
             </div>
           )}
@@ -215,9 +274,10 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
           {/* Bouton Envoyer */}
           <button
             type="submit"
-            className="px-12 py-3 bg-secondary text-white font-futura text-lg rounded-lg hover:bg-primary hover:text-secondary transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
+            disabled={isLoading}
+            className="px-12 py-3 bg-secondary text-white font-futura text-lg rounded-lg hover:bg-primary hover:text-secondary transition-all duration-300 transform hover:scale-105 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
-            ENVOYER
+            {isLoading ? 'ENVOI EN COURS...' : 'ENVOYER'}
           </button>
         </div>
       </div>
@@ -236,5 +296,13 @@ export default function FormulaireContact({ postuler = false, onSubmit, onSubmit
         </p>
       )}
     </form>
+
+      {/* Overlay de chargement */}
+      {isLoading && (
+        <div className="absolute inset-0 bg-white flex items-center justify-center z-50 rounded-lg">
+          <LoadingSpinner size="lg" showText text={postuler ? "Upload des fichiers en cours..." : "Envoi en cours..."} />
+        </div>
+      )}
+    </div>
   );
 }

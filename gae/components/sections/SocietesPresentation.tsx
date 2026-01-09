@@ -2,8 +2,8 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import Boxed from './Boxed';
-import Button from '@/componentes/Button';
+import Boxed from '@/components/layout/Boxed';
+import Button from '@/components/ui/Button';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
@@ -15,32 +15,32 @@ if (typeof window !== 'undefined') {
 const companies = [
   {
     id: 1,
-    logo: '/ilstr/allanic_electricite_56.svg',
-    icon: '/ilstr/eclair_02.svg',
+    logo: '/icons/logos/allanic_electricite_56.svg',
+    icon: '/icons/ui/eclair_02.svg',
     text: "Spécialiste reconnu de l'installation et de la rénovation électrique pour l'habitat collectif, cette entité accompagne les projets neufs et les résidences de grande envergure. Son expertise couvre l'ensemble des réseaux électriques basse et haute tension, incluant la pose de tableaux de protection et la mise en œuvre de systèmes de ventilation (VMC) pour garantir le confort et la sécurité des occupants.",
     bgColor: 'bg-[var(--color-extra)]',
     reverse: false
   },
   {
     id: 2,
-    logo: '/ilstr/allanic_electricite_29.svg',
-    icon: '/ilstr/eclair_02.svg',
+    logo: '/icons/logos/allanic_electricite_29.svg',
+    icon: '/icons/ui/eclair_02.svg',
     text: "Tournée vers le secteur industriel et tertiaire, cette agence déploie des solutions techniques pointues en électricité générale et électromécanique. Elle se distingue par une spécialisation rare dans les systèmes de levage ainsi que par une forte réactivité pour les opérations de dépannage et de maintenance curative, assurant ainsi la continuité d'activité des infrastructures professionnelles et agricoles.",
     bgColor: 'bg-[var(--color-extra)]/20',
     reverse: true
   },
   {
     id: 3,
-    logo: '/ilstr/allanic_cvc_56.svg',
-    icon: '/ilstr/chauffage_climatisation.svg',
+    logo: '/icons/logos/allanic_cvc_56.svg',
+    icon: '/icons/services/chauffage_climatisation.svg',
     text: "Expert en génie climatique, Allanic C.V.C. intervient sur les lots fluides et énergies pour les bâtiments collectifs. De la plomberie sanitaire au chauffage, en passant par la climatisation et le traitement de l'air, ses équipes conçoivent des installations performantes répondant aux dernières normes environnementales pour une gestion thermique optimale et durable.",
     bgColor: 'bg-[var(--color-extra)]',
     reverse: false
   },
   {
     id: 4,
-    logo: '/ilstr/acf_56.svg',
-    icon: '/ilstr/maintenance.svg',
+    logo: '/icons/logos/acf_56.svg',
+    icon: '/icons/services/maintenance.svg',
     text: "Véritable partenaire de la gestion technique du bâtiment, A.C.F. est l'expert des courants faibles et de la sécurité. La société assure l'installation et la maintenance rigoureuse des systèmes d'interphonie, de contrôle d'accès et de sécurité incendie. Elle pilote également des contrats de maintenance multi-techniques pour pérenniser l'ensemble des installations électriques et de ventilation.",
     bgColor: 'bg-[var(--color-extra)]/20',
     reverse: true
@@ -91,7 +91,8 @@ export default function SocietesPresentation() {
                   <Image 
                     src={company.icon} 
                     alt="Icone métier" 
-                    fill 
+                    fill
+                    sizes="(max-width: 1280px) 64px, 96px"
                     className="object-contain"
                   />
                 </div>
@@ -101,7 +102,8 @@ export default function SocietesPresentation() {
                   <Image 
                     src={company.logo} 
                     alt="Logo société" 
-                    fill 
+                    fill
+                    sizes="(max-width: 1280px) 256px, 384px"
                     className="object-contain"
                   />
                 </div>

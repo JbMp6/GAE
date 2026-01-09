@@ -1,47 +1,34 @@
+/**
+ * Module de requêtes Supabase
+ * 
+ * Fournit les fonctions pour interagir avec la base de données Supabase.
+ * Toutes les fonctions utilisent les constantes SUPABASE_CONFIG pour les noms de tables.
+ * 
+ * @module queries
+ */
+
 import { supabase } from './supabase';
+import type { Service, Actu, Realisation, OffreRecrutement } from '@/types';
+import { SUPABASE_CONFIG } from '@/config/constants';
 
-export interface Service {
-  id: string;
-  title: string;
-  icon: string;
-  bg: string;
-  buttonColor: string;
-  description?: string;
-  created_at?: string;
-}
+export type { Service, Actu, Realisation, OffreRecrutement };
 
-export interface Actu {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  content: string;
-  image: string;
-  imageAlt: string;
-  href: string;
-  created_at?: string;
-}
-
-export interface Realisation {
-  id: string;
-  title: string;
-  subtitle: string;
-  description?: string;
-  image: string;
-  imageAlt: string;
-  created_at?: string;
-}
-
-export interface OffreRecrutement {
-  id: number;
-  title: string;
-  description: string;
-  created_at?: string;
-}
-
+/**
+ * Récupère tous les services depuis la base de données
+ * 
+ * Réorganise les services pour alterner les couleurs de fond.
+ * 
+ * @returns {Promise<Service[]>} Liste des services réorganisés
+ * @throws {Error} Si la requête échoue
+ * 
+ * @example
+ * ```typescript
+ * const services = await getServices();
+ * ```
+ */
 export async function getServices(): Promise<Service[]> {
   const { data, error } = await supabase
-    .from('services')
+    .from(SUPABASE_CONFIG.TABLES.SERVICES)
     .select('*')
     .order('created_at');
   
@@ -82,7 +69,7 @@ export async function getServices(): Promise<Service[]> {
 
 export async function getActus(): Promise<Actu[]> {
   const { data, error } = await supabase
-    .from('actus')
+    .from(SUPABASE_CONFIG.TABLES.ACTUS)
     .select('*')
     .order('created_at', { ascending: false });
   
@@ -96,7 +83,7 @@ export async function getActus(): Promise<Actu[]> {
 
 export async function getRealisations(): Promise<Realisation[]> {
   const { data, error } = await supabase
-    .from('real')
+    .from(SUPABASE_CONFIG.TABLES.REALISATIONS)
     .select('*')
     .order('created_at', { ascending: false });
   
@@ -110,7 +97,7 @@ export async function getRealisations(): Promise<Realisation[]> {
 
 export async function getOffresRecrutement(): Promise<OffreRecrutement[]> {
   const { data, error } = await supabase
-    .from('recrutement_offre')
+    .from(SUPABASE_CONFIG.TABLES.OFFRES)
     .select('*')
     .order('created_at', { ascending: false });
   
@@ -130,7 +117,7 @@ export async function submitContact(contact: {
   message: string;
 }) {
   const { error } = await supabase
-    .from('contact')
+    .from(SUPABASE_CONFIG.TABLES.CONTACTS)
     .insert([contact]);
   
   if (error) {
@@ -145,11 +132,11 @@ export async function submitCandidature(candidature: {
   nom: string;
   mail: string;
   tel: string;
-  cv: string | null;
-  ldm: string | null;
+  cv: string | null; // URL du fichier dans Supabase Storage
+  ldm: string | null; // URL du fichier dans Supabase Storage
 }) {
   const { error } = await supabase
-    .from('recrutement_rep')
+    .from(SUPABASE_CONFIG.TABLES.CANDIDATURES)
     .insert([candidature]);
   
   if (error) {

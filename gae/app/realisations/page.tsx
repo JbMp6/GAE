@@ -4,10 +4,10 @@
 import { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import Header from '@/componentes/Header';
-import ActuCard from '@/componentes/ActuCard';
-import FixedFooter from '@/staticComponentes/FixedFooter';
-import Footer from '@/staticComponentes/Footer';
+import Header from '@/components/layout/Header';
+import ActuCard from '@/components/cards/ActuCard';
+import FixedFooter from '@/components/layout/FixedFooter';
+import Footer from '@/components/layout/Footer';
 import RealisationsSearchParamsWrapper from './RealisationsSearchParamsWrapper';
 import { getRealisations, type Realisation } from '@/lib/queries';
 
@@ -83,7 +83,7 @@ function HomeWithSearchParams() {
             className="w-16 h-16 flex items-center justify-center rounded-md bg-white text-primary text-3xl font-bold transition hover:text-secondary"
             type="button"
           >
-            <Image src="/ilstr/bouton_fleche.svg" alt="Précédent" width={36} height={36} className="w-10 h-10 transition-transform duration-150 hover:scale-125" />
+            <Image src="/icons/ui/bouton_fleche.svg" alt="Précédent" width={36} height={36} className="w-10 h-10 transition-transform duration-150 hover:scale-125" />
           </button>
           {/* Pagination centrale max 3 boutons */}
           {(() => {
@@ -132,7 +132,7 @@ function HomeWithSearchParams() {
             className="w-16 h-16 flex items-center justify-center rounded-md bg-white text-primary text-3xl font-bold transition-transform duration-150 hover:text-secondary hover:scale-125"
             type="button"
           >
-            <Image src="/ilstr/bouton_fleche.svg" alt="Suivant" width={36} height={36} className="w-10 h-10 rotate-180 transition-transform duration-150 hover:scale-105" />
+            <Image src="/icons/ui/bouton_fleche.svg" alt="Suivant" width={36} height={36} className="w-10 h-10 rotate-180 transition-transform duration-150 hover:scale-105" />
           </button>
         </div>
         <div className="xl:fixed xl:block hidden bottom-footer left-0 w-full h-70 bg-gradient-to-t from-white to-transparent pointer-events-none" />
